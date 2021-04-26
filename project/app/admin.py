@@ -1,7 +1,7 @@
 # Django
 # First-Party
-from address.forms import AddressWidget
-from address.models import AddressField
+# from address.forms import AddressWidget
+# from address.models import AddressField
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
@@ -20,7 +20,7 @@ class AccountAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
-        'address',
+        # 'address',
         'email',
         'phone',
         'is_public',
@@ -52,15 +52,15 @@ class AccountAdmin(VersionAdmin):
     readonly_fields = [
         'is_comment',
     ]
-    formfield_overrides = {
-        AddressField: {
-            'widget': AddressWidget(
-                attrs={
-                    'style': 'width: 300px;'
-                }
-            )
-        }
-    }
+    # formfield_overrides = {
+    #     AddressField: {
+    #         'widget': AddressWidget(
+    #             attrs={
+    #                 'style': 'width: 300px;'
+    #             }
+    #         )
+    #     }
+    # }
 
     def is_comment(self, obj):
         return bool(obj.comments)
