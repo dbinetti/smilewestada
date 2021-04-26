@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+Thank you for joining Smile West Ada!
+
+We've registered your support to make masks optional before the end of this
+school year.  I'll be sure to keep you posted as others to join the movement;
+for now, simply accept my thanks for getting involved!
+
+Best,
+Dave
+
+
+PS If you haven't already done so, please consider making your name public,
+adding some comments, and sharing the site on Facebook and other social networks!
+
+
+{% endautoescape %}
