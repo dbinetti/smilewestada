@@ -259,6 +259,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'bootstrap4',
     'phonenumber_field',
-    # 'address',
+    'address',
     'app',
 ]
