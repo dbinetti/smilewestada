@@ -15,11 +15,6 @@ from .models import Account
 from .models import User
 
 
-@admin.register(Email)
-class EmailAdmin(VersionAdmin):
-    save_on_top = True
-
-
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
     save_on_top = True
@@ -29,16 +24,12 @@ class AccountAdmin(VersionAdmin):
         'email',
         'phone',
         'is_public',
-        'is_teacher',
-        'is_medical',
         'comments',
         'notes',
     ]
     list_display = [
         'name',
         'is_public',
-        'is_teacher',
-        'is_medical',
         'user',
         'is_comment',
     ]
@@ -46,8 +37,6 @@ class AccountAdmin(VersionAdmin):
     ]
     list_filter = [
         'is_public',
-        'is_teacher',
-        'is_medical',
     ]
     search_fields = [
         'name',
@@ -56,7 +45,6 @@ class AccountAdmin(VersionAdmin):
         'user',
     ]
     inlines = [
-        StudentInline,
     ]
     ordering = [
         'created',

@@ -14,9 +14,7 @@ from django.template.loader import render_to_string
 from django.utils.crypto import get_random_string
 from django_rq import job
 
-from .forms import SchoolForm
 from .models import Account
-from .models import Email
 from .models import User
 
 
@@ -208,24 +206,6 @@ def delete_user_email(email_address):
         to=[email_address],
     )
     return email.send()
-
-@job
-def email_reply(user, subject, body):
-    email = EmailMessage(
-        subject=subject,
-        body=body,
-        from_email='dbinetti@smilewestada.com',
-        to=[user.email],
-    )
-    send_email.delay(email)
-    Email.objects.create(
-        kind=Email.KIND.outbound,
-        to_email=user.email,
-        subject=subject,
-        text=body,
-        from_email='dbinetti@smilewestada.com',
-        user=user
-    )
 
 def schools_list(filename='ada.csv'):
     with open(filename) as f:

@@ -26,6 +26,7 @@ ADMINS = [
     ('admin', env("DEFAULT_FROM_EMAIL")),
 ]
 USE_L10N = True
+DEFAULT_AUTO_FIELD = 'hashid_field.HashidAutoField'
 
 # Datetime
 USE_TZ = True

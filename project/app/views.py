@@ -22,7 +22,6 @@ from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
 from .forms import DeleteForm
-from .forms import EmailForm
 from .models import Account
 from .models import User
 from .tasks import account_update
