@@ -18,8 +18,6 @@ class DeleteForm(forms.Form):
 class AccountForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Required fields override
-        # self.fields['address'].required = True
 
     class Meta:
         model = Account
