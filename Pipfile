@@ -38,6 +38,7 @@ nameparser = "*"
 pyjwt = "*"
 django-reversion = "*"
 django-cloudinary-storage = "*"
+django-address = "*"
 
 [requires]
 python_version = "3.9"
