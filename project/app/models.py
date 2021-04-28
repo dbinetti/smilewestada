@@ -1,5 +1,6 @@
 
 # First-Party
+from address.models import AddressField
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
@@ -23,6 +24,11 @@ class Account(models.Model):
     email = models.EmailField(
         blank=True,
         null=True,
+    )
+    address = AddressField(
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
     )
     phone = PhoneNumberField(
         blank=True,
