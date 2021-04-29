@@ -52,7 +52,7 @@ def join(request):
         'scope': 'openid profile email',
         'state': state,
         'redirect_uri': redirect_uri,
-        'screen_hint': 'signup',
+        'initScreen': 'signUp',
     }
     url = requests.Request(
         'GET',
@@ -71,7 +71,7 @@ def login(request):
         'scope': 'openid profile email',
         'state': state,
         'redirect_uri': redirect_uri,
-        'prompt': 'login',
+        'initScreen': 'login',
     }
     url = requests.Request(
         'GET',
