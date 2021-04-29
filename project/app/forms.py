@@ -24,6 +24,7 @@ class AccountForm(forms.ModelForm):
         fields = [
             'name',
             'address',
+            'zone',
             'phone',
             'email',
             'is_public',
@@ -51,10 +52,13 @@ class AccountForm(forms.ModelForm):
         }
         help_texts = {
             'name': "Please provide your real name.  Your name remains private \
-            unless you explicity ask to be Public below.",
-            'is_public': "Showing your support publicly carries more weight and \
-            encourages others to join.",
-            'address': "If you wish to prove you are a voter in the district please provide your address.  We keep it private and use it for no other purpose.",
+            unless you explicity ask to be Public.",
+            'is_public': "Showing your support publicly encourages others to join.",
+            'zone': "Please indicate your District Zone so we can send your \
+            message to the proper Board Member.",
+            'address': "If you wish to prove you are a voter in the district \
+            please provide your address.  We keep it private and use it for \
+            no other purpose.",
         }
 
 

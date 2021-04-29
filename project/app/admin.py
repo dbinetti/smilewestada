@@ -21,6 +21,7 @@ class AccountAdmin(VersionAdmin):
     fields = [
         'name',
         'email',
+        'zone',
         'address',
         'phone',
         'is_public',

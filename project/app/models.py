@@ -19,7 +19,18 @@ class Account(models.Model):
     name = models.CharField(
         max_length=100,
         blank=False,
-        default='',
+    )
+    ZONE = Choices(
+        (1, 'one', 'Zone One'),
+        (2, 'two', 'Zone Two'),
+        (3, 'three', 'Zone Three'),
+        (4, 'four', 'Zone Four'),
+        (5, 'five', 'Zone Five'),
+    )
+    zone = models.IntegerField(
+        blank=True,
+        null=True,
+        choices=ZONE,
     )
     email = models.EmailField(
         blank=True,
