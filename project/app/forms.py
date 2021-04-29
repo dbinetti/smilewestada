@@ -73,11 +73,6 @@ class AccountForm(forms.ModelForm):
                 "Comments are only shared if you make your name public."
             )
 
-        if is_public and name == 'Anonymous':
-            raise ValidationError(
-                {'name': "Please provide your real name if you wish to be public."}
-            )
-
 
 class UserCreationForm(UserCreationFormBase):
     """

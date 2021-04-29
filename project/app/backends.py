@@ -14,10 +14,8 @@ class Auth0Backend(ModelBackend):
 
     def authenticate(self, request, **kwargs):
         username = kwargs.get('username', None)
-        name = kwargs.get('name', '(Unknown)')
+        name = kwargs.get('name', None)
         email = kwargs.get('email', None)
-        if name == email:
-            name = 'Anonymous'
         try:
             user = User.objects.get(
                 username=username,
