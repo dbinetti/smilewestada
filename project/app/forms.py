@@ -23,6 +23,7 @@ class AccountForm(forms.ModelForm):
         model = Account
         fields = [
             'name',
+            'address',
             'phone',
             'email',
             'is_public',
@@ -53,6 +54,7 @@ class AccountForm(forms.ModelForm):
             unless you explicity ask to be Public below.",
             'is_public': "Showing your support publicly carries more weight and \
             encourages others to join.",
+            'address': "If you wish to prove you are a voter in the district please provide your address.  We keep it private and use it for no other purpose.",
         }
 
 

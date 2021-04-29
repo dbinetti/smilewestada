@@ -8,6 +8,7 @@ from sentry_sdk.integrations.rq import RqIntegration
 
 
 class AppConfig(AppConfig):
+    default_auto_field = 'hashid_field.HashidAutoField'
     name = 'app'
     def ready(self):
         sentry_sdk.init(
