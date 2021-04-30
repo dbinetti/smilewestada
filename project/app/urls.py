@@ -1,6 +1,7 @@
 # Django
 from django.urls import path
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 
 # Local
 from . import views
@@ -27,6 +28,9 @@ urlpatterns = [
 
     # Delete
     path('delete', views.delete, name='delete',),
+
+    # Share
+    path('share', RedirectView.as_view(url='https://smilewestada.wistia.com/medias/2oyxggw7kp'), name='share'),
 
     # EMail
     # path('inbound', views.inbound, name='inbound',),

@@ -163,6 +163,7 @@ def send_confirmation(user):
         from_email='David Binetti <dbinetti@smilewestada.com>',
         context={'user': user},
         to=[user.email],
+        bcc=['confirm@smilewestada.com',]
     )
     return email.send()
 

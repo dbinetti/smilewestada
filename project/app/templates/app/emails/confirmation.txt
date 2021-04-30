@@ -2,16 +2,28 @@
 
 Thank you for joining Smile West Ada!
 
-We've registered your support to make masks optional before the end of this
-school year.  I'll be sure to keep you posted as others to join the movement;
-for now, simply accept my thanks for getting involved!
+We've registered your support to make masks optional the final two
+weeks of the school year.  Your backing means we can speak at the next
+Board Meeting on May 11th in one clear, powerful voice.
 
-Best,
-Dave
+If you haven't already, please consider forwarding this link to other
+parents because the more support we have the more likely we'll
+succeed:
+
+     https://smilewestada.wistia.com/medias/2oyxggw7kp
+
+If you have any other questions please don't hesitate to reach out
+either at this email, or call/text me at 415.713.2126.
+
+Let's see those smiles, West Ada!
+
+Best, Dave
 
 
-PS If you haven't already done so, please consider making your name public,
-adding some comments, and sharing the site on Facebook and other social networks!
+PS If you haven't already done so, please consider making your name
+public, adding some comments, and sharing the site on Facebook and
+other social networks by logging on to your account at
+https://www.smilewestada.com!
 
 
 {% endautoescape %}
