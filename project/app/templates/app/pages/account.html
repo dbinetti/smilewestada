@@ -9,23 +9,27 @@
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="BVurEf1h"></script>
 {% endblock formmedia %}
 
-{% block title %}Account Information{% endblock title %}
+{% block title %}Thank You!{% endblock title %}
 
 {% block content %}
   <section class='mt-5'>
-    <h2 class='mb-3'>
-      Thank You -- Your Support has been Registered!
+    <h2 class='my-3'>
+      Thank You for Joining!
     </h2>
     <p class='lead my-3'>
-      Next, share this link via text, social media, or anywhere else you can:<br><br>
-
-      <div class="shadow-sm p-3 mb-5 bg-white rounded">
-          https://smilewestada.wistia.com/medias/2oyxggw7kp
-      </div>
-
-      <br><br>
-      And don't forget to share on Facebook!<br><br>
-      <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fsmilewestada.wistia.com%2Fmedias%2F2oyxggw7kp&layout=button&size=large&appId=286973936371350&width=300&height=100" width="300" height="100" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+      Next, share this on Facebook:
+    </p>
+    <div>
+      <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fsmilewestada.wistia.com%2Fmedias%2F2oyxggw7kp&layout=button&size=large&appId=286973936371350&width=300&height=60" width="300" height="60" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+    </div>
+    <p class='lead'>
+      Or copy/paste this link on other social media, or via text:
+    </p>
+    <div class='mx-3 my-5'>
+      <strong>https://smilewestada.wistia.com/medias/2oyxggw7kp</strong>
+    </div>
+    <p class='lead'>
+      Lastly, take a moment to review your information below.  You can make your name public, add a message, and pick your zone so we can report directly to your specific Board Member.  If you need any other help, please don't hesitate to reach out at <a href='mailto:dbinetti@smilewestada.com'>dbinetti@smilewestada.com</a>.
     </p>
     {% comment %}
     <ul class='list-inline ml-4'>
@@ -36,7 +40,7 @@
     {% endcomment %}
   </section>
 
-  <section class='my-2'>
+  <section class='mt-'>
     <div class='card'>
       <h4 class='card-header'>Account Details</h4>
       <div class="card-body">
@@ -61,10 +65,10 @@
       </div>
       <div class='card-footer'>
           <div class='row'>
-            <div class='col-7'>
+            <div class='col-6'>
               <small class='text-muted'>Please contact <a href='mailto://support@smilewestada.com'>support@smilewestada.com</a> if you have any questions or need support.</small>
             </div>
-            <div class='col-3 offset-2 text-right'>
+            <div class='col-4 offset-2 text-right'>
               <a href='{% url "delete" %}'><span class='text-danger text-small'>Delete Account</span></a>
             </div>
           </div>
