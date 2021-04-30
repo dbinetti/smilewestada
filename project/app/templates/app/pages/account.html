@@ -3,30 +3,45 @@
 {% load bootstrap4 %}
 {% load humanize %}
 
-{% block formmedia %}{{ form.media }}{% endblock formmedia %}
+{% block formmedia %}
+  {{ form.media }}
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="BVurEf1h"></script>
+{% endblock formmedia %}
 
 {% block title %}Account Information{% endblock title %}
 
 {% block content %}
-  <section class='my-5'>
-    <h2>
-      Thank You!
+  <section class='mt-5'>
+    <h2 class='mb-3'>
+      Thank You -- Your Support has been Registered!
     </h2>
-    <p class='lead'>
-      Next, please share this on social media!
+    <p class='lead my-3'>
+      Next, share this link via text, social media, or anywhere else you can:<br><br>
+
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+          https://smilewestada.wistia.com/medias/2oyxggw7kp
+      </div>
+
+      <br><br>
+      And don't forget to share on Facebook!<br><br>
+      <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fsmilewestada.wistia.com%2Fmedias%2F2oyxggw7kp&layout=button&size=large&appId=286973936371350&width=300&height=100" width="300" height="100" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
     </p>
+    {% comment %}
     <ul class='list-inline ml-4'>
       <li class='list-inline-item'><iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fsmilewestada.wistia.com%2Fmedias%2F2oyxggw7kp&layout=button&size=small&appId=286973936371350&width=67&height=20" width="67" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></li>
-      {% comment %}
       <li class='list-inline-item'><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="If you want the Kids all in school check this out" data-url="https://smilewestada.wistia.com/medias/beb6fxz2dk" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
-      {% endcomment %}
+
     </ul>
+    {% endcomment %}
   </section>
 
-  <section class='my-5'>
+  <section class='my-2'>
     <div class='card'>
-      {# <h4 class='card-header'>Account Information</h4> #}
+      <h4 class='card-header'>Account Details</h4>
       <div class="card-body">
+        <div class='card-title'>
+        </div>
         <div class='card-text'>
           <form method='post'>
             {% csrf_token %}

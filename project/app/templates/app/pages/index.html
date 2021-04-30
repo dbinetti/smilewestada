@@ -12,15 +12,17 @@
     </div>
 
     <div class='jumbotron'>
-            <div class='mb-5'>
+        <div class='mb-5'>
+        {% comment %}
         <h2 class='text-center'>
           Let's See Those Smiles, West Ada!
         </h2>
+        {% endcomment %}
       </div>
 
       <div>
         <p>
-          Smile West Ada is a group of parents who wish to see masks made optional before the end of this school year.  We aren't asking for money, we protect your data, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms before the end of this year.
+          Smile West Ada is a group of parents who want masks optional the last two weeks of this school year.  We aren't asking for money, we protect your privacy, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms before the end of this year.
         </p>
       </div>
       {% comment %}
@@ -37,7 +39,7 @@
       </div>
       <div class='mb-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg">
-          <strong>Join Us!</strong>
+          <strong>Click Here to Join Us!</strong>
         </a>
       </div>
       {% comment %}
@@ -46,7 +48,6 @@
           Learn More
         </a>
       </div>
-      {% endcomment %}
       <div class="collapse" id="learnMoreCollapse">
         <div class="card card-body mt-3 p-5">
           <p>
@@ -64,6 +65,8 @@
           </p>
         </div>
       </div>
+      {% endcomment %}
+
     </div>
   </section>
   {% comment %}

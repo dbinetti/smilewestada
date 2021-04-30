@@ -54,7 +54,7 @@ class AccountForm(forms.ModelForm):
             'name': "Please provide your real name.  Your name remains private \
             unless you explicity ask to be Public.",
             'is_public': "Showing your support publicly encourages others to join.",
-            'zone': "Please indicate your District Zone so we can send your \
+            'zone': "Please indicate your District Zone so we can direct your \
             message to the proper Board Member.",
             'address': "If you wish to prove you are a voter in the district \
             please provide your address.  We keep it private and use it for \
