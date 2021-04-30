@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3b23b95368e6e00b7952d6c60cc9206aaaf4a4d49510809d918584c0803f7ce3"
+            "sha256": "12b52f9141537c4738ac3cdd6bf53c2ec7206cc3f3ab0114d7900e9429af5a0f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -203,14 +203,6 @@
             "index": "pypi",
             "version": "==3.2"
         },
-        "django-address": {
-            "hashes": [
-                "sha256:1918a92ab56cfe9df1976b940256d90b1230d9ae08c0e38e18ea645e78e84f02",
-                "sha256:75d7fb77d1eaba0e612e361d6e6794f55f1810971d46c13cfb49d8802634fcab"
-            ],
-            "index": "pypi",
-            "version": "==0.2.5"
-        },
         "django-bootstrap4": {
             "hashes": [
                 "sha256:76a52fb22a8d3dbb2f7609b21908ce863e941a4462be079bf1d12025e551af37",
@@ -385,11 +377,11 @@
         },
         "phonenumberslite": {
             "hashes": [
-                "sha256:134de25059aa8fb7dd5f1adc8f19d21a1d3ce2a45b051e04dea393046dce442b",
-                "sha256:8506182760241ea922f47f4c4273f0e1bdaa3d5d3d3288ee6720627284d8608c"
+                "sha256:8a431ce8c99cfb41386d363a4671ae3a32f655a8ae1e0cc49ad8608b12de4ee4",
+                "sha256:9c5a35d7fabbc58835ca945ce51ae2086eddfaf7908b332a95b52990665039d2"
             ],
             "index": "pypi",
-            "version": "==8.12.21"
+            "version": "==8.12.22"
         },
         "pickleshare": {
             "hashes": [
@@ -651,11 +643,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:14edeced0492f1516df2e8c73bd9cc02307ad89bf2b46c2c3b46b2f595ae6d24",
-                "sha256:1cc03528930fd26570077b05bd02da0625eb87b7ba192ea5c448284beb77149b"
+                "sha256:156854f36d4086bb21ff85a79b4d6a6403a240cd2c17a33a44b8ea4ff4e957c2",
+                "sha256:a2ed065342e91a7672407325848cd5728d5e5eb4928d0a1c478fd4f0dd97d1f7"
             ],
             "index": "pypi",
-            "version": "==8.1.1"
+            "version": "==8.1.2"
         },
         "iniconfig": {
             "hashes": [

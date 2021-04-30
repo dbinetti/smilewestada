@@ -23,7 +23,6 @@ class AccountForm(forms.ModelForm):
         model = Account
         fields = [
             'name',
-            'address',
             'zone',
             'phone',
             'email',
@@ -56,9 +55,6 @@ class AccountForm(forms.ModelForm):
             'is_public': "Showing your support publicly encourages others to join.",
             'zone': "Please indicate your District Zone so we can direct your \
             message to the proper Board Member.",
-            'address': "If you wish to prove you are a voter in the district \
-            please provide your address.  We keep it private and use it for \
-            no other purpose.",
         }
 
 

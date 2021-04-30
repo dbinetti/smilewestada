@@ -1,7 +1,5 @@
 # Django
 # First-Party
-from address.forms import AddressWidget
-from address.models import AddressField
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
@@ -22,7 +20,6 @@ class AccountAdmin(VersionAdmin):
         'name',
         'email',
         'zone',
-        'address',
         'phone',
         'is_public',
         'comments',
@@ -58,15 +55,6 @@ class AccountAdmin(VersionAdmin):
         return bool(obj.comments)
     is_comment.boolean = True
 
-    formfield_overrides = {
-        AddressField: {
-            'widget': AddressWidget(
-                attrs={
-                    'style': 'width: 300px;'
-                }
-            )
-        }
-    }
 
 
 @admin.register(User)
