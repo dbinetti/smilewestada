@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Make Masks Optional the Last Two Weeks of School" />
-    <meta property="og:image" content="https://www.smilewestada.com/static/app/wide_logo.png" />
+    {% block metatags %}
+    {% endblock metatags %}
     <link rel="shortcut icon" href="{%  static 'app/favicon.png' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@
       {% block content %}
       {% endblock %}
     </div>
-
+    <br>
     {% block bottomnav %}
       <nav class="navbar navbar-expand-sm navbar-light">
         <ul class="nav nav-pills mr-auto">
@@ -89,6 +89,8 @@
     <br><br><br>
 
     {% block scripts %}
+      <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="S2yVNVmf"></script>
     {% endblock scripts %}
 
   </body>

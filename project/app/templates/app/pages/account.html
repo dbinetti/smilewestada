@@ -13,22 +13,27 @@
 
 {% block content %}
   <section class='mt-5'>
-    <h2 class='my-3'>
+    <h2 class='my-3 col-md-12'>
       Thank You for Joining!
     </h2>
-    <p class='lead my-3'>
+    <p class='lead my-3 col-md-12'>
       Next, share this on Facebook:
     </p>
-    <div>
-      <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fsmilewestada.wistia.com%2Fmedias%2F2oyxggw7kp&layout=button&size=large&appId=286973936371350&width=300&height=60" width="300" height="60" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+    <div class='mb-3 ml-3 col-md-12'>
+<div class="fb-share-button" data-href="https://www.smilewestada.com" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.smilewestada.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+
+{% comment %}
+
+      <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.smilewestada.com&layout=button_count&size=large&appId=286973936371350&width=95&height=28" width="95" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+{% endcomment %}
     </div>
-    <p class='lead'>
+    <p class='lead col-md-12'>
       Or copy/paste this link on other social media, or via text:
     </p>
-    <div class='mx-3 my-5'>
-      <strong>https://www.smilewestada.com/share</strong>
+    <div class='mx-3 my-3 col-md-12'>
+      <strong>https://www.smilewestada.com</strong>
     </div>
-    <p class='lead'>
+    <p class='lead col-md-8'>
       Lastly, take a moment to review your information below.  You can make your name public, add a message, and pick your zone so we can report directly to your specific Trustee.  If you need any other help, please don't hesitate to reach out at <a href='mailto:dbinetti@smilewestada.com'>dbinetti@smilewestada.com</a>.
     </p>
     {% comment %}
@@ -40,7 +45,7 @@
     {% endcomment %}
   </section>
 
-  <section class='mt-5'>
+  <section class='mt-5 col-md-8'>
     <div class='card'>
       <h4 class='card-header'>Account Details</h4>
       <div class="card-body">
