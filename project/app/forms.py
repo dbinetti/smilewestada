@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
 # Local
 from .models import Account
@@ -53,8 +54,8 @@ class AccountForm(forms.ModelForm):
             'name': "Please provide your real name.  Your name remains private \
             unless you explicity ask to be Public.",
             'is_public': "Showing your support publicly encourages others to join.",
-            'zone': "Please indicate your District Zone so we can direct your \
-            message to the proper Board Member.",
+            'zone': mark_safe("Please indicate your <a href='static/app/wasd_trustee_zones.pdf' target='_blank'>District Zone</a> so we can direct your \
+            message to the proper Trustee."),
         }
 
 
