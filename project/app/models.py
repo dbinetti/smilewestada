@@ -42,7 +42,7 @@ class Account(models.Model):
         default=False,
     )
     comments = models.TextField(
-        max_length=2000,
+        max_length=500,
         blank=True,
         default='',
     )
