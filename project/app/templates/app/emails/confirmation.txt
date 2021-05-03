@@ -20,10 +20,20 @@ Let's see those smiles, West Ada!
 Best, Dave
 
 
-PS If you haven't already done so, please consider making your name
-public, adding some comments, and sharing the site on Facebook and
-other social networks by logging on to your account at
-https://www.smilewestada.com!
+PS We're having a special planning session on Monday, May 3, at 8:00PM
+over Zoom.  If you'd like to get more involved please join us!
+
+Topic: Smile West Ada Planning Session
+Time: May 3, 2021 08:00 PM Mountain Time (US and Canada)
+
+Join Zoom Meeting
+https://us02web.zoom.us/j/4157132126
+
+Meeting ID: 415 713 2126
+Passcode: smile
+
+
+
 
 
 {% endautoescape %}
