@@ -58,12 +58,24 @@ class AccountForm(forms.ModelForm):
             message to the proper Trustee."),
         }
 
+    def clean_comments(self):
+        comments= self.cleaned_data['comments']
+        words = comments.split(" ")
+        for word in words:
+            if any([
+                word.startswith("http"),
+                word.startswith("www"),
+            ]):
+                raise ValidationError(
+                    "Links are not allowed in comments."
+                )
+        return comments
+
 
     def clean(self):
         cleaned_data = super().clean()
         is_public = cleaned_data.get("is_public")
         comments = cleaned_data.get("comments")
-        name = cleaned_data.get("name")
 
         if comments and not is_public:
             raise ValidationError(
