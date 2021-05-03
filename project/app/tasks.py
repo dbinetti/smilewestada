@@ -189,6 +189,16 @@ def account_outreach(account):
     return email.send()
 
 @job
+def account_planning(account):
+    email = build_email(
+        template='app/emails/planning.txt',
+        subject='Smile West Ada - Planning Session Tonight, Monday May 3',
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
 def account_final(user):
     email = build_email(
         template='app/emails/final.txt',

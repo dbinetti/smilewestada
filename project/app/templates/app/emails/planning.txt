@@ -1,0 +1,42 @@
+{% autoescape off %}
+
+Overview:  we're holding a planning session for those interested in doing
+more to support Smile West Ada.  Information on how to participate is below.
+
+--
+
+
+Thank you for standing up for our kids!
+
+Our initial reaction has been tremendous, with more than 150 members joining our
+movement over the weekend!  These are really good numbers to start, but we are
+going to need more to ensure our eventual success.
+
+To that end, we're holding a planning session over Zoom tonight, Monday May 3,
+at 8PM Mountain Time.  The goal is to brainstorm ideas, discuss strategy and
+coordinate efforts so that we can speak with one, clear powerful voice at the
+Board Meeting on May 11.
+
+Please join us!  It's open to anyone who wants to do more to support our
+efforts. That said, please know that I run a very tight meeting -- we will start
+on time, stay on task, and finish within the hour -- so please be comfortable
+with that if you choose to participate.  Here's the meeting info:
+
+    Topic: Smile West Ada Planning Session
+    Time: Monday, May 3, 2021 08:00 PM
+
+    Join Zoom Meeting
+    https://us02web.zoom.us/j/4157132126
+
+    Meeting ID: 415 713 2126
+    Passcode: smile
+
+If you'd prefer to simply reach out to me personally that's great too! I can be
+reached at this email or by phone at 415.713.2126.
+
+Thanks again, and let's see those smiles West Ada!
+
+Best, Dave
+
+
+{% endautoescape %}
