@@ -163,17 +163,17 @@ def send_confirmation(user):
         from_email='David Binetti <dbinetti@smilewestada.com>',
         context={'user': user},
         to=[user.email],
-        bcc=['confirm@smilewestada.com',]
     )
     return email.send()
 
 @job
 def account_update(account):
+    count = Account.objects.all().count()
     email = build_email(
         template='app/emails/update.txt',
-        subject='KAN Update',
+        subject='SWA Update',
         from_email='David Binetti <dbinetti@smilewestada.com>',
-        context={'account': account},
+        context={'account': account, 'count': count},
         to=['dbinetti@gmail.com'],
     )
     return email.send()

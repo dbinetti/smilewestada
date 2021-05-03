@@ -1,11 +1,9 @@
 {% autoescape off %}
 
-Account Update
+Count: {{count}}
 
 {{account.name}}
 {{account.user.email}}
-Public: {{account.is_public|yesno|title}}
-
 {{account.comments|default:"(No Comments)"}}
 
 {% endautoescape %}
