@@ -10,6 +10,7 @@ from reversion.admin import VersionAdmin
 from .forms import UserChangeForm
 from .forms import UserCreationForm
 from .models import Account
+from .models import School
 from .models import User
 
 
@@ -54,6 +55,27 @@ class AccountAdmin(VersionAdmin):
     def is_comment(self, obj):
         return bool(obj.comments)
     is_comment.boolean = True
+
+
+
+@admin.register(School)
+class SchoolAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+    ]
+    list_display = [
+        'name',
+    ]
+    list_editable = [
+    ]
+    list_filter = [
+    ]
+    search_fields = [
+        'name',
+    ]
+    autocomplete_fields = [
+    ]
 
 
 
