@@ -20,20 +20,4 @@ Let's see those smiles, West Ada!
 Best, Dave
 
 
-PS We're having a special planning session on Monday, May 3, at 8:00PM
-over Zoom.  If you'd like to get more involved please join us!
-
-Topic: Smile West Ada Planning Session
-Time: May 3, 2021 08:00 PM Mountain Time (US and Canada)
-
-Join Zoom Meeting
-https://us02web.zoom.us/j/4157132126
-
-Meeting ID: 415 713 2126
-Passcode: smile
-
-
-
-
-
 {% endautoescape %}
