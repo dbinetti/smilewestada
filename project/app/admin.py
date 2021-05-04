@@ -29,13 +29,14 @@ class AccountAdmin(VersionAdmin):
     list_display = [
         'name',
         'is_public',
-        'user',
         'is_comment',
+        'zone',
     ]
     list_editable = [
     ]
     list_filter = [
         'is_public',
+        'zone',
     ]
     search_fields = [
         'name',
@@ -57,7 +58,6 @@ class AccountAdmin(VersionAdmin):
     is_comment.boolean = True
 
 
-
 @admin.register(School)
 class SchoolAdmin(VersionAdmin):
     save_on_top = True
@@ -76,7 +76,6 @@ class SchoolAdmin(VersionAdmin):
     ]
     autocomplete_fields = [
     ]
-
 
 
 @admin.register(User)
