@@ -28,11 +28,13 @@ class AccountForm(forms.ModelForm):
             'phone',
             'email',
             'is_public',
+            'is_volunteer',
             'comments',
             'notes',
         ]
         labels = {
             "is_public": "Make My Name Public",
+            "is_volunteer": "Volunteer to Help",
         }
         widgets = {
             'comments': forms.Textarea(
@@ -54,6 +56,7 @@ class AccountForm(forms.ModelForm):
             'name': "Please provide your real name.  Your name remains private \
             unless you explicity ask to be Public.",
             'is_public': "Showing your support publicly encourages others to join.",
+            'is_volunteer': mark_safe("Want to do more?  We'll keep you updated on additional volunteer opportunities."),
             'zone': mark_safe("Please indicate your <a href='static/app/wasd_trustee_zones.pdf' target='_blank'>District Zone</a> so we can direct your \
             message to the proper Trustee."),
         }

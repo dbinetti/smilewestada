@@ -41,6 +41,9 @@ class Account(models.Model):
     is_public = models.BooleanField(
         default=False,
     )
+    is_volunteer = models.BooleanField(
+        default=False,
+    )
     comments = models.TextField(
         max_length=500,
         blank=True,
