@@ -85,7 +85,6 @@ def create_mailchimp_from_account(account):
         list_id=list_id,
         data=data,
     )
-    log.info(result)
     return
 
 
