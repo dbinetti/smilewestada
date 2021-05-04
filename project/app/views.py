@@ -1,6 +1,3 @@
-import csv
-import json
-
 import jwt
 import requests
 from django.conf import settings
@@ -9,24 +6,16 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
-from django.core.mail import EmailMessage
-from django.db import transaction
 from django.http import HttpResponse
 # from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
 from .forms import DeleteForm
 from .models import Account
-from .models import User
-from .tasks import account_update
-from .tasks import create_auth0_user
-from .tasks import send_email
 
 
 # Root
@@ -148,7 +137,6 @@ def account(request):
                 request,
                 "Saved!",
             )
-            account_update.delay(account)
             return redirect('account')
     else:
         form = AccountForm(instance=account)
@@ -186,42 +174,3 @@ def delete(request):
         'app/pages/delete.html',
         {'form': form,},
     )
-
-
-@csrf_exempt
-@require_POST
-# @transaction.atomic
-# def inbound(request):
-#     form = EmailForm(request.POST)
-#     if form.is_valid():
-#         email = form.save(commit=False)
-#         try:
-#             user = User.objects.get(
-#                 email=email.from_email,
-#             )
-#         except User.DoesNotExist:
-#             user = None
-#         email.kind = email.KIND.inbound
-#         email.user = user
-#         email.save()
-#         email = EmailMessage(
-#             subject='KAN Inbound',
-#             body=f'{email.from_email}\n{email.subject}\n{email.text}',
-#             from_email='inbound@smilewestada.com',
-#             to=['dbinetti@gmail.com'],
-#         )
-#         send_email.delay(email)
-#         return HttpResponse(status=200)
-#     raise Exception(form.errors)
-
-
-@csrf_exempt
-@require_POST
-@transaction.atomic
-def wistia(request):
-    data = json.loads(request.body)
-    create_auth0_user(
-        name=data['events'][0]['payload']['name'],
-        email=data['events'][0]['payload']['email'],
-    )
-    return HttpResponse(status=200)

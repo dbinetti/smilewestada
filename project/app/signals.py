@@ -4,33 +4,32 @@ from django.dispatch import receiver
 
 from .models import Account
 from .models import User
-from .tasks import create_account
-from .tasks import delete_user
-from .tasks import delete_user_email
-from .tasks import send_confirmation
-from .tasks import update_auth0
-from .tasks import update_user_from_account
+from .tasks import create_account_from_user
+from .tasks import create_mailchimp_from_account
+from .tasks import delete_auth0_user
+from .tasks import delete_mailchimp_from_account
+from .tasks import send_admin_notification
+from .tasks import send_goodbye_email
+from .tasks import send_welcome_email
 
-
-@receiver(pre_delete, sender=User)
-def delete_auth0(sender, instance, **kwargs):
-    delete_user(instance.username)
-    delete_user_email(instance.email)
-    return
-
-
-@receiver(post_save, sender=Account)
-def account_post_save(sender, instance, created, **kwargs):
-    if created:
-        return
-    update_user_from_account.delay(instance)
-    return
 
 @receiver(post_save, sender=User)
 def user_post_save(sender, instance, created, **kwargs):
     if created:
-        create_account(instance)
-        send_confirmation.delay(instance)
-        return
-    update_auth0.delay(instance)
+        create_account_from_user(instance)
+    return
+
+@receiver(pre_delete, sender=User)
+def user_pre_delete(sender, instance, **kwargs):
+    delete_auth0_user(instance.username)
+    delete_mailchimp_from_account(instance.account)
+    send_goodbye_email(instance.email)
+    return
+
+@receiver(post_save, sender=Account)
+def account_post_save(sender, instance, created, **kwargs):
+    if created:
+        send_welcome_email.delay(instance)
+        create_mailchimp_from_account.delay(instance)
+    send_admin_notification.delay(instance)
     return
