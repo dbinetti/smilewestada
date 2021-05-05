@@ -97,16 +97,30 @@
         <p>Of the {{total}}, here are those who have elected to share their names publicly:</p>
         <table class='table'>
           <thead>
-            <tr>
-              <th scope='col'>Name</th>
-              <th scope='col'>Comments</th>
+            <tr class='row'>
+              {# <th scope='col' class='col-1'>Zone</th> #}
+              <th scope='col' class='col-4'>Name</th>
+              <th scope='col' class='col-8'>Comments</th>
             </tr>
           </thead>
           <tbody>
             {% for account in accounts %}
-              <tr>
-                <td>{{account.name}}</td>
-                <td>{{account.comments}}</td>
+              <tr class='row'>
+                <td class='col-4'>
+                  {% if account.zone == 1 %}
+                    <span class="badge badge-warning">Zone 1</span>&nbsp;&nbsp;
+                  {% elif account.zone == 2 %}
+                    <span class="badge badge-primary">Zone 2</span>&nbsp;&nbsp;
+                  {% elif account.zone == 3 %}
+                    <span class="badge badge-info">Zone 3</span>&nbsp;&nbsp;
+                  {% elif account.zone == 4 %}
+                    <span class="badge badge-success">Zone 4</span>&nbsp;&nbsp;
+                  {% elif account.zone == 5 %}
+                    <span class="badge badge-danger">Zone 5</span>&nbsp;&nbsp;
+                  {% endif %}
+
+                  {{account.name}}</td>
+                <td class='col-8'>{{account.comments}}</td>
               </tr>
             {% endfor %}
           </tbody>
