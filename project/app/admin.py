@@ -36,6 +36,7 @@ class AccountAdmin(VersionAdmin):
     ]
     list_filter = [
         'is_public',
+        'is_volunteer',
         'zone',
     ]
     search_fields = [
