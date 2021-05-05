@@ -103,7 +103,8 @@ vars().update(EMAIL_CONFIG)
 
 # Static File Management
 STATIC_ROOT = root('staticfiles')
-STATIC_URL = '/static/'
+STATIC_URL = '/smilewestada/'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 # Media File Management
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -165,7 +166,7 @@ BOOTSTRAP4 = {
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -250,11 +251,11 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'django_rq',
     'reversion',
-    'cloudinary_storage',
     'cloudinary',
     'bootstrap4',
     'phonenumber_field',
