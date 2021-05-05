@@ -99,14 +99,14 @@
           <thead>
             <tr class='row'>
               {# <th scope='col' class='col-1'>Zone</th> #}
-              <th scope='col' class='col-4'>Name</th>
-              <th scope='col' class='col-8'>Comments</th>
+              <th scope='col' class='col-5'>Name</th>
+              <th scope='col' class='col-7'>Comments</th>
             </tr>
           </thead>
           <tbody>
             {% for account in accounts %}
               <tr class='row'>
-                <td class='col-4'>
+                <td class='col-5'>
                   {{account.name}}<br>
                   {% if account.zone == 1 %}
                     <span class="badge badge-warning">Zone 1</span>
@@ -120,7 +120,7 @@
                     <span class="badge badge-danger">Zone 5</span>
                   {% endif %}
                 </td>
-                <td class='col-8'>{{account.comments}}</td>
+                <td class='col-7'>{{account.comments}}</td>
               </tr>
             {% endfor %}
           </tbody>
