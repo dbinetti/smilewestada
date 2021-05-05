@@ -57,7 +57,7 @@ class AccountForm(forms.ModelForm):
             unless you explicity ask to be Public.",
             'is_public': "Showing your support publicly encourages others to join.",
             'is_volunteer': mark_safe("Want to do more?  We'll keep you updated on additional volunteer opportunities."),
-            'zone': mark_safe("Please indicate your <a href='static/app/wasd_trustee_zones.pdf' target='_blank'>District Zone</a> so we can direct your \
+            'zone': mark_safe("Please indicate your <a href='https://res.cloudinary.com/dyvz0sbfw/raw/upload/v1620230044/smilewestada/app/wasd_trustee_zones.20328492709b.pdf' target='_blank'>District Zone</a> so we can direct your \
             message to the proper Trustee."),
         }
 
