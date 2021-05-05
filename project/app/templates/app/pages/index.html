@@ -107,19 +107,19 @@
             {% for account in accounts %}
               <tr class='row'>
                 <td class='col-4'>
+                  {{account.name}}<br>
                   {% if account.zone == 1 %}
-                    <span class="badge badge-warning">Zone 1</span>&nbsp;&nbsp;
+                    <span class="badge badge-warning">Zone 1</span>
                   {% elif account.zone == 2 %}
-                    <span class="badge badge-primary">Zone 2</span>&nbsp;&nbsp;
+                    <span class="badge badge-primary">Zone 2</span>
                   {% elif account.zone == 3 %}
-                    <span class="badge badge-info">Zone 3</span>&nbsp;&nbsp;
+                    <span class="badge badge-info">Zone 3</span>
                   {% elif account.zone == 4 %}
-                    <span class="badge badge-success">Zone 4</span>&nbsp;&nbsp;
+                    <span class="badge badge-success">Zone 4</span>
                   {% elif account.zone == 5 %}
-                    <span class="badge badge-danger">Zone 5</span>&nbsp;&nbsp;
+                    <span class="badge badge-danger">Zone 5</span>
                   {% endif %}
-
-                  {{account.name}}</td>
+                </td>
                 <td class='col-8'>{{account.comments}}</td>
               </tr>
             {% endfor %}
