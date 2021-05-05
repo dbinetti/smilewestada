@@ -1,9 +1,7 @@
 {% autoescape off %}
 
 Count: {{count}}
-
-{{account.name}}
-{{account.user.email}}
+{{account.name}} ->
 {{account.comments|default:"(No Comments)"}}
 
 {% endautoescape %}

@@ -153,9 +153,11 @@ def send_goodbye_email(email_address):
 @job
 def send_admin_notification(account):
     count = Account.objects.all().count()
+    if not account.comments:
+        return
     email = build_email(
         template='app/emails/update.txt',
-        subject='SWA Update',
+        subject=f'SWA {count}',
         from_email='David Binetti <dbinetti@smilewestada.com>',
         context={'account': account, 'count': count},
         to=['dbinetti@gmail.com'],
