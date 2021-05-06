@@ -85,9 +85,29 @@
         </div>
       </div>
       {% endcomment %}
-
     </div>
   </section>
+
+  <nav class="navbar navbar-expand-sm navbar-light">
+    <ul class="nav nav-pills mr-auto">
+      <li class="nav-item ml-3">
+        <a href="{% url 'about' %}"><small>About</small></a>
+      </li>
+      <li class="nav-item ml-3">
+        <a href="{% url 'faq' %}"><small>FAQ</small></a>
+      </li>
+      <li class="nav-item ml-3">
+        <a href="{% url 'privacy' %}"><small>Privacy</small></a>
+      </li>
+      <li class="nav-item ml-3">
+        <a href="{% url 'terms' %}"><small>Terms</small></a>
+      </li>
+      <li class="nav-item ml-3">
+        <a href="{% url 'support' %}"><small>Support</small></a>
+      </li>
+    </ul>
+  </nav>
+
 
   <section class='mt-5'>
     <div class="card">
@@ -130,3 +150,5 @@
   </section>
 
 {% endblock content %}
+{% block bottomnav %}
+{% endblock bottomnav %}
