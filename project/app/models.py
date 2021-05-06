@@ -113,8 +113,7 @@ class User(AbstractBaseUser):
         editable=False,
     )
     email = models.EmailField(
-        blank=True,
-        null=True,
+        blank=False,
         editable=False,
     )
     is_active = models.BooleanField(
