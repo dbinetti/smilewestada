@@ -42,6 +42,7 @@ class AccountAdmin(VersionAdmin):
     ]
     search_fields = [
         'name',
+        'email',
     ]
     autocomplete_fields = [
         'user',
