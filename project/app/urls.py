@@ -33,6 +33,5 @@ urlpatterns = [
     path('share', RedirectView.as_view(url='https://smilewestada.wistia.com/medias/2oyxggw7kp'), name='share'),
 
     # EMail
-    # path('inbound', views.inbound, name='inbound',),
-    # path('wistia', views.wistia, name='wistia',),
+    path('sendgrid-event-webhook', views.sendgrid_event_webhook, name='webhook',),
 ]

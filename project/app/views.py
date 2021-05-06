@@ -1,3 +1,6 @@
+import json
+import logging
+
 import jwt
 import requests
 from django.conf import settings
@@ -12,10 +15,15 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
 from .forms import DeleteForm
 from .models import Account
+from .tasks import deactivate_user
+
+log = logging.getLogger('SMA')
 
 
 # Root
@@ -142,6 +150,7 @@ def account(request):
         form = AccountForm(instance=account)
     accounts = Account.objects.filter(
         is_public=True,
+        user__is_active=True,
     ).order_by('-created')
     total = Account.objects.count()
     return render(
@@ -174,3 +183,15 @@ def delete(request):
         'app/pages/delete.html',
         {'form': form,},
     )
+
+
+@csrf_exempt
+@require_POST
+def sendgrid_event_webhook(request):
+    if request.method == 'POST':
+        payload = json.loads(request.body)
+        if not payload['event'] == 'bounce':
+            raise Exception('Not a bounce')
+        email = payload['email']
+        deactivate_user.delay(email)
+    return HttpResponse()

@@ -183,3 +183,10 @@ def send_shutdown_email(account):
         to=[account.user.email],
     )
     return email.send()
+
+@job
+def deactivate_user(email):
+    user = User.objects.get(email=email)
+    user.is_active = False
+    user.save()
+    return
