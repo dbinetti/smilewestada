@@ -23,6 +23,7 @@ class AccountAdmin(VersionAdmin):
         'zone',
         'phone',
         'is_public',
+        'is_volunteer',
         'comments',
         'notes',
     ]
