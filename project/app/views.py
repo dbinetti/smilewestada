@@ -195,5 +195,5 @@ def sendgrid_event_webhook(request):
                 email = payload['email']
                 deactivate_user.delay(email)
             else:
-                log.error(f'Not a bounce: {payload}')
+                log.info(f'Not a bounce: {payload}')
     return HttpResponse()
