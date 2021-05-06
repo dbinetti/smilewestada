@@ -189,11 +189,11 @@ def delete(request):
 @require_POST
 def sendgrid_event_webhook(request):
     if request.method == 'POST':
-        payload = json.loads(request.body)
-        for event in payload:
+        payload_list = json.loads(request.body)
+        for payload in payload_list:
             if payload['event'] == 'bounce':
                 email = payload['email']
                 deactivate_user.delay(email)
             else:
-                log.error(f'Not a bounce: {event}')
+                log.error(f'Not a bounce: {payload}')
     return HttpResponse()
