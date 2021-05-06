@@ -30,6 +30,6 @@ def user_pre_delete(sender, instance, **kwargs):
 def account_post_save(sender, instance, created, **kwargs):
     if created:
         send_welcome_email.delay(instance)
-        create_or_update_mailchimp_from_account.delay(instance)
+    create_or_update_mailchimp_from_account.delay(instance)
     send_admin_notification.delay(instance)
     return
