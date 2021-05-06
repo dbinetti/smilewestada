@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from .models import Account
 from .models import User
 from .tasks import create_account_from_user
-from .tasks import create_mailchimp_from_account
+from .tasks import create_or_update_mailchimp_from_account
 from .tasks import delete_auth0_user
 from .tasks import delete_mailchimp_from_account
 from .tasks import send_admin_notification
@@ -30,6 +30,6 @@ def user_pre_delete(sender, instance, **kwargs):
 def account_post_save(sender, instance, created, **kwargs):
     if created:
         send_welcome_email.delay(instance)
-        create_mailchimp_from_account.delay(instance)
+        create_or_update_mailchimp_from_account.delay(instance)
     send_admin_notification.delay(instance)
     return

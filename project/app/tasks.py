@@ -74,6 +74,43 @@ def get_mailchimp_client():
 
 
 @job
+def create_or_update_mailchimp_from_account(account):
+    client = get_mailchimp_client()
+    list_id = settings.MAILCHIMP_AUDIENCE_ID
+    email = account.user.email
+    subscriber_hash = get_subscriber_hash(email)
+    data = {
+        'status_if_new': 'subscribed',
+        'email_address': email,
+        'merge_fields': {
+            'NAME': account.name,
+            'COMMENTS': account.comments,
+            'ZONE': account.zone,
+            'PUBLIC': account.is_public,
+            'VOLUNTEER': account.is_volunteer,
+        }
+    }
+    try:
+        client.lists.members.create_or_update(
+            list_id=list_id,
+            subscriber_hash=subscriber_hash,
+            data=data,
+        )
+    except MailChimpError as err:
+        # error = json.loads(str(e).replace("\'", "\""))
+        # if error['title'] == 'Invalid Resource':
+        #     user = User.objects.get(
+        #         email=email,
+        #     )
+        #     user.is_active = False
+        #     user.save()
+        #     result = 'Invalid Resource'
+        # else:
+        #     raise e
+        raise err
+    return
+
+@job
 def create_mailchimp_from_account(account):
     client = get_mailchimp_client()
     list_id = settings.MAILCHIMP_AUDIENCE_ID
