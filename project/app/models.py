@@ -64,7 +64,6 @@ class Account(models.Model):
         'app.User',
         on_delete=models.CASCADE,
         related_name='account',
-        null=True,
         unique=True,
     )
 
