@@ -79,15 +79,16 @@ def create_or_update_mailchimp_from_account(account):
     list_id = settings.MAILCHIMP_AUDIENCE_ID
     email = account.user.email
     subscriber_hash = get_subscriber_hash(email)
+    zone = account.zone if account.zone else 0
     data = {
         'status_if_new': 'subscribed',
         'email_address': email,
         'merge_fields': {
             'NAME': account.name,
             'COMMENTS': account.comments,
-            'ZONE': account.zone,
-            'PUBLIC': account.is_public,
-            'VOLUNTEER': account.is_volunteer,
+            'ZONE': zone,
+            'PUBLIC': int(account.is_public),
+            'VOLUNTEER': int(account.is_volunteer),
         }
     }
     try:
