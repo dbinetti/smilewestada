@@ -50,7 +50,7 @@ class AccountAdmin(VersionAdmin):
     inlines = [
     ]
     ordering = [
-        'created',
+        '-created',
     ]
     readonly_fields = [
         'is_comment',
