@@ -39,9 +39,9 @@
         </div>
       {% endcomment %}
 
-      <div>
+      <div class='mb-2'>
         <p>
-          Smile West Ada is a group of parents who want masks optional the last two weeks of this school year.  Support us by joining today, and we'll speak with one, clear, powerful voice at the next School Board meeting on May 11th.  The site is free, we protect your privacy, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms before the end of this year.
+          Smile West Ada is a group of parents who want <strong>masks optional</strong> the last <strong>two weeks</strong> of this school year.  Support us by joining our free, private site today and we'll speak with one, clear, powerful voice at the <strong>next School Board Meeting</strong> on May 11th.
         </p>
       </div>
       {% comment %}
@@ -50,15 +50,16 @@
           Let's Get <strong>Smile West Ada</strong> School!
         </h2>
       </div>
-      {% endcomment %}
       <div class='mb-5'>
         <p class='lead'>
             {# If you support Full-Time, In-Person, K-12 Instruction you should join our movement! #}
         </p>
       </div>
+      {% endcomment %}
       <div class='mb-3'>
-        <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg">
-          <strong>Click Here to Join Us!</strong>
+        <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3">
+          <strong>Click Here to Join {{total}} Others <br>
+          Who Want Masks-Optional The Last Two Weeks</strong>
         </a>
       </div>
       {% comment %}
