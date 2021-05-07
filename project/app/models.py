@@ -14,6 +14,9 @@ class Account(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
+    is_featured = models.BooleanField(
+        default=False,
+    )
     name = models.CharField(
         max_length=100,
         blank=False,

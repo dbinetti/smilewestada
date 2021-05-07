@@ -18,6 +18,7 @@ from .models import User
 class AccountAdmin(VersionAdmin):
     save_on_top = True
     fields = [
+        'is_featured',
         'name',
         'email',
         'zone',
@@ -28,6 +29,7 @@ class AccountAdmin(VersionAdmin):
         'notes',
     ]
     list_display = [
+        'is_featured',
         'name',
         'is_public',
         'is_comment',
@@ -36,6 +38,7 @@ class AccountAdmin(VersionAdmin):
     list_editable = [
     ]
     list_filter = [
+        'is_featured',
         'is_public',
         'is_volunteer',
         'zone',

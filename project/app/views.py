@@ -30,7 +30,11 @@ log = logging.getLogger('SMA')
 def index(request):
     accounts = Account.objects.filter(
         is_public=True,
-    ).order_by('-created')
+        user__is_active=True,
+    ).order_by(
+        '-is_featured',
+        '-created',
+    )
     total = Account.objects.count()
     return render(
         request,
