@@ -29,11 +29,11 @@ class AccountAdmin(VersionAdmin):
         'notes',
     ]
     list_display = [
-        'is_featured',
         'name',
         'is_public',
         'is_comment',
         'zone',
+        'is_featured',
     ]
     list_editable = [
     ]

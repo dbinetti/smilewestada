@@ -130,16 +130,20 @@
                 <td class='col-5'>
                   {{account.name}}<br>
                   {% if account.zone == 1 %}
-                    <span class="badge badge-warning">Zone 1</span>
+                    <span class="badge badge-warning">Zone 1</span>&nbsp;
                   {% elif account.zone == 2 %}
-                    <span class="badge badge-primary">Zone 2</span>
+                    <span class="badge badge-primary">Zone 2</span>&nbsp;
                   {% elif account.zone == 3 %}
-                    <span class="badge badge-info">Zone 3</span>
+                    <span class="badge badge-info">Zone 3</span>&nbsp;
                   {% elif account.zone == 4 %}
-                    <span class="badge badge-success">Zone 4</span>
+                    <span class="badge badge-success">Zone 4</span>&nbsp;
                   {% elif account.zone == 5 %}
-                    <span class="badge badge-danger">Zone 5</span>
+                    <span class="badge badge-danger">Zone 5</span>&nbsp;
                   {% endif %}
+                  {% if account.is_featured %}
+                    <span class="badge badge-dark">Featured</span>
+                  {% endif %}
+
                 </td>
                 <td class='col-7'>{{account.comments}}</td>
               </tr>
