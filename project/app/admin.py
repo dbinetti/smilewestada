@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
+from django.db.models.signals import post_save
 from reversion.admin import VersionAdmin
 
 # Local
@@ -13,6 +14,24 @@ from .models import Account
 from .models import School
 from .models import User
 from .models import Voter
+from .signals import account_post_save
+from .tasks import send_fullname_email
+
+
+def privatize_account(account):
+    account.is_public = False
+    post_save.disconnect(account_post_save, Account)
+    account.save()
+    post_save.connect(account_post_save, Account)
+    send_fullname_email.delay(account)
+    return
+
+
+
+def privatize(modeladmin, request, queryset):
+    for account in queryset:
+        privatize_account(account)
+privatize.short_description = 'Privatize account'
 
 
 @admin.register(Account)
@@ -59,7 +78,9 @@ class AccountAdmin(VersionAdmin):
     readonly_fields = [
         'is_comment',
     ]
-
+    actions = [
+        privatize,
+    ]
     def is_comment(self, obj):
         return bool(obj.comments)
     is_comment.boolean = True

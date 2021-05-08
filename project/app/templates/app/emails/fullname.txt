@@ -1,0 +1,34 @@
+{% autoescape off %}
+
+Thank you for being a part of Smile West Ada!
+
+I'm writing because I need to be more stringent in enforcing
+the "real full name" policy on the website.  This has always
+been a requirement, but now that we're really gaining serious
+traction our opposition will soon start to enter the "fight"
+mode, which means they will use any inconsistency against us.
+
+What this means for you:
+
+- I've made your account private.  This means that your name
+and comments (if any) will no longer appear on the homepage.
+- All information is saved!  Nothing has been or will be
+deleted.
+- If you wish to have your name and comments reinstated, simply
+provide your real, full name and re-check the "Make My Name
+Public" box.  Everything will instantly appear back on the homepage.
+
+I'm sorry that I have to burden you with this inconvenience,
+but the value we hold over our opposition comes from the
+authenticity of our movement.  As we get closer to the
+Tuesday Board Meeting we'll need every advantage to prevail;
+thanks for understanding the importance of this.
+
+If you have any other questions please don't hesitate to reach
+out to be at this email or by phone at 415.713.2126
+
+Best, Dave
+
+
+
+{% endautoescape %}

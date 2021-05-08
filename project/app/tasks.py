@@ -224,6 +224,16 @@ def send_shutdown_email(account):
     return email.send()
 
 @job
+def send_fullname_email(account):
+    email = build_email(
+        template='app/emails/fullname.txt',
+        subject='Smile West Ada - Real, Full Name Notice',
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
 def deactivate_user(email):
     user = User.objects.get(email=email)
     user.is_active = False
