@@ -234,6 +234,16 @@ def send_fullname_email(account):
     return email.send()
 
 @job
+def send_moderation_email(account):
+    email = build_email(
+        template='app/emails/modulate.txt',
+        subject='Smile West Ada - On Topic Notice',
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
 def deactivate_user(email):
     user = User.objects.get(email=email)
     user.is_active = False

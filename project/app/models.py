@@ -17,6 +17,9 @@ class Account(models.Model):
     is_featured = models.BooleanField(
         default=False,
     )
+    is_moderated = models.BooleanField(
+        default=False,
+    )
     name = models.CharField(
         max_length=100,
         blank=False,

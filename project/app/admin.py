@@ -16,6 +16,7 @@ from .models import User
 from .models import Voter
 from .signals import account_post_save
 from .tasks import send_fullname_email
+from .tasks import send_moderation_email
 
 
 def privatize_account(account):
@@ -34,6 +35,22 @@ def privatize(modeladmin, request, queryset):
 privatize.short_description = 'Privatize account'
 
 
+def modulate_account(account):
+    account.is_moderated = True
+    post_save.disconnect(account_post_save, Account)
+    account.save()
+    post_save.connect(account_post_save, Account)
+    send_moderation_email.delay(account)
+    return
+
+
+
+def modulate(modeladmin, request, queryset):
+    for account in queryset:
+        modulate_account(account)
+modulate.short_description = 'Modulate account'
+
+
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
     save_on_top = True
@@ -43,6 +60,7 @@ class AccountAdmin(VersionAdmin):
         'email',
         'zone',
         'phone',
+        'is_moderated',
         'is_public',
         'is_volunteer',
         'comments',
@@ -50,6 +68,7 @@ class AccountAdmin(VersionAdmin):
     ]
     list_display = [
         'name',
+        'is_moderated',
         'is_public',
         'is_comment',
         'zone',
@@ -58,6 +77,7 @@ class AccountAdmin(VersionAdmin):
     list_editable = [
     ]
     list_filter = [
+        'is_moderated',
         'is_featured',
         'is_public',
         'is_volunteer',
@@ -80,6 +100,7 @@ class AccountAdmin(VersionAdmin):
     ]
     actions = [
         privatize,
+        modulate,
     ]
     def is_comment(self, obj):
         return bool(obj.comments)

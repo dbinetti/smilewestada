@@ -1,0 +1,33 @@
+{% autoescape off %}
+
+Thank you for being a part of Smile West Ada!
+
+I'm writing because I need to be more stringent in enforcing
+the "repspectul, on topic" policy on the website.  This has always
+been a requirement, but now that we're really gaining serious
+traction our opposition will soon start to enter the "fight"
+mode, which means they will use any inconsistency against us.
+
+What this means for you:
+
+- I've hidden your comment on the homepage.
+- All information is saved!  Nothing has been or will be
+deleted.
+- If you wish to have your comments reinstated, please edit them
+to stay respectful and specifically on topic to the issue of making
+masks optional the last two weeks of the year in West Ada.
+Everything will instantly appear back on the homepage.
+
+I know this is subjective, but  but the value we hold over our
+opposition comes from the focused nature of our movement.  As we get
+closer to the Tuesday Board Meeting we'll need every advantage to
+prevail; thanks for understanding the importance of this.
+
+If you have any other questions please don't hesitate to reach
+out to be at this email or by phone at 415.713.2126
+
+Best, Dave
+
+
+
+{% endautoescape %}

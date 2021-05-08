@@ -126,7 +126,7 @@
                   {% endif %}
 
                 </td>
-                <td class='col-7'>{{account.comments}}</td>
+                <td class='col-7'>{% if not account.is_moderated %}{{account.comments}}{% endif %}</td>
               </tr>
             {% endfor %}
           </tbody>
