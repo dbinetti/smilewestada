@@ -30,7 +30,7 @@ urlpatterns = [
     path('delete', views.delete, name='delete',),
 
     # Share
-    path('share', RedirectView.as_view(url='https://smilewestada.wistia.com/medias/2oyxggw7kp'), name='share'),
+    path('share', RedirectView.as_view(url='https://smilewestada.wistia.com/medias/24zuln9lmk'), name='share'),
 
     # EMail
     path('sendgrid-event-webhook', views.sendgrid_event_webhook, name='webhook',),
