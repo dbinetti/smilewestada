@@ -1,6 +1,7 @@
 {% extends 'app/pages/base.html' %}
 {% load cloudinary %}
 {% load static %}
+{% load humanize %}
 
 {% block metatags %}
   <meta property="og:title" content="Make Masks Optional the Last Two Weeks of School" />
@@ -38,7 +39,7 @@
       </div>
       <div class='mb-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3">
-          <strong>Click Here to Join {{total}} Others <br>
+          <strong>Click Here to Join {{total|intcomma}} Others <br>
           Supporting Masks-Optional The Last Two Weeks</strong>
         </a>
       </div>
@@ -93,7 +94,7 @@
   <section class='mt-3'>
     <div class="card">
       <h6 class="card-header">
-        Of our {{total}} members, here are those who have elected to share their names publicly:
+        Of our {{total|intcomma}} members, here are those who have elected to share their names publicly:
       </h6>
       <div class="card-body">
         <table class='table'>
