@@ -20,6 +20,7 @@ from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
 
+from .forms import VoterForm
 from .models import Account
 from .models import User
 
@@ -228,3 +229,38 @@ def deactivate_user(email):
     user.is_active = False
     user.save()
     return
+
+
+def import_voters(filename):
+    with open(filename) as f:
+        reader = csv.reader(
+            f,
+            skipinitialspace=True,
+        )
+        next(reader)
+        rows = [row for row in reader]
+        t = len(rows)
+        i = 0
+        errors = []
+        output = []
+        for row in rows:
+            i += 1
+            print(f"{i}/{t}")
+            voter = {
+                'voter_id': int(row[0]),
+                'prefix': row[2].strip(),
+                'last_name': row[2].strip(),
+                'first_name': row[3].strip(),
+                'middle_name': row[4].strip(),
+                'suffix': row[1].strip(),
+                'age': int(row[6]),
+                'address': row[8].strip(),
+                'city': row[10].strip(),
+                'st': 'ID',
+                'zipcode': row[12].strip(),
+                'zone': int(row[27][-1]),
+            }
+            form = VoterForm(voter)
+            if form.is_valid():
+                output.append(voter)
+    return output

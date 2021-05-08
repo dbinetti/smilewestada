@@ -12,6 +12,7 @@ from .forms import UserCreationForm
 from .models import Account
 from .models import School
 from .models import User
+from .models import Voter
 
 
 @admin.register(Account)
@@ -81,6 +82,45 @@ class SchoolAdmin(VersionAdmin):
         'name',
     ]
     autocomplete_fields = [
+    ]
+
+
+@admin.register(Voter)
+class VoterAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'voter_id',
+        'last_name',
+        'first_name',
+        'middle_name',
+        'suffix',
+        'age',
+        'address',
+        'city',
+        'st',
+        'zipcode',
+        'zone',
+    ]
+    list_display = [
+        'last_name',
+        'first_name',
+        'age',
+        'zone',
+    ]
+    list_editable = [
+    ]
+    list_filter = [
+        'zone',
+    ]
+    search_fields = [
+        'first_name',
+        'last_name',
+    ]
+    inlines = [
+    ]
+    ordering = [
+        'last_name',
+        'first_name',
     ]
 
 

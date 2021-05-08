@@ -8,6 +8,7 @@ from django.utils.safestring import mark_safe
 # Local
 from .models import Account
 from .models import User
+from .models import Voter
 
 
 class DeleteForm(forms.Form):
@@ -15,6 +16,23 @@ class DeleteForm(forms.Form):
         required=True,
     )
 
+
+class VoterForm(forms.ModelForm):
+    class Meta:
+        model = Voter
+        fields = [
+            'voter_id',
+            'last_name',
+            'first_name',
+            'middle_name',
+            'suffix',
+            'age',
+            'address',
+            'city',
+            'st',
+            'zipcode',
+            'zone',
+        ]
 
 class AccountForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
