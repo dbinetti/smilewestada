@@ -1,15 +1,16 @@
 # Standard Libary
 import csv
-import logging
 
 # First-Party
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
 # Django
 from django.conf import settings
+from django.core.cache import cache
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django_rq import job
+from fuzzywuzzy import fuzz
 from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
@@ -17,6 +18,12 @@ from mailchimp3.mailchimpclient import MailChimpError
 from .forms import VoterForm
 from .models import Account
 from .models import User
+from .models import Voter
+from .signals import account_post_save
+
+impofrom django.db.models.signals import post_save
+
+
 
 log = logging.getLogger('SMA')
 
@@ -301,3 +308,42 @@ def import_voters(filename):
             if form.is_valid():
                 output.append(voter)
     return output
+
+
+def voter_names():
+    cache_key = 'voter_names'
+    value = cache.get(cache_key)
+    if not value:
+        vs = Voter.objects.all()
+        value = [f'{v.first_name} {v.last_name}' for v in vs]
+        cache.set(cache_key, value, 86000)
+    return value
+
+def match_names(account, min_score=0, invalidate=False):
+    cache_key = 'voter_names'
+    voters = cache.get(cache_key)
+    if not voters or invalidate:
+        vs = Voter.objects.all()
+        voters = [f'{v.first_name} {v.last_name}'.lower() for v in vs]
+        cache.set(cache_key, voters, 86000)
+    max_score = -1
+    # max_name = ''
+    account_name = account.name.lower()
+    for voter in voters:
+        score = fuzz.partial_ratio(account_name, voter)
+        if (score > min_score) & (score > max_score):
+            max_name = voter
+            max_score = score
+    if max_score == 100:
+        account.is_voter = True
+        post_save.disconnect(account_post_save, Account)
+        account.save()
+        post_save.connect(account_post_save, Account)
+
+# @job
+# def voter_verify(account):
+#     vs = Voter.objects.all()
+#     voters = [f'{v.first_name} {v.last_name}' for v in vs]
+#     for voter in voters:
+
+#     return

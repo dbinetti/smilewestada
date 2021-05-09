@@ -39,6 +39,8 @@ pyjwt = "*"
 django-reversion = "*"
 django-cloudinary-storage = "*"
 segno = "*"
+fuzzywuzzy = "*"
+python-Levenshtein = "*"
 
 [requires]
 python_version = "3.9"
