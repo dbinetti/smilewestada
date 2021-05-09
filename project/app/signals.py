@@ -20,6 +20,7 @@ def user_post_save(sender, instance, created, **kwargs):
         create_account_from_user(instance)
     else:
         update_auth0_from_user(instance)
+        create_or_update_mailchimp_from_account.delay(instance.account)
     return
 
 @receiver(pre_delete, sender=User)

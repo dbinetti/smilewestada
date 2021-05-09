@@ -52,12 +52,13 @@ def delete_auth0_user(user_id):
 
 @job
 def update_auth0_from_user(user):
+    if not user.username.startswith('auth0|'):
+        return
     client = get_auth0_client()
     payload = {
         'name': user.name,
+        'email': user.email,
     }
-    if user.username.startswith('auth0|'):
-        payload['email'] = user.email
     response = client.users.update(user.username, payload)
     return response
 

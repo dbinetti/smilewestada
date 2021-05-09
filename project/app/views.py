@@ -204,7 +204,8 @@ def sendgrid_event_webhook(request):
         for payload in payload_list:
             if payload['event'] == 'bounce':
                 email = payload['email']
-                deactivate_user.delay(email)
+                log.error(f'Bounced Email: {email}')
+                # deactivate_user.delay(email)
             else:
                 log.info(f'Not a bounce: {payload}')
     return HttpResponse()
