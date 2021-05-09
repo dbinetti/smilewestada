@@ -79,6 +79,9 @@ class AccountAdmin(VersionAdmin):
         'is_moderated',
         'is_public',
         'is_volunteer',
+        'is_speaker',
+        'is_signage',
+        'is_voter',
         'comments',
         'notes',
     ]
@@ -88,6 +91,9 @@ class AccountAdmin(VersionAdmin):
         'is_moderated',
         'is_public',
         'is_comment',
+        'is_speaker',
+        'is_signage',
+        'is_voter',
         'zone',
         'is_featured',
 
@@ -99,6 +105,9 @@ class AccountAdmin(VersionAdmin):
         'is_featured',
         'is_public',
         'is_volunteer',
+        'is_speaker',
+        'is_signage',
+        'is_voter',
         'zone',
     ]
     search_fields = [

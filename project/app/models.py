@@ -50,6 +50,15 @@ class Account(models.Model):
     is_volunteer = models.BooleanField(
         default=False,
     )
+    is_speaker = models.BooleanField(
+        default=False,
+    )
+    is_signage = models.BooleanField(
+        default=False,
+    )
+    is_voter = models.BooleanField(
+        default=False,
+    )
     comments = models.TextField(
         max_length=500,
         blank=True,
