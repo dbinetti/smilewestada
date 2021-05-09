@@ -112,6 +112,7 @@ def callback(request):
         }
     )
     payload['username'] = payload.pop('sub')
+    log.info(payload)
     if not payload['email']:
         messages.error(
             request,
