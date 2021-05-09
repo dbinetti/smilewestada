@@ -1,20 +1,14 @@
 # Standard Libary
 import csv
-import json
 import logging
 
-import requests
 # First-Party
 from auth0.v3.authentication import GetToken
-from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
 # Django
 from django.conf import settings
-from django.contrib.auth import get_user_model
-from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from django.utils.crypto import get_random_string
 from django_rq import job
 from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
@@ -73,7 +67,6 @@ def get_mailchimp_client():
         enabled=enabled,
     )
 
-
 @job
 def create_or_update_mailchimp_from_account(account):
     client = get_mailchimp_client()
@@ -120,7 +113,7 @@ def create_mailchimp_from_account(account):
         'status': 'subscribed',
         'email_address': account.user.email,
     }
-    result = client.lists.members.create(
+    client.lists.members.create(
         list_id=list_id,
         data=data,
     )
