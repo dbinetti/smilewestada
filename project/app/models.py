@@ -179,7 +179,7 @@ class User(AbstractBaseUser):
     )
     email = models.EmailField(
         blank=False,
-        editable=False,
+        editable=True,
     )
     is_active = models.BooleanField(
         default=True,
