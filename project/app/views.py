@@ -112,6 +112,12 @@ def callback(request):
         }
     )
     payload['username'] = payload.pop('sub')
+    if not payload['email']:
+        messages.error(
+            request,
+            "Email address is required",
+        )
+        return redirect('index')
     user = authenticate(request, **payload)
     if user:
         log_in(request, user)
