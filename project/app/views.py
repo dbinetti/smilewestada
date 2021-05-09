@@ -118,7 +118,12 @@ def callback(request):
         if user.is_admin:
             return redirect('admin:index')
         return redirect('account')
-    return HttpResponse(status=403)
+    messages.error(
+        request,
+        "Email is Required for Login",
+    )
+    return redirect('index')
+
 
 def logout(request):
     log_out(request)

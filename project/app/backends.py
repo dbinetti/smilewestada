@@ -16,6 +16,8 @@ class Auth0Backend(ModelBackend):
         username = kwargs.get('username', None)
         name = kwargs.get('name', None)
         email = kwargs.get('email', None)
+        if not email:
+            return None
         try:
             user = User.objects.get(
                 username=username,
