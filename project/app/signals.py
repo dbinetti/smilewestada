@@ -19,7 +19,7 @@ def user_post_save(sender, instance, created, **kwargs):
     if created:
         create_account_from_user(instance)
     else:
-        update_auth0_from_user(instance)
+        update_auth0_from_user.delay(instance)
         create_or_update_mailchimp_from_account.delay(instance.account)
     return
 
