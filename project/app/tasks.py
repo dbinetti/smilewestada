@@ -1,5 +1,6 @@
 # Standard Libary
 import csv
+import logging
 
 # First-Party
 from auth0.v3.authentication import GetToken
@@ -8,6 +9,7 @@ from auth0.v3.management import Auth0
 from django.conf import settings
 from django.core.cache import cache
 from django.core.mail import EmailMultiAlternatives
+from django.db.models.signals import post_save
 from django.template.loader import render_to_string
 from django_rq import job
 from fuzzywuzzy import fuzz
@@ -20,10 +22,6 @@ from .models import Account
 from .models import User
 from .models import Voter
 from .signals import account_post_save
-
-impofrom django.db.models.signals import post_save
-
-
 
 log = logging.getLogger('SMA')
 
