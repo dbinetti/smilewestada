@@ -244,6 +244,16 @@ def send_moderation_email(account):
     return email.send()
 
 @job
+def send_unmoderation_email(account):
+    email = build_email(
+        template='app/emails/unmoderate.txt',
+        subject='Smile West Ada - Comments Reinstated',
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
 def deactivate_user(email):
     user = User.objects.get(email=email)
     user.is_active = False

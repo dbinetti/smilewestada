@@ -17,6 +17,7 @@ from .models import Voter
 from .signals import account_post_save
 from .tasks import send_fullname_email
 from .tasks import send_moderation_email
+from .tasks import send_unmoderation_email
 
 
 def privatize_account(account):
@@ -49,6 +50,21 @@ def modulate(modeladmin, request, queryset):
     for account in queryset:
         modulate_account(account)
 modulate.short_description = 'Modulate account'
+
+def unmodulate_account(account):
+    account.is_moderated = False
+    post_save.disconnect(account_post_save, Account)
+    account.save()
+    post_save.connect(account_post_save, Account)
+    send_unmoderation_email.delay(account)
+    return
+
+
+
+def unmodulate(modeladmin, request, queryset):
+    for account in queryset:
+        unmodulate_account(account)
+unmodulate.short_description = 'Unmodulate account'
 
 
 @admin.register(Account)
@@ -103,6 +119,7 @@ class AccountAdmin(VersionAdmin):
     actions = [
         privatize,
         modulate,
+        unmodulate,
     ]
     def is_comment(self, obj):
         return bool(obj.comments)
