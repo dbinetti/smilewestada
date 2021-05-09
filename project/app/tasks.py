@@ -49,6 +49,19 @@ def delete_auth0_user(user_id):
     response = client.users.delete(user_id)
     return response
 
+
+@job
+def update_auth0_from_user(user):
+    client = get_auth0_client()
+    payload = {
+        'name': user.name,
+    }
+    if user.username.startswith('auth0|'):
+        payload['email'] = user.email
+    response = client.users.update(user.username, payload)
+    return response
+
+
 # Account Creation Utility
 def create_account_from_user(user):
     account = Account.objects.create(
