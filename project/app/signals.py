@@ -11,15 +11,12 @@ from .tasks import delete_mailchimp_from_account
 from .tasks import send_admin_notification
 from .tasks import send_goodbye_email
 from .tasks import send_welcome_email
-from .tasks import update_auth0_from_user
 
 
 @receiver(post_save, sender=User)
 def user_post_save(sender, instance, created, **kwargs):
     if created:
         create_account_from_user(instance)
-    else:
-        update_auth0_from_user(instance)
     return
 
 @receiver(pre_delete, sender=User)
