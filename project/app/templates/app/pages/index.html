@@ -111,18 +111,21 @@
                 <td class='col-5'>
                   {{account.name}}<br>
                   {% if account.zone == 1 %}
-                    <span class="badge badge-warning">Zone 1</span>&nbsp;
+                    <span class="badge badge-warning">Zone 1</span>
                   {% elif account.zone == 2 %}
-                    <span class="badge badge-primary">Zone 2</span>&nbsp;
+                    <span class="badge badge-secondary">Zone 2</span>
                   {% elif account.zone == 3 %}
-                    <span class="badge badge-info">Zone 3</span>&nbsp;
+                    <span class="badge badge-info">Zone 3</span>
                   {% elif account.zone == 4 %}
-                    <span class="badge badge-success">Zone 4</span>&nbsp;
+                    <span class="badge badge-success">Zone 4</span>
                   {% elif account.zone == 5 %}
-                    <span class="badge badge-danger">Zone 5</span>&nbsp;
+                    <span class="badge badge-danger">Zone 5</span>
                   {% endif %}
                   {% if account.is_featured %}
                     <span class="badge badge-light">Featured</span>
+                  {% endif %}
+                  {% if account.is_voter %}
+                    <span class="badge badge-primary">Registered Voter</span>
                   {% endif %}
 
                 </td>

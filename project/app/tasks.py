@@ -21,7 +21,6 @@ from .forms import VoterForm
 from .models import Account
 from .models import User
 from .models import Voter
-from .signals import account_post_save
 
 log = logging.getLogger('SMA')
 
@@ -333,6 +332,7 @@ def match_names(account, min_score=0, invalidate=False):
             max_name = voter
             max_score = score
     if max_score == 100:
+        from app.signals import account_post_save
         account.is_voter = True
         post_save.disconnect(account_post_save, Account)
         account.save()
