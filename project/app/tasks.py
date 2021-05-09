@@ -337,6 +337,9 @@ def match_names(account, min_score=0, invalidate=False):
         post_save.disconnect(account_post_save, Account)
         account.save()
         post_save.connect(account_post_save, Account)
+        return 'matched'
+    else:
+        return (max_score, max_name, account_name)
 
 # @job
 # def voter_verify(account):
