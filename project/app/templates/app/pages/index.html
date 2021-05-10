@@ -125,10 +125,11 @@
                   {% if account.is_featured %}
                     <span class="badge badge-light">Featured</span>
                   {% endif %}
+{% comment %}
                   {% if account.is_voter %}
                     <span class="badge badge-primary">Registered Voter</span>
                   {% endif %}
-
+{% endcomment %}
                 </td>
                 <td class='col-7'>{% if not account.is_moderated %}{{account.comments}}{% endif %}</td>
               </tr>
