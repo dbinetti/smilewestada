@@ -76,8 +76,20 @@ class AssignmentAdmin(VersionAdmin):
         'account',
         'school',
     ]
+    list_display = [
+        'id',
+        'date',
+        'school',
+        'account',
+    ]
+    list_editable = [
+        'account',
+    ]
     autocomplete_fields = [
         'account',
+        'school',
+    ]
+    ordering = [
         'school',
     ]
 
