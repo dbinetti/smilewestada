@@ -21,7 +21,6 @@ from django.views.decorators.http import require_POST
 from .forms import AccountForm
 from .forms import DeleteForm
 from .models import Account
-from .tasks import deactivate_user
 
 log = logging.getLogger('SMA')
 
@@ -156,7 +155,7 @@ def account(request):
                 request,
                 "Saved!",
             )
-            return redirect('account')
+            return redirect('share')
     else:
         form = AccountForm(instance=account)
     accounts = Account.objects.filter(
@@ -172,6 +171,14 @@ def account(request):
             'accounts': accounts,
             'total': total,
         },
+    )
+
+# Account
+@login_required
+def share(request):
+    return render(
+        request,
+        'app/pages/share.html',
     )
 
 # Delete

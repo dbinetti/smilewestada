@@ -46,6 +46,10 @@
               </li>
               <span class="visible-xs-inline mb-3"></span>
               <li class='nav-item'>
+                <a href="{% url 'share' %}" class='align-bottom far fa-share mr-3'>&nbsp;Share</a>
+              </li>
+              <span class="visible-xs-inline mb-3"></span>
+              <li class='nav-item'>
                 <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-outline-dark ml-3'>Logout</a>
               </li>
             {% else %}
@@ -89,8 +93,6 @@
     <br><br><br>
 
     {% block scripts %}
-      <div id="fb-root"></div>
-      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="S2yVNVmf"></script>
     {% endblock scripts %}
 
   </body>

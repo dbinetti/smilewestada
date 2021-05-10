@@ -1,7 +1,6 @@
 # Django
 from django.urls import path
 from django.views.generic import TemplateView
-from django.views.generic.base import RedirectView
 
 # Local
 from . import views
@@ -26,11 +25,11 @@ urlpatterns = [
     # Account
     path('account', views.account, name='account',),
 
+    # Share
+    path('share', views.share, name='share'),
+
     # Delete
     path('delete', views.delete, name='delete',),
-
-    # Share
-    path('share', RedirectView.as_view(url='https://smilewestada.wistia.com/medias/24zuln9lmk'), name='share'),
 
     # EMail
     path('sendgrid-event-webhook', views.sendgrid_event_webhook, name='webhook',),

@@ -1,0 +1,23 @@
+{% autoescape off %}
+
+Thank you for being willing to speak at the May 11th Board Meeting
+on behalf of Smile West Ada.
+
+The comment period is being restricted, so there won't be time for
+everyone to speak.  As a result, we're coordinating all of our
+comments so that we aren't being redundent and can cover all of
+our arguments in favor of masks optional.
+
+I can't promise a speaking spot on behalf of Smile West Ada to everyone
+because of this constraint, but thanks for being willing; even if we
+can't all speak in person I will have an alternative so that everyone
+can be heard.
+
+I'll follow up before Monday as I see who is interested in serving
+in this role.  In the meantime, please simply accept my thanks for
+standing up for our kids!
+
+Best, Dave
+
+
+{% endautoescape %}

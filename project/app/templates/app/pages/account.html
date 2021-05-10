@@ -9,42 +9,17 @@
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=286973936371350&autoLogAppEvents=1" nonce="BVurEf1h"></script>
 {% endblock formmedia %}
 
-{% block title %}Thank You!{% endblock title %}
+{% block title %}Account Page{% endblock title %}
 
 {% block content %}
   <section class='mt-5'>
     <h2 class='my-3 col-md-12'>
-      Thank You for Joining!
+      Thank You for Your Support!
     </h2>
-    <p class='lead my-3 col-md-12'>
-      Next, share this on Facebook:
-    </p>
-    <div class='mb-3 ml-3 col-md-12'>
-<div class="fb-share-button" data-href="https://www.smilewestada.com" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.smilewestada.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-
-{% comment %}
-
-      <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.smilewestada.com&layout=button_count&size=large&appId=286973936371350&width=95&height=28" width="95" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-{% endcomment %}
-    </div>
-    <p class='lead col-md-12'>
-      Or copy/paste this link on other social media, or via text:
-    </p>
-    <div class='mx-3 my-3 col-md-12'>
-      <strong>https://www.smilewestada.com</strong>
-    </div>
     <p class='lead col-md-8'>
-      Lastly, take a moment to review your information below.  You can make your name public, add a message, and pick your zone so we can report directly to your specific Trustee.  If you need any other help, please don't hesitate to reach out at <a href='mailto:dbinetti@smilewestada.com'>dbinetti@smilewestada.com</a>.
+      Next, review/update your account details below because the more we work together the better our chances of success!
     </p>
-    {% comment %}
-    <ul class='list-inline ml-4'>
-      <li class='list-inline-item'><iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fsmilewestada.wistia.com%2Fmedias%2F2oyxggw7kp&layout=button&size=small&appId=286973936371350&width=67&height=20" width="67" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></li>
-      <li class='list-inline-item'><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="If you want the Kids all in school check this out" data-url="https://smilewestada.wistia.com/medias/beb6fxz2dk" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
-
-    </ul>
-    {% endcomment %}
   </section>
-
   <section class='mt-5 col-md-8'>
     <div class='card'>
       <h4 class='card-header'>Account Details</h4>
@@ -57,13 +32,14 @@
             {% bootstrap_form_errors form %}
 
             {% bootstrap_field form.name show_help=True show_label=False placeholder="Name" %}
-            {# {% bootstrap_field form.email show_help=True show_label=True placeholder='Email' %} #}
-            {# {% bootstrap_field form.phone show_help=False show_label=False %} #}
             {% bootstrap_field form.is_public show_help=True show_label=False %}
-            {% bootstrap_field form.is_volunteer show_help=True show_label=False %}
+            {% bootstrap_field form.role show_help=True show_label=False %}
             {% bootstrap_field form.zone show_help=True show_label=False %}
+            {% bootstrap_field form.is_attending show_help=True show_label=False %}
+            {% bootstrap_field form.is_signage show_help=True show_label=False %}
+            {% bootstrap_field form.is_speaker show_help=True show_label=False %}
             {% bootstrap_field form.comments show_help=True show_label=False  placeholder='Any other notes? (optional)'%}
-            {# {% bootstrap_field form.notes show_help=False show_label=False  placeholder='Any other notes? (optional)'%} #}
+
             {% bootstrap_button "Save" button_type='submit' size='large' %}
             {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-light' extra_classes='ml-3'%}
           </form>

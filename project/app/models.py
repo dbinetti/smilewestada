@@ -36,6 +36,17 @@ class Account(models.Model):
         null=True,
         choices=ZONE,
     )
+    ROLE = Choices(
+        (1, 'parent', 'Parent'),
+        (2, 'student', 'Student'),
+        (3, 'teacher', 'Teacher'),
+        (4, 'other', 'Other'),
+    )
+    role = models.IntegerField(
+        blank=True,
+        null=True,
+        choices=ROLE,
+    )
     email = models.EmailField(
         blank=True,
         null=True,
@@ -57,6 +68,9 @@ class Account(models.Model):
         default=False,
     )
     is_voter = models.BooleanField(
+        default=False,
+    )
+    is_attending = models.BooleanField(
         default=False,
     )
     comments = models.TextField(
