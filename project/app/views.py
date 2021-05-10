@@ -188,6 +188,22 @@ def sign(request):
         'app/pages/sign.html',
     )
 
+@login_required
+def updates(request):
+    updates = [
+        ('Update #1 - May 6', 'http://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=22b5bcef67'),
+        ('Update #2 - May 7', 'http://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=c382811712'),
+        ('Update #3 - May 8', 'http://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=b29f9c9a2c'),
+        ('Update #4 - May 9', 'http://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=9b41dcc6cb'),
+    ]
+    return render(
+        request,
+        'app/pages/updates.html',
+        context = {
+            'updates': updates,
+        },
+    )
+
 # Delete
 @login_required
 def delete(request):

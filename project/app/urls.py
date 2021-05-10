@@ -15,7 +15,6 @@ urlpatterns = [
     path('privacy/', TemplateView.as_view(template_name='app/pages/privacy.html'), name='privacy',),
     path('terms/', TemplateView.as_view(template_name='app/pages/terms.html'), name='terms',),
     path('support/', TemplateView.as_view(template_name='app/pages/support.html'), name='support',),
-    path('sign/', TemplateView.as_view(template_name='app/pages/sign.html'), name='sign',),
 
     # Authentication
     path('join', views.join, name='join'),
@@ -25,6 +24,8 @@ urlpatterns = [
 
     # Account
     path('account', views.account, name='account',),
+    path('sign/', views.sign, name='sign',),
+    path('updates/', views.updates, name='updates',),
 
     # Share
     path('share', views.share, name='share'),

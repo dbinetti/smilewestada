@@ -28,17 +28,10 @@
     {% block topnav %}
       <nav class="navbar navbar-expand-sm navbar-light">
         <a class="navbar-brand" href="{% url 'index' %}"><img class="d-inline-block mr-1" src='{% static "app/wide_logo.png" %}'></a>
-        {# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"> #}
-        {# <span class="navbar-toggler-icon"></span> #}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        {# <div class="collapse navbar-collapse" id="navbarNav"> #}
-            {% comment %}
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item ml-3">
-              <a href='{% url "involved" %}'>Get Involved!</a>
-            </li>
-         </ul>
-            {% endcomment %}
+        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
               <li class='nav-item'>
@@ -50,6 +43,10 @@
               </li>
               <span class="visible-xs-inline mb-3"></span>
               <li class='nav-item'>
+                <a href="{% url 'updates' %}" class='align-bottom far fa-newspaper mr-3'>&nbsp;Updates</a>
+              </li>
+              <span class="visible-xs-inline mb-3"></span>
+              <li class='nav-item'>
                 <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-outline-dark ml-3'>Logout</a>
               </li>
             {% else %}
@@ -58,7 +55,7 @@
               </li>
             {% endif %}
           </ul>
-        {# </div> #}
+        </div>
       </nav>
     {% endblock topnav %}
 
