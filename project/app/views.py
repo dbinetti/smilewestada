@@ -182,7 +182,7 @@ def share(request):
         'app/pages/share.html',
     )
 
-@login_required
+# @login_required
 def sign(request):
     assignments = Assignment.objects.order_by(
         'school__name',
