@@ -1,0 +1,85 @@
+{% extends 'app/pages/base.html' %}
+
+{% load static %}
+{% block title %}Support Smile West Ada Sign{% endblock title %}
+
+
+{% block content %}
+
+  <section class='my-5'>
+    <h2>
+      Sign Instructions and Guidelines
+    </h2>
+  </section>
+
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <p class='lead'>
+        Please read these <strong>IN FULL</strong>.  This is important.
+      </p>
+    </div>
+  </section>
+
+  <section class='my-5 col-md-8'>
+    <p>
+      Thanks for being willing to support our cause by standing with a Support Smile West Ada sign.  This is far and away the most impactful way you can make a difference before the Board Meeting.  That said, there are some important guidelines to follow so that we don't hurt our cause.
+    </p>
+    <ul class='list-unstyled'>
+      <li class='my-3'>
+        <strong>Always put safety first.</strong>  If there is any scenario where you believe your actions are putting others in harm's way then simply leave.  Immediately.  It doesn't matter if someone is provoking you, or you feel you have a right to be there, or basically anything -- if in doubt, leave.
+      </li>
+      <li class='my-3'>
+        <strong>Stay off of school property.</strong>  The school has an obligation to keep the school grounds themselves free of advocacy.  Now sometimes the definition of school grounds isn't fully clear, but basically if you're anywhere between the building and a road or parking lot, that's 100% bad.  If you're on a public street or sidewalk, that's 100% good.  If you're in a parking lot or access road, that's less obvious, but position yourself as far from the building as possible.
+      </li>
+      <li class='my-3'>
+        <strong>Do not distract drivers.</strong>  The ideal target is those parked, waiting, and already on their cell phones.  People who are driving may strain to see the sign, potentially causing a safety hazard.  Reverse the sign while people are moving so there’s nothing to see.  I found that since cars tend to move in batches, find a good starting point where cars are stopped and then work your way down the batch.  When it starts to move, turn around the sign and go back to the beginning of the line and start again. Don’t put yourself in a spot where you could back up traffic if people stop to look -- turn around the sign and move.
+      </li>
+      <li class='my-3'>
+        <strong>Follow instructions of school personnel.</strong>  If a principal, crossing guard, teacher, or basically anyone in authority gives you an instruction, follow it without complaint -- even if you're on the public sidewalk or otherwise feel in the right.  Their judgement is final; do not argue, do not delay.  Just do what he/she says immediately.
+      </li>
+      <li class='my-3'>
+        <strong>Don't force this on anyone.</strong>  Walk at a normal pace, smile, and engage with those who want to engage.  Don't get too close to cars; at least three feet back.  Good people can disagree on important issues; we are here to let people know who are, not convince them of our position.
+      </li>
+      <li class='my-3'>
+        <strong>Do not engage kids who are alone.</strong>  They may want to look at your sign, but basically tell them "I'm sorry, I can't talk" and don't even turn around.  I know this is rude, but sadly necessary -- observers may take your engagement out of context.
+      </li>
+      <li class='my-3'>
+        <strong>Do not engage detractors.</strong>  You will get a lot of support, but there may be detractors.  Most likely is just a disapproving look, but some may yell or otherwise provoke you.  Again, DO NOT ENGAGE.  Ideally smile and ignore, but if needed simply say “I appreciate your position” or "thank you for your thoughts".  Whatever you do, don’t get in an argument or shouting match.  If they try to provoke an altercation simply leave.  Take the high road.  The other parents will notice, and it will ultimately backfire on that person.
+      </li>
+    </ul>
+
+        <h3>And in the end, if there’s no way to do any of this safely even under these guidelines, then don't even start.</h3>
+    <hr>
+    <p>
+      OK, those are the guidelines, here are the instructions:
+    </p>
+    <p>
+      Below you'll find two links.  One is the QR code PDF, which is black and white, and prints on a single sheet of paper.  Glue that code on a poster board with room for text around it.  Then, take a marker and write in clear, block text.  If you like, you can also print the text itself and then glue that as well.  Add smiles or other pictures if you like, but don't get too fancy -- again, the longer it takes the read, the fewer cars you can get through.  A sample photo is attached.
+    </p>
+    <p>
+      Be sure you stick to the main message:  "Masks Optional, Last Two Weeks of School".  You can also add text like "Take a Picture to Support..."  or "See the Smiles".  Simplicity and consistency will resonate across the District.
+    </p>
+    <p>
+      When someone engages, they will bring up their phone to take a picture of you.  Stop, hold the sign steady, and wait until they're done.  Their phone (under most circumstances) will recognize the QR code and prompt them to open the site.  Success!  They may roll down their windows and ask what it's about -- again, keep it short and to the point.  "We're supporting masks optional for the last two weeks of school; snap a picture if you agree".  Don't get into a conversation, move on to the next target.
+    </p>
+    <p>
+      And that's about it.  There's a sweet spot about 10-15 minutes before school lets out when everyone is stopped and waiting.  Mornings are trickier since there isn't as much batching, but if it's safe to do so, great.  And take a picture of your sign so we can put it in the next update.
+    </p>
+    <p>
+      As an aside, I've noticed some are painting their cars and that's great!  I've tested this QR code from 30 feet away and it still works, so putting it on the inside windows is likely to work as well.  So give it a try and let me know how it works!
+    </p>
+    <p class='lead'>
+      Thanks again for supporting our kids!  Let's see those smiles, West Ada!
+    </p>
+    <div class='mt-5 col-md-6'>
+      <ul class='list-inline'>
+        <li class='my-5'>
+          <img src={% static 'app/qrcode.pdf' %} class='img-fluid img-thumbnail'>
+        </li>
+        <li class='my-5'>
+          <img src={% static 'app/samplesign.jpg' %} class='img-fluid img-thumbnail'>
+        </li>
+      </ul>
+    <div>
+  </section>
+{% endblock content %}

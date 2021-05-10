@@ -181,6 +181,13 @@ def share(request):
         'app/pages/share.html',
     )
 
+@login_required
+def sign(request):
+    return render(
+        request,
+        'app/pages/sign.html',
+    )
+
 # Delete
 @login_required
 def delete(request):
