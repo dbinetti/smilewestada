@@ -111,13 +111,17 @@ class Assignment(models.Model):
     )
     account = models.ForeignKey(
         'app.Account',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='assignments',
+        null=True,
+        blank=True,
     )
     school = models.ForeignKey(
         'app.School',
         on_delete=models.CASCADE,
         related_name='assignments',
+        null=False,
+        blank=False,
     )
     created = models.DateTimeField(
         auto_now_add=True,

@@ -82,7 +82,13 @@
         {% for assignment in assignments %}
           <tr>
             <td>{{assignment.school}}</td>
-            <td>{{assignment.account}}</td>
+            <td>
+              {% if assignment.account %}
+                {{assignment.account}}
+              {% else %}
+                <a href='mailto:dbinetti@smilewestada.com?subject=Signs-Up Sign Up&body={{assignment.school}}'>Sign Up for this Slot!</a>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </table>

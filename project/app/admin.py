@@ -12,6 +12,7 @@ from .forms import UserChangeForm
 from .forms import UserCreationForm
 from .inlines import AssignmentInline
 from .models import Account
+from .models import Assignment
 from .models import School
 from .models import User
 from .models import Voter
@@ -67,6 +68,18 @@ def unmodulate(modeladmin, request, queryset):
         unmodulate_account(account)
 unmodulate.short_description = 'Unmodulate account'
 
+@admin.register(Assignment)
+class AssignmentAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'date',
+        'account',
+        'school',
+    ]
+    autocomplete_fields = [
+        'account',
+        'school',
+    ]
 
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
