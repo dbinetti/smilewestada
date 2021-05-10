@@ -72,25 +72,29 @@
       Thanks again for supporting our kids!  Let's see those smiles, West Ada!
     </p>
   </section>
-  <section>
+  <section class='col-md-8'>
     <div class='table-responsive'>
-      <table class='table'>
-        <tr>
-          <th>School</th>
-          <th>Assignment</th>
-        </tr>
-        {% for assignment in assignments %}
+      <table class='table table-hover table-sm table-bordered'>
+        <thead>
           <tr>
-            <td>{{assignment.school}}</td>
-            <td>
-              {% if assignment.account %}
-                {{assignment.account}}
-              {% else %}
-                <a href='mailto:dbinetti@smilewestada.com?subject=Signs-Up Sign Up&body={{assignment.school}}'>Sign Up for this Slot!</a>
-              {% endif %}
-            </td>
+            <th>School</th>
+            <th>Assignment</th>
           </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+          {% for assignment in assignments %}
+            <tr>
+              <td>{{assignment.school}}</td>
+              <td>
+                {% if assignment.account %}
+                  {{assignment.account}}
+                {% else %}
+                  <a href='mailto:dbinetti@smilewestada.com?subject=Signs-Up Sign Up&body={{assignment.school}}'>Sign Up for this Slot!</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
   </section>
