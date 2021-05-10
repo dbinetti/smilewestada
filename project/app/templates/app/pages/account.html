@@ -17,7 +17,7 @@
       Thank You for Your Support!
     </h2>
     <p class='lead col-md-8'>
-      Next, review/update your account details below because the more we work together the better our chances of success!
+      Next, review/update your account details below.
     </p>
   </section>
   <section class='mt-5 col-md-8'>
@@ -34,10 +34,13 @@
             {% bootstrap_field form.name show_help=True show_label=False placeholder="Name" %}
             {% bootstrap_field form.is_public show_help=True show_label=False %}
             {% bootstrap_field form.role show_help=True show_label=False %}
+            {% bootstrap_field form.is_voter show_help=True show_label=False %}
             {% bootstrap_field form.zone show_help=True show_label=False %}
+            {% comment %}
             {% bootstrap_field form.is_attending show_help=True show_label=False %}
             {% bootstrap_field form.is_signage show_help=True show_label=False %}
             {% bootstrap_field form.is_speaker show_help=True show_label=False %}
+            {% endcomment %}
             {% bootstrap_field form.comments show_help=True show_label=False  placeholder='Any other notes? (optional)'%}
 
             {% bootstrap_button "Save" button_type='submit' size='large' %}

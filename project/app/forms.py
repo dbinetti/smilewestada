@@ -45,6 +45,7 @@ class AccountForm(forms.ModelForm):
             'zone',
             'role',
             'is_public',
+            'is_voter',
             'is_attending',
             'is_signage',
             'is_speaker',
@@ -53,6 +54,7 @@ class AccountForm(forms.ModelForm):
         ]
         labels = {
             "is_public": "Make My Name Public",
+            "is_voter": "I'm a Voter in the District",
             "is_volunteer": "Volunteer to Help",
             "is_attending": "I'm Attending the Meeting",
             "is_signage": "I'll Hold a Sign to Recruit Others",
@@ -82,13 +84,14 @@ class AccountForm(forms.ModelForm):
             is not provided or are off-topic.",
             'is_public': "Showing your support publicly encourages others to join \
             and enables you to make a comment below.",
+            'is_voter': "Click if you're a registered voter in the District.",
+            'zone': mark_safe("Select your <a href='https://res.cloudinary.com/dyvz0sbfw/raw/upload/v1620230044/smilewestada/app/wasd_trustee_zones.20328492709b.pdf' target='_blank'>District Zone</a> so we can direct your \
+            message to the proper Trustee."),
             'is_volunteer': mark_safe("Want to do more?  We'll keep you updated on additional volunteer opportunities."),
             'is_attending': "Knowing that you're going will help us plan.",
             'is_signage': "We'll send instructions and a code for your sign.",
             'is_speaker': "We'll coordinate you with other speakers.",
             'role': "Select the role that best describes you.  If both a parent and teacher, choose teacher.",
-            'zone': mark_safe("Select your <a href='https://res.cloudinary.com/dyvz0sbfw/raw/upload/v1620230044/smilewestada/app/wasd_trustee_zones.20328492709b.pdf' target='_blank'>District Zone</a> so we can direct your \
-            message to the proper Trustee."),
         }
 
     def clean_comments(self):
