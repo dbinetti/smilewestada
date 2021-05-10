@@ -68,13 +68,11 @@
     const button = document.querySelector('button');
     button.addEventListener('click', async () => {
       try {
-        console.log('share');
         await navigator.share(toShare); // Will trigger the native "share" feature
         button.textContent = 'Thank You -- Share Again!';
       }
       catch(err) {
         button.textContent = 'Something went wrong:  copy and paste the URL below';
-        console.log(err);
       }
     });
   </script>
