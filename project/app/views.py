@@ -21,6 +21,7 @@ from django.views.decorators.http import require_POST
 from .forms import AccountForm
 from .forms import DeleteForm
 from .models import Account
+from .models import Assignment
 
 log = logging.getLogger('SMA')
 
@@ -183,9 +184,15 @@ def share(request):
 
 @login_required
 def sign(request):
+    assignments = Assignment.objects.order_by(
+        'school__name',
+    )
     return render(
         request,
         'app/pages/sign.html',
+        context = {
+            'assignments': assignments,
+        }
     )
 
 @login_required

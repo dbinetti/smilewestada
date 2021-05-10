@@ -71,13 +71,28 @@
     <p class='lead'>
       Thanks again for supporting our kids!  Let's see those smiles, West Ada!
     </p>
-    <p>
-      <a href='https://docs.google.com/spreadsheets/d/1_EV7kmUYnrpHRvdR-6RFlm2sccbwNtPdnAiCxtFFZ6w/edit?usp=sharing'>Signup Schedule</a>
-    </p>
-    <p class='my-5'>
-      Right-click to download or drag and drop to desktop.
-    </p>
+  </section>
+  <section>
+    <div class='table-responsive'>
+      <table class='table'>
+        <tr>
+          <th>School</th>
+          <th>Assignment</th>
+        </tr>
+        {% for assignment in assignments %}
+          <tr>
+            <td>{{assignment.school}}</td>
+            <td>{{assignment.account}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </section>
+  <section>
     <div class='mt-5 col-md-6'>
+      <p class='my-5'>
+        Right-click to download or drag and drop to desktop.
+      </p>
       <ul class='list-inline'>
         <li class='my-5'>
           <img src={% static 'app/qrcode.pdf' %} class='img-fluid img-thumbnail'>

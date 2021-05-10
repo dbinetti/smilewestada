@@ -10,6 +10,7 @@ from reversion.admin import VersionAdmin
 # Local
 from .forms import UserChangeForm
 from .forms import UserCreationForm
+from .inlines import AssignmentInline
 from .models import Account
 from .models import School
 from .models import User
@@ -145,6 +146,9 @@ class SchoolAdmin(VersionAdmin):
     ]
     search_fields = [
         'name',
+    ]
+    inlines = [
+        AssignmentInline,
     ]
     autocomplete_fields = [
     ]
