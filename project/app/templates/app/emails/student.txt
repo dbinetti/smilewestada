@@ -1,0 +1,30 @@
+{% autoescape off %}
+
+{{first|title}},
+
+My name is David Binetti and I started the Smile West Ada movement to
+make masks optional the last two weeks of the school year.  Your comment
+on the site was moving, and I really think the School Board Trustees
+need to hear directly from you.
+
+Would you be willing to speak tonight at the Board Meeting?
+
+I'm reaching out to you and a few other students who made similarly
+powerful remarks.  It's just two minutes, and would make a huge difference.
+We have a few slots reserved and can make it easy.
+
+If you would consider this, please speak with your parents -- do not respond
+to me without speaking with them first.  I had to reach out to you directly
+since I have no other contact information, but again it's very important
+that your parents know about this.  You can forward this message to them.
+
+If you have any questions I'll be happy to answer them either in email or
+on the phone, but again that request will need to come from your parents.
+
+Thank you so much.
+
+Dave
+
+
+
+{% endautoescape %}

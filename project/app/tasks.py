@@ -265,6 +265,17 @@ def send_unmoderation_email(account):
     return email.send()
 
 @job
+def send_student_email(account):
+    email = build_email(
+        template='app/emails/student.txt',
+        subject='Speak at Board Meeting Tonight for Smile West Ada',
+        context={'account': account, 'first': account.name.partition(' ')[0]},
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
 def deactivate_user(email):
     user = User.objects.get(email=email)
     user.is_active = False

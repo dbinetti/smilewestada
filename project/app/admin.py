@@ -112,13 +112,13 @@ class AccountAdmin(VersionAdmin):
     list_display = [
         'name',
         'comments',
+        'is_featured',
         'is_moderated',
         'is_public',
         'is_comment',
         'is_voter',
         'zone',
         'role',
-        'is_featured',
 
     ]
     list_editable = [
