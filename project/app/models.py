@@ -27,11 +27,11 @@ class Account(models.Model):
         blank=False,
     )
     ZONE = Choices(
-        (1, 'one', 'Zone One'),
-        (2, 'two', 'Zone Two'),
-        (3, 'three', 'Zone Three'),
-        (4, 'four', 'Zone Four'),
-        (5, 'five', 'Zone Five'),
+        (1, 'one', 'Zone 1'),
+        (2, 'two', 'Zone 2'),
+        (3, 'three', 'Zone 3'),
+        (4, 'four', 'Zone 4'),
+        (5, 'five', 'Zone 5'),
     )
     zone = models.IntegerField(
         blank=True,

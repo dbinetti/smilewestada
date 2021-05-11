@@ -111,25 +111,34 @@
               <tr class='row'>
                 <td class='col-5'>
                   {{account.name}}<br>
-                  {% if account.zone == 1 %}
-                    <span class="badge badge-warning">Zone 1</span>
-                  {% elif account.zone == 2 %}
-                    <span class="badge badge-secondary">Zone 2</span>
-                  {% elif account.zone == 3 %}
-                    <span class="badge badge-info">Zone 3</span>
-                  {% elif account.zone == 4 %}
-                    <span class="badge badge-success">Zone 4</span>
-                  {% elif account.zone == 5 %}
-                    <span class="badge badge-danger">Zone 5</span>
-                  {% endif %}
-                  {% if account.is_featured %}
-                    <span class="badge badge-light">Featured</span>
-                  {% endif %}
-{% comment %}
-                  {% if account.is_voter %}
-                    <span class="badge badge-primary">Registered Voter</span>
-                  {% endif %}
-{% endcomment %}
+                  <ul class='list-inline'>
+                    {% if account.role == 1 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-warning">Parent</span>
+                      </li>
+                    {% elif account.role == 2 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-success">Student</span>
+                      </li>
+                    {% elif account.role == 3 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-danger">Teacher</span>
+                      </li>
+                    {% endif %}
+                    {% if account.is_voter %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-primary">Registered Voter</span>
+                      </li>
+                    {% endif %}
+                    {% if account.zone %}
+                      <li class='list-inline-item'>
+                        <span class="badge badge-light">{{account.get_zone_display}}</span>
+                      </li>
+                    {% endif %}
+                  </ul>
+                  {# {% if account.is_featured %} #}
+                  {# {% endif %} #}
+                  {# <span class="badge badge-info">Zone 3</span> #}
                 </td>
                 <td class='col-7'>{% if not account.is_moderated %}{{account.comments}}{% endif %}</td>
               </tr>
