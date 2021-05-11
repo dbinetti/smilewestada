@@ -186,7 +186,7 @@ def share(request):
 # @login_required
 def sign(request):
     assignments = Assignment.objects.filter(
-        date=date(2021,5,11)
+        date='2021-05-11',
     ).order_by(
         'school__name',
     )
