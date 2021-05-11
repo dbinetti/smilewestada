@@ -1,5 +1,6 @@
 import json
 import logging
+from datetime import date
 
 import jwt
 import requests
@@ -184,7 +185,9 @@ def share(request):
 
 # @login_required
 def sign(request):
-    assignments = Assignment.objects.order_by(
+    assignments = Assignment.objects.filter(
+        date=date(2021,5,11)
+    ).order_by(
         'school__name',
     )
     return render(
