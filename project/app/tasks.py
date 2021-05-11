@@ -276,6 +276,18 @@ def send_student_email(account):
     return email.send()
 
 @job
+def send_featured_email(account):
+    comments = account.comments
+    email = build_email(
+        template='app/emails/featured.txt',
+        subject='Smile West Ada Featured Comments',
+        context={'comments': comments},
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
 def deactivate_user(email):
     user = User.objects.get(email=email)
     user.is_active = False
