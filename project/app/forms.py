@@ -84,7 +84,7 @@ class AccountForm(forms.ModelForm):
             is not provided or are off-topic.",
             'is_public': "Showing your support publicly encourages others to join \
             and enables you to make a comment below.",
-            'is_voter': "Click if you're a registered voter in the District.",
+            'is_voter': "Click if you're a registered voter in the District.  We'll verify with Ada County Elections.",
             'zone': mark_safe("Select your <a href='https://res.cloudinary.com/dyvz0sbfw/raw/upload/v1620230044/smilewestada/app/wasd_trustee_zones.20328492709b.pdf' target='_blank'>District Zone</a> so we can direct your \
             message to the proper Trustee."),
             'is_volunteer': mark_safe("Want to do more?  We'll keep you updated on additional volunteer opportunities."),
