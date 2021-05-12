@@ -157,7 +157,7 @@ def account(request):
                 request,
                 "Saved!",
             )
-            return redirect('share')
+            return redirect('account')
     else:
         form = AccountForm(instance=account)
     accounts = Account.objects.filter(

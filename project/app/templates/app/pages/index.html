@@ -5,12 +5,12 @@
 
 {% block metatags %}
   <meta property="og:title" content="Make Masks Optional the Last Two Weeks of School" />
-  <meta property="og:image" content='{% static "app/vidcap3.png" %}' />
-  <meta property="og:image:secure_url" content='{% static "app/vidcap3.png" %}' />
+  <meta property="og:image" content='{% static "app/wide_logo.jpg" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/wide_logo.jpg" %}' />
   <meta property="og:url" content="https://www.smilewestada.com" />
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="286973936371350" />
-  <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional the last two weeks of this school year.  Join today so we can speak with one, clear, powerful voice at the May 11th School Board meeting.  The site is free, we protect your privacy, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms before the end of this year." />
+  <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional next year.  Join today so we can speak with one, clear, powerful voice.  The site is free, we protect your privacy, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms next year." />
 
 
   {% comment %}
@@ -27,21 +27,55 @@
 
 {% block content %}
   <section class 'mt-5'>
-
+    {% comment %}
     <div id='id_wistia'>
 <script src="https://fast.wistia.com/embed/medias/24zuln9lmk.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_24zuln9lmk popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
     </div>
+    {% endcomment %}
 
     <div class='jumbotron'>
-      <div class='mb-2'>
-        <p>
-          Smile West Ada supports <strong>masks-optional</strong> the last <strong>two weeks</strong> of school.  Join our free, private site today and we'll speak with one, clear, powerful voice at the May 11th <strong>School Board Meeting</strong>.
-        </p>
+      <div class='mb-3'>
+        <div class='row'>
+          <div class='col-md-6 mt-2'>
+            <p>
+              <strong>Smile West Ada</strong> supports optional masking for our school-kids, and we've made progress towards that goal!  Still, however well-intentioned, the Board's current policy of mandatory masking indoor and out remains in place for next school year, and that must change.  We're taking a breath for today, but to support our mission and stay informed on next steps, please <a href='{% url "join"%}'>Join Us</a>!
+            </p>
+          </div>
+          <div class='col-md-6'>
+            <div class='ml-5'>
+              <table class='table table-borderless table-sm'>
+                <thead>
+                  <tr>
+                    <th style="width: 10px;"></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class='far fa-times text-danger'></span></td>
+                    <td>Smiles Inside This Year</td>
+                  </tr>
+                  <tr>
+                    <td><span class='far fa-check text-success'></td>
+                    <td>Smiles Outside This Year</td>
+                  </tr>
+                  <tr>
+                    <td><span class='far fa-check text-success'></span></td>
+                    <td>Smiles This Summer</td>
+                  </tr>
+                  <tr>
+                    <td><span class='emoji'>🤷</span></td>
+                    <td><strong>Smiles Next Year</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
       <div class='mb-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3">
-          <strong>Click Here to Join {{total|intcomma}} Others <br>
-          Supporting Masks-Optional The Last Two Weeks</strong>
+          <strong>Click Here to Join</strong>
         </a>
       </div>
       {% comment %}
@@ -91,7 +125,7 @@
     </ul>
   </nav>
 
-
+  {% comment %}
   <section class='mt-3'>
     <div class="card">
       <h6 class="card-header">
@@ -148,7 +182,7 @@
       </div>
     </div>
   </section>
-
+  {% endcomment %}
 {% endblock content %}
 {% block bottomnav %}
 {% endblock bottomnav %}

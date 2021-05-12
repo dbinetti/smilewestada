@@ -24,11 +24,11 @@ urlpatterns = [
 
     # Account
     path('account', views.account, name='account',),
-    path('sign/', views.sign, name='sign',),
-    path('updates/', views.updates, name='updates',),
+    # path('sign/', views.sign, name='sign',),
+    # path('updates/', views.updates, name='updates',),
 
     # Share
-    path('share', views.share, name='share'),
+    # path('share', views.share, name='share'),
 
     # Delete
     path('delete', views.delete, name='delete',),
