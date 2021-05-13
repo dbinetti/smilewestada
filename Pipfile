@@ -41,6 +41,8 @@ django-cloudinary-storage = "*"
 segno = "*"
 fuzzywuzzy = "*"
 python-Levenshtein = "*"
+python-magic = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.9"

@@ -1,6 +1,8 @@
 
 import datetime
 
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
 # First-Party
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
@@ -32,6 +34,7 @@ class Account(models.Model):
         (3, 'three', 'Zone 3'),
         (4, 'four', 'Zone 4'),
         (5, 'five', 'Zone 5'),
+        (6, 'outside', 'Outside District'),
     )
     zone = models.IntegerField(
         blank=True,
@@ -122,6 +125,33 @@ class Assignment(models.Model):
         related_name='assignments',
         null=False,
         blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    def __str__(self):
+        return f"{self.id}"
+
+
+class Discussion(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    date = models.DateField(
+        default=datetime.date.today,
+    )
+    video = models.FileField(
+        upload_to='videos/',
+        blank=True,
+        storage=VideoMediaCloudinaryStorage(),
+        validators=[validate_video],
     )
     created = models.DateTimeField(
         auto_now_add=True,

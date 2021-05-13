@@ -13,6 +13,7 @@ from .forms import UserCreationForm
 from .inlines import AssignmentInline
 from .models import Account
 from .models import Assignment
+from .models import Discussion
 from .models import School
 from .models import User
 from .models import Voter
@@ -92,6 +93,24 @@ class AssignmentAdmin(VersionAdmin):
     ordering = [
         'school',
     ]
+
+@admin.register(Discussion)
+class DiscussionAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+        'date',
+        'video',
+    ]
+    list_display = [
+        'id',
+        'name',
+        'date',
+    ]
+    ordering = [
+        'date',
+    ]
+
 
 @admin.register(Account)
 class AccountAdmin(VersionAdmin):
