@@ -276,6 +276,16 @@ def send_student_email(account):
     return email.send()
 
 @job
+def send_mission_email(account):
+    email = build_email(
+        template='app/emails/mission.txt',
+        subject='Smile West Ada - Important Administrative Notice',
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
 def send_featured_email(account):
     comments = account.comments
     email = build_email(
