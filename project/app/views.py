@@ -121,7 +121,7 @@ def callback(request):
             request,
             "Email address is required",
         )
-        return redirect('index')
+        return redirect('logout')
     user = authenticate(request, **payload)
     if user:
         log_in(request, user)
@@ -261,6 +261,4 @@ def sendgrid_event_webhook(request):
                 email = payload['email']
                 log.error(f'Bounced Email: {email}')
                 # deactivate_user.delay(email)
-            else:
-                log.info(f'Not a bounce: {payload}')
     return HttpResponse()
