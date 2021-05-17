@@ -29,6 +29,7 @@ urlpatterns = [
 
     # Share
     # path('share', views.share, name='share'),
+    # path('discussion', views.discussion, name='discussion'),
 
     # Delete
     path('delete', views.delete, name='delete',),

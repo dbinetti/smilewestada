@@ -4,6 +4,7 @@ from datetime import date
 
 import jwt
 import requests
+from cloudinary import CloudinaryVideo
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -23,6 +24,7 @@ from .forms import AccountForm
 from .forms import DeleteForm
 from .models import Account
 from .models import Assignment
+from .models import Discussion
 
 log = logging.getLogger('SMA')
 
@@ -181,6 +183,17 @@ def share(request):
     return render(
         request,
         'app/pages/share.html',
+    )
+
+@login_required
+def discussion(request):
+    discussions = Discussion.objects.all()
+    return render(
+        request,
+        'app/pages/discussion.html',
+        context={
+            'discussions': discussions,
+        }
     )
 
 # @login_required
