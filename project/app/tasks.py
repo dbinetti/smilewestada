@@ -238,9 +238,9 @@ def send_shutdown_email(account):
     return email.send()
 
 @job
-def send_fullname_email(account):
+def send_privatize_email(account):
     email = build_email(
-        template='app/emails/fullname.txt',
+        template='app/emails/privatize.txt',
         subject='Smile West Ada - Real, Full Name Notice',
         from_email='David Binetti <dbinetti@smilewestada.com>',
         to=[account.user.email],
@@ -384,3 +384,12 @@ def match_names(account, min_score=0, invalidate=False):
 #     for voter in voters:
 
 #     return
+
+def privatize_account(account):
+    from app.signals import account_post_save
+    account.is_public = False
+    post_save.disconnect(account_post_save, Account)
+    account.save()
+    post_save.connect(account_post_save, Account)
+    send_privatize_email.delay(account)
+    return

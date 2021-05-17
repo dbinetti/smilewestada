@@ -18,19 +18,9 @@ from .models import School
 from .models import User
 from .models import Voter
 from .signals import account_post_save
-from .tasks import send_fullname_email
+from .tasks import privatize_account
 from .tasks import send_moderation_email
 from .tasks import send_unmoderation_email
-
-
-def privatize_account(account):
-    account.is_public = False
-    post_save.disconnect(account_post_save, Account)
-    account.save()
-    post_save.connect(account_post_save, Account)
-    send_fullname_email.delay(account)
-    return
-
 
 
 def privatize(modeladmin, request, queryset):
