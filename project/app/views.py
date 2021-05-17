@@ -257,8 +257,15 @@ def sendgrid_event_webhook(request):
     if request.method == 'POST':
         payload_list = json.loads(request.body)
         for payload in payload_list:
-            if payload['event'] == 'bounce':
+            if payload['event'] in ['bounce', 'dropped']:
                 email = payload['email']
-                log.error(f'Bounced Email: {email}')
-                # deactivate_user.delay(email)
+                try:
+                    account = Account.objects.get(
+                        user__email=email,
+                    )
+                except Account.DoesNotExist:
+                    log.error(payload)
+                    return HttpResponse()
+                account.sendgrid = payload
+                account.save()
     return HttpResponse()
