@@ -250,18 +250,18 @@ def send_privatize_email(account):
 @job
 def send_moderation_email(account):
     email = build_email(
-        template='app/emails/modulate.txt',
-        subject='Smile West Ada - On Topic Notice',
+        template='app/emails/moderate.txt',
+        subject='Smile West Ada - Moderation Notice',
         from_email='David Binetti <dbinetti@smilewestada.com>',
         to=[account.user.email],
     )
     return email.send()
 
 @job
-def send_unmoderation_email(account):
+def send_reinstatement_email(account):
     email = build_email(
-        template='app/emails/unmoderate.txt',
-        subject='Smile West Ada - Comments Reinstated',
+        template='app/emails/reinstate.txt',
+        subject='Smile West Ada - Reinstatement Notice',
         from_email='David Binetti <dbinetti@smilewestada.com>',
         to=[account.user.email],
     )
@@ -392,4 +392,24 @@ def privatize_account(account):
     account.save()
     post_save.connect(account_post_save, Account)
     send_privatize_email.delay(account)
+    return
+
+
+def moderate_account(account):
+    from app.signals import account_post_save
+    account.is_moderated = True
+    post_save.disconnect(account_post_save, Account)
+    account.save()
+    post_save.connect(account_post_save, Account)
+    send_moderation_email.delay(account)
+    return
+
+
+def reinstate_account(account):
+    from app.signals import account_post_save
+    account.is_moderated = False
+    post_save.disconnect(account_post_save, Account)
+    account.save()
+    post_save.connect(account_post_save, Account)
+    send_reinstatement_email.delay(account)
     return

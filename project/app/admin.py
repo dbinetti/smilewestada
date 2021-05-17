@@ -18,46 +18,29 @@ from .models import School
 from .models import User
 from .models import Voter
 from .signals import account_post_save
+from .tasks import moderate_account
 from .tasks import privatize_account
+from .tasks import reinstate_account
 from .tasks import send_moderation_email
-from .tasks import send_unmoderation_email
+from .tasks import send_reinstatement_email
 
 
 def privatize(modeladmin, request, queryset):
     for account in queryset:
         privatize_account(account)
-privatize.short_description = 'Privatize account'
+privatize.short_description = 'Privatize Account'
 
 
-def modulate_account(account):
-    account.is_moderated = True
-    post_save.disconnect(account_post_save, Account)
-    account.save()
-    post_save.connect(account_post_save, Account)
-    send_moderation_email.delay(account)
-    return
-
-
-
-def modulate(modeladmin, request, queryset):
+def moderate(modeladmin, request, queryset):
     for account in queryset:
-        modulate_account(account)
-modulate.short_description = 'Modulate account'
-
-def unmodulate_account(account):
-    account.is_moderated = False
-    post_save.disconnect(account_post_save, Account)
-    account.save()
-    post_save.connect(account_post_save, Account)
-    send_unmoderation_email.delay(account)
-    return
+        moderate_account(account)
+moderate.short_description = 'Moderate Account'
 
 
-
-def unmodulate(modeladmin, request, queryset):
+def reinstate(modeladmin, request, queryset):
     for account in queryset:
-        unmodulate_account(account)
-unmodulate.short_description = 'Unmodulate account'
+        reinstate_account(account)
+reinstate.short_description = 'Reinstate Account'
 
 
 @admin.register(Assignment)
@@ -159,8 +142,8 @@ class AccountAdmin(VersionAdmin):
     ]
     actions = [
         privatize,
-        modulate,
-        unmodulate,
+        moderate,
+        reinstate,
     ]
     def is_comment(self, obj):
         return bool(obj.comments)
