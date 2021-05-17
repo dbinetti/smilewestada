@@ -78,6 +78,10 @@ class Account(models.Model):
     is_attending = models.BooleanField(
         default=False,
     )
+    sendgrid = models.JSONField(
+        null=True,
+        blank=True,
+    )
     comments = models.TextField(
         max_length=500,
         blank=True,

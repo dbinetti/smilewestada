@@ -69,6 +69,7 @@ def unmodulate(modeladmin, request, queryset):
         unmodulate_account(account)
 unmodulate.short_description = 'Unmodulate account'
 
+
 @admin.register(Assignment)
 class AssignmentAdmin(VersionAdmin):
     save_on_top = True
@@ -126,6 +127,7 @@ class AccountAdmin(VersionAdmin):
         'is_voter',
         'role',
         'comments',
+        'sendgrid',
         'notes',
     ]
     list_display = [
