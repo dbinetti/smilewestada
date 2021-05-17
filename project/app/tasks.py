@@ -1,5 +1,6 @@
 # Standard Libary
 import csv
+import json
 import logging
 
 # First-Party
@@ -149,7 +150,9 @@ def delete_mailchimp_from_account(account):
             subscriber_hash=subscriber_hash,
         )
     except MailChimpError as err:
-        log.error(err)
+        error = json.loads(str(err).replace("\'", "\""))
+        if not error['title'] == 'Method Not Allowed':
+            raise err
     return
 
 
