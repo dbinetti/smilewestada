@@ -218,6 +218,8 @@ def updates(request):
         ('Update #2 - May 7', 'http://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=c382811712'),
         ('Update #3 - May 8', 'http://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=b29f9c9a2c'),
         ('Update #4 - May 9', 'http://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=9b41dcc6cb'),
+        ('Update #5 - May 10', 'https://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=3063de15ca'),
+        ('Update #6 - May 11', 'https://us7.campaign-archive.com/?u=2a7069bda2face16fe1e2674f&id=ab4c722e10'),
     ]
     return render(
         request,
