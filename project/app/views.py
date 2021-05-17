@@ -114,7 +114,7 @@ def callback(request):
     )
     payload['username'] = payload.pop('sub')
     log.info(payload)
-    if not payload['email']:
+    if not 'email' in payload:
         messages.error(
             request,
             "Email address is required",
