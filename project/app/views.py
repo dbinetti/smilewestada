@@ -26,7 +26,7 @@ from .models import Account
 from .models import Assignment
 from .models import Discussion
 
-log = logging.getLogger('SMA')
+log = logging.getLogger('SWA View')
 
 
 # Root

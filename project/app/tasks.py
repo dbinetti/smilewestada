@@ -22,7 +22,7 @@ from .models import Account
 from .models import User
 from .models import Voter
 
-log = logging.getLogger('SMA')
+log = logging.getLogger('SWA Task')
 
 # Auth0
 def get_auth0_token():
