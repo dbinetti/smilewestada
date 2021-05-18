@@ -4,25 +4,24 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
-from django.db.models.signals import post_save
 from reversion.admin import VersionAdmin
 
 # Local
 from .forms import UserChangeForm
 from .forms import UserCreationForm
 from .inlines import AssignmentInline
+from .inlines import AttendeeInline
 from .models import Account
 from .models import Assignment
+from .models import Attendee
 from .models import Discussion
+from .models import Event
 from .models import School
 from .models import User
 from .models import Voter
-from .signals import account_post_save
 from .tasks import moderate_account
 from .tasks import privatize_account
 from .tasks import reinstate_account
-from .tasks import send_moderation_email
-from .tasks import send_reinstatement_email
 
 
 def privatize(modeladmin, request, queryset):
@@ -41,49 +40,6 @@ def reinstate(modeladmin, request, queryset):
     for account in queryset:
         reinstate_account(account)
 reinstate.short_description = 'Reinstate Account'
-
-
-@admin.register(Assignment)
-class AssignmentAdmin(VersionAdmin):
-    save_on_top = True
-    fields = [
-        'date',
-        'account',
-        'school',
-    ]
-    list_display = [
-        'id',
-        'date',
-        'school',
-        'account',
-    ]
-    list_editable = [
-        'account',
-    ]
-    autocomplete_fields = [
-        'account',
-        'school',
-    ]
-    ordering = [
-        'school',
-    ]
-
-@admin.register(Discussion)
-class DiscussionAdmin(VersionAdmin):
-    save_on_top = True
-    fields = [
-        'name',
-        'date',
-        'video',
-    ]
-    list_display = [
-        'id',
-        'name',
-        'date',
-    ]
-    ordering = [
-        'date',
-    ]
 
 
 @admin.register(Account)
@@ -148,6 +104,103 @@ class AccountAdmin(VersionAdmin):
     def is_comment(self, obj):
         return bool(obj.comments)
     is_comment.boolean = True
+
+
+@admin.register(Assignment)
+class AssignmentAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'date',
+        'account',
+        'school',
+    ]
+    list_display = [
+        'id',
+        'date',
+        'school',
+        'account',
+    ]
+    list_editable = [
+        'account',
+    ]
+    autocomplete_fields = [
+        'account',
+        'school',
+    ]
+    ordering = [
+        'school',
+    ]
+
+
+@admin.register(Attendee)
+class Attendee(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'account',
+        'event',
+    ]
+    list_display = [
+        'id',
+        'account',
+        'event',
+    ]
+    list_editable = [
+    ]
+    autocomplete_fields = [
+        'account',
+        'event',
+    ]
+    ordering = [
+        'event',
+        'account',
+    ]
+
+
+@admin.register(Discussion)
+class DiscussionAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+        'date',
+        'video',
+    ]
+    list_display = [
+        'id',
+        'name',
+        'date',
+    ]
+    ordering = [
+        'date',
+    ]
+
+
+@admin.register(Event)
+class EventAdmin(VersionAdmin):
+    save_on_top = True
+    fields = [
+        'name',
+        'date',
+        'description',
+        'location',
+        'notes',
+    ]
+    list_display = [
+        'name',
+        'date',
+        'location',
+    ]
+    list_editable = [
+    ]
+    list_filter = [
+    ]
+    search_fields = [
+        'name',
+    ]
+    inlines = [
+        AttendeeInline,
+    ]
+    autocomplete_fields = [
+    ]
 
 
 @admin.register(School)

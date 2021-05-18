@@ -25,6 +25,8 @@ urlpatterns = [
 
     # Account
     path('account', views.account, name='account',),
+    path('events', views.events, name='events',),
+    path('event/<str:event_id>', views.event, name='event',),
     # path('sign/', views.sign, name='sign',),
     # path('updates/', views.updates, name='updates',),
 

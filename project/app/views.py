@@ -13,6 +13,7 @@ from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 # from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -25,6 +26,7 @@ from .forms import DeleteForm
 from .models import Account
 from .models import Assignment
 from .models import Discussion
+from .models import Event
 
 log = logging.getLogger('SWA View')
 
@@ -208,6 +210,38 @@ def sign(request):
         'app/pages/sign.html',
         context = {
             'assignments': assignments,
+        }
+    )
+
+@login_required
+def events(request):
+    events = Event.objects.filter(
+    ).order_by(
+        'date',
+    )
+    return render(
+        request,
+        'app/pages/events.html',
+        context = {
+            'events': events,
+        }
+    )
+
+@login_required
+def event(request, event_id):
+    event = get_object_or_404(
+        Event,
+        pk=event_id,
+    )
+    attendees = event.attendees.order_by(
+        'account__name',
+    )
+    return render(
+        request,
+        'app/pages/event.html',
+        context = {
+            'event': event,
+            'attendees': attendees,
         }
     )
 

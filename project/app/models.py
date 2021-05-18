@@ -140,6 +140,34 @@ class Assignment(models.Model):
         return f"{self.id}"
 
 
+class Attendee(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    account = models.ForeignKey(
+        'app.Account',
+        on_delete=models.SET_NULL,
+        related_name='attendees',
+        null=True,
+        blank=False,
+    )
+    event = models.ForeignKey(
+        'app.Event',
+        on_delete=models.SET_NULL,
+        related_name='attendees',
+        null=True,
+        blank=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    def __str__(self):
+        return f"{self.id}"
+
+
 class Discussion(models.Model):
     id = HashidAutoField(
         primary_key=True,
@@ -165,6 +193,43 @@ class Discussion(models.Model):
     )
     def __str__(self):
         return f"{self.id}"
+
+
+class Event(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+    )
+    description = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    date = models.DateField(
+        default=datetime.date.today,
+    )
+    location = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+    )
+    notes = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class School(models.Model):
