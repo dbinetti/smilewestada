@@ -1,0 +1,38 @@
+{% extends 'app/pages/base.html' %}
+
+{% block title %}Code of Conduct{% endblock title %}
+
+
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Code of Conduct
+    </h2>
+  </section>
+  <section class='my-5'>
+    <div class='col-lg-8'>
+      <p class='lead'>
+        All Members of Smile West Ada are expected to follow this Code of Conduct:
+      </p>
+      <ul class='list-styled'>
+        <li>We support our opposition's right to be heard and reject activities that disrupt the democratic process.</li>
+        <li>We focus exclusively on masks; taxes, unions, CRT, etc., are separate off-topic issues.</li>
+        <li>We follow the rules, even as we work to change them.</li>
+        <li>We reject threats of any kind, even electoral ones.</li>
+        <li>We specifically support our teachers.</li>
+        <li>We do not force our views on unsympatehtic ears.</li>
+        <li>We will continue to pursue our mission as long as we're part of the District.</li>
+      </ul>
+      <p>
+        We sum this up as <strong>Respectful but Resolute</strong>.
+      </p>
+      <p>
+        Good people can disagree on important issues.  We are never guaranteed to get what we want, nor that the process will be entirely fair.  Still, we believe that supporting honest, direct, open discussion is the best way to the most durable solution.
+      </p>
+      <p>
+        We do not expect everyone to agree with this approach, but it is and will remain the central guiding principle of Smile West Ada.  If you believe this is insufficient and want to see a more aggressive, confrontational approach then I wish you well.  Simply log in and click the <a href='{% url "delete" %}'>Delete Account</a> link at the bottom of your account page.   This will fully delete all data (logins, personal information, history, etc.) from our system.
+      </p>
+    </div>
+  </section>
+{% endblock content %}
