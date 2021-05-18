@@ -144,6 +144,9 @@ class Attendee(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
+    is_confirmed = models.BooleanField(
+        default=False,
+    )
     account = models.ForeignKey(
         'app.Account',
         on_delete=models.SET_NULL,

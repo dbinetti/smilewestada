@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 
 # Local
 from .models import Account
+from .models import Attendee
 from .models import User
 from .models import Voter
 
@@ -16,6 +17,18 @@ class DeleteForm(forms.Form):
         required=True,
     )
 
+
+class AttendeeForm(forms.ModelForm):
+    class Meta:
+        model = Attendee
+        fields = [
+            'is_confirmed',
+            # 'account',
+            # 'event',
+        ]
+        labels = {
+            "is_confirmed": "Yes I'll Attend",
+        }
 
 class VoterForm(forms.ModelForm):
     class Meta:

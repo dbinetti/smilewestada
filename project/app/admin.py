@@ -136,11 +136,13 @@ class AssignmentAdmin(VersionAdmin):
 class Attendee(VersionAdmin):
     save_on_top = True
     fields = [
+        'is_confirmed',
         'account',
         'event',
     ]
     list_display = [
         'id',
+        'is_confirmed',
         'account',
         'event',
     ]

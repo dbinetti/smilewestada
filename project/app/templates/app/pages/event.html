@@ -1,4 +1,5 @@
 {% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
 
 {% load static %}
 {% block title %}{{event.name}}{% endblock title %}
@@ -30,12 +31,20 @@
 
   <section class='my-5'>
     <div class='col-lg-8'>
-      <p class='lead'>
-        Following is a list of persons attending this event.
-      </p>
+      <form method='post'>
+        {% csrf_token %}
+        {% bootstrap_form_errors form %}
+        {% bootstrap_field form.is_confirmed show_help=True show_label=False %}
+        {% bootstrap_button "Save" button_type='submit' size='large' %}
+        {% bootstrap_button "Cancel" button_type='link' href="/events" size='large' button_class='btn-light' extra_classes='ml-3'%}
+      </form>
     </div>
   </section>
+
   <section class='my-5 col-md-8'>
+    <h4>
+      Event Attendees
+    </h4>
     <table class='table table-sm table-hover'>
       <thead>
         <tr>

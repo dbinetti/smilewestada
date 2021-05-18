@@ -22,9 +22,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
+from .forms import AttendeeForm
 from .forms import DeleteForm
 from .models import Account
 from .models import Assignment
+from .models import Attendee
 from .models import Discussion
 from .models import Event
 
@@ -233,15 +235,35 @@ def event(request, event_id):
         Event,
         pk=event_id,
     )
-    attendees = event.attendees.order_by(
+    attendees = event.attendees.filter(
+        is_confirmed=True,
+    ).order_by(
         'account__name',
     )
+    try:
+        attendee = event.attendees.get(account=request.user.account)
+    except Attendee.DoesNotExist:
+        attendee = None
+    if request.method == 'POST':
+        form = AttendeeForm(request.POST, instance=attendee)
+        if form.is_valid():
+            attendee = form.save(commit=False)
+            attendee.account = request.user.account
+            attendee.event = event
+            attendee.save()
+            messages.success(
+                request,
+                'Saved!',
+            )
+            return redirect('event', event_id)
+    form = AttendeeForm(instance=attendee)
     return render(
         request,
         'app/pages/event.html',
         context = {
             'event': event,
             'attendees': attendees,
+            'form': form,
         }
     )
 
