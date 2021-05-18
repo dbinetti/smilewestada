@@ -81,6 +81,7 @@ def create_account_from_user(user):
 # Mailchimp
 def get_mailchimp_client():
     enabled = not settings.DEBUG
+    enabled = True
     return MailChimp(
         mc_api=settings.MAILCHIMP_API_KEY,
         enabled=enabled,
