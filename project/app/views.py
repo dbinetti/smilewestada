@@ -242,7 +242,7 @@ def event(request, event_id):
     attendees = event.attendees.filter(
         is_confirmed=True,
     ).order_by(
-        'account__name',
+        '-created',
     )
     try:
         attendee = event.attendees.get(account=request.user.account)
