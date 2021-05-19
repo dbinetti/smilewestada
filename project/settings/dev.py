@@ -19,8 +19,9 @@ MIDDLEWARE += [
 ]
 
 # Cloudinary
+CLOUDINARY_PREFIX = 'smilewestada-dev'
 CLOUDINARY_STORAGE = {
-    'PREFIX': 'smilewestada-dev',
+    'PREFIX': CLOUDINARY_PREFIX,
 }
 
 # Async settings

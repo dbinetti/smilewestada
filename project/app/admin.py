@@ -14,7 +14,7 @@ from .inlines import AttendeeInline
 from .models import Account
 from .models import Assignment
 from .models import Attendee
-from .models import Discussion
+from .models import Comment
 from .models import Event
 from .models import School
 from .models import User
@@ -158,23 +158,17 @@ class Attendee(VersionAdmin):
     ]
 
 
-@admin.register(Discussion)
-class DiscussionAdmin(VersionAdmin):
+@admin.register(Comment)
+class CommentAdmin(VersionAdmin):
     save_on_top = True
     fields = [
-        'name',
-        'date',
         'video',
     ]
     list_display = [
         'id',
-        'name',
-        'date',
     ]
     ordering = [
-        'date',
     ]
-
 
 @admin.register(Event)
 class EventAdmin(VersionAdmin):

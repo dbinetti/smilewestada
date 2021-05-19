@@ -1,10 +1,8 @@
 import json
 import logging
-from datetime import date
 
 import jwt
 import requests
-from cloudinary import CloudinaryVideo
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -23,11 +21,12 @@ from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
 from .forms import AttendeeForm
+from .forms import CommentForm
 from .forms import DeleteForm
 from .models import Account
 from .models import Assignment
 from .models import Attendee
-from .models import Discussion
+from .models import Comment
 from .models import Event
 from .tasks import get_mailchimp_client
 
@@ -193,16 +192,32 @@ def share(request):
         'app/pages/share.html',
     )
 
-@login_required
-def discussion(request):
-    discussions = Discussion.objects.all()
+def comments(request):
+    comments = Comment.objects.all()
     return render(
         request,
-        'app/pages/discussion.html',
+        'app/pages/comments.html',
         context={
-            'discussions': discussions,
+            'comments': comments
         }
     )
+
+@login_required
+def submit(request):
+    if request.POST:
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('comments')
+    form = CommentForm()
+    return render(
+        request,
+        'app/pages/submit.html',
+        context={
+            'form': form,
+        }
+    )
+
 
 # @login_required
 def sign(request):
@@ -325,4 +340,17 @@ def sendgrid_event_webhook(request):
                     return HttpResponse()
                 account.sendgrid = payload
                 account.save()
+    return HttpResponse()
+
+
+@csrf_exempt
+@require_POST
+def comment_submission(request):
+    if request.method == 'POST':
+        payload = json.loads(request.body)
+        comment = Comment(
+            account=request.user.account,
+        )
+        comment.video.name = payload['public_id']
+        comment.save()
     return HttpResponse()

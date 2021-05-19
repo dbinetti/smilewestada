@@ -3,6 +3,7 @@ import datetime
 
 from cloudinary_storage.storage import VideoMediaCloudinaryStorage
 from cloudinary_storage.validators import validate_video
+from django.conf import settings
 # First-Party
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
@@ -171,13 +172,9 @@ class Attendee(models.Model):
         return f"{self.id}"
 
 
-class Discussion(models.Model):
+class Comment(models.Model):
     id = HashidAutoField(
         primary_key=True,
-    )
-    name = models.CharField(
-        max_length=100,
-        blank=False,
     )
     date = models.DateField(
         default=datetime.date.today,
@@ -188,12 +185,31 @@ class Discussion(models.Model):
         storage=VideoMediaCloudinaryStorage(),
         validators=[validate_video],
     )
+    written = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+    account = models.ForeignKey(
+        'app.Account',
+        on_delete=models.SET_NULL,
+        related_name='comments_model',
+        null=True,
+        blank=False,
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
     updated = models.DateTimeField(
         auto_now=True,
     )
+
+    @property
+    def cld_public_id(self):
+        suffix = self.video.name.rpartition("/")[2]
+        prefix = settings.CLOUDINARY_STORAGE['PREFIX']
+        return f"{prefix}/videos/{suffix}"
+
     def __str__(self):
         return f"{self.id}"
 
