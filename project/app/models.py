@@ -204,12 +204,6 @@ class Comment(models.Model):
         auto_now=True,
     )
 
-    @property
-    def cld_public_id(self):
-        suffix = self.video.name.rpartition("/")[2]
-        prefix = settings.CLOUDINARY_STORAGE['PREFIX']
-        return f"{prefix}/videos/{suffix}"
-
     def __str__(self):
         return f"{self.id}"
 
