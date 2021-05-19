@@ -53,7 +53,8 @@ def index(request):
 # Authentication
 def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    state = f"{get_random_string()}"
+    next_url = request.GET.get('next', '/account')
+    state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
         'client_id': settings.AUTH0_CLIENT_ID,
@@ -72,7 +73,8 @@ def join(request):
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    state = f"{get_random_string()}"
+    next_url = request.GET.get('next', '/account')
+    state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
         'client_id': settings.AUTH0_CLIENT_ID,
@@ -93,9 +95,10 @@ def callback(request):
     # Reject if state doesn't match
     browser_state = request.session.get('state')
     server_state = request.GET.get('state')
+    print(browser_state, server_state)
     if browser_state != server_state:
         return HttpResponse(status=400)
-
+    next_url = server_state.partition('|')[2]
     # Get Auth0 Code
     code = request.GET.get('code', None)
     if not code:
@@ -132,7 +135,7 @@ def callback(request):
         log_in(request, user)
         if user.is_admin:
             return redirect('admin:index')
-        return redirect('account')
+        return redirect(next_url)
     return HttpResponse(status=403)
 
 def logout(request):
