@@ -25,7 +25,9 @@
       {{event.location}}
     </h6>
     <p>
-      {{event.description|escape}}
+      {% autoescape off %}
+      {{event.description}}
+      {% autoescape on %}
     </p>
   </section>
 
@@ -63,7 +65,7 @@
       <tbody>
         {% for attendee in attendees %}
           <tr>
-            <td>{{attendee.account.name}}</td>
+            <td>{% if attendee.account.is_public %}{{attendee.account.name}}{% else %}(Not Public){% endif%}</td>
           </tr>
         {% endfor %}
       </tbody>
