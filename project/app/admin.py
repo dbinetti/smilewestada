@@ -152,6 +152,12 @@ class CommentAdmin(VersionAdmin):
     fields = [
         'video',
         'written',
+        'is_featured',
+        'is_moderated',
+    ]
+    list_filter = [
+        'is_featured',
+        'is_moderated',
     ]
     list_display = [
         'id',
