@@ -205,8 +205,6 @@ def send_goodbye_email(email_address):
 @job
 def send_admin_notification(account):
     count = Account.objects.all().count()
-    if not account.comments:
-        return
     email = build_email(
         template='app/emails/update.txt',
         subject=f'SWA {count}',
@@ -289,11 +287,11 @@ def send_mission_email(account):
 
 @job
 def send_featured_email(account):
-    comments = account.comments
+    # comments = account.comments
     email = build_email(
         template='app/emails/featured.txt',
         subject='Smile West Ada Featured Comments',
-        context={'comments': comments},
+        # context={'comments': comments},
         from_email='David Binetti <dbinetti@smilewestada.com>',
         to=[account.user.email],
     )

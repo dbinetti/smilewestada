@@ -102,24 +102,24 @@ class AccountForm(forms.ModelForm):
             'role': "Select the role that best describes you.  If both a parent and teacher, choose teacher.",
         }
 
-    def clean_comments(self):
-        comments= self.cleaned_data['comments']
-        words = comments.split(" ")
-        for word in words:
-            if any([
-                word.startswith("http"),
-                word.startswith("www"),
-            ]):
-                raise ValidationError(
-                    "Links are not allowed in comments."
-                )
-        return comments
+    # def clean_comments(self):
+    #     comments= self.cleaned_data['comments']
+    #     words = comments.split(" ")
+    #     for word in words:
+    #         if any([
+    #             word.startswith("http"),
+    #             word.startswith("www"),
+    #         ]):
+    #             raise ValidationError(
+    #                 "Links are not allowed in comments."
+    #             )
+    #     return comments
 
 
     def clean(self):
         cleaned_data = super().clean()
         is_public = cleaned_data.get("is_public")
-        comments = cleaned_data.get("comments")
+        # comments = cleaned_data.get("comments")
         name = cleaned_data.get("name")
         last_name = name.partition(" ")[2]
         full_name = False
@@ -130,10 +130,10 @@ class AccountForm(forms.ModelForm):
             raise ValidationError(
                 "You must provide your full, real name to be public."
             )
-        if comments and not is_public:
-            raise ValidationError(
-                "Comments are only shared if you make your name public."
-            )
+        # if comments and not is_public:
+        #     raise ValidationError(
+        #         "Comments are only shared if you make your name public."
+        #     )
 
 
 class UserCreationForm(UserCreationFormBase):

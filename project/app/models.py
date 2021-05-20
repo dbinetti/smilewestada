@@ -164,23 +164,22 @@ class Comment(PolymorphicModel):
     id = HashidAutoField(
         primary_key=True,
     )
+    STATE = Choices(
+        (-10, 'moderated', 'Moderated'),
+        (0, 'new', 'New'),
+        (10, 'approved', 'Approved'),
+        (20, 'featured', 'Featured'),
+    )
+    state = FSMIntegerField(
+        choices=STATE,
+        default=STATE.new,
+    )
     is_featured = models.BooleanField(
         default=False,
     )
     is_moderated = models.BooleanField(
         default=False,
     )
-    # video = models.FileField(
-    #     upload_to='videos/',
-    #     blank=True,
-    #     storage=VideoMediaCloudinaryStorage(),
-    #     validators=[validate_video],
-    # )
-    # written = models.TextField(
-    #     max_length=2000,
-    #     blank=True,
-    #     default='',
-    # )
     account = models.ForeignKey(
         'app.Account',
         on_delete=models.SET_NULL,
@@ -197,6 +196,17 @@ class Comment(PolymorphicModel):
 
     # def __str__(self):
     #     return f"{self.id}"
+    @transition(field=state, source=[STATE.new, STATE.moderated, STATE.featured], target=STATE.approved)
+    def approve(self):
+        return
+
+    @transition(field=state, source=[STATE.new, STATE.approved], target=STATE.moderated)
+    def moderate(self):
+        return
+
+    @transition(field=state, source=[STATE.new, STATE.approved], target=STATE.featured)
+    def feature(self):
+        return
 
 
 class WrittenComment(Comment):

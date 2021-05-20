@@ -56,9 +56,7 @@ class AccountAdmin(FSMTransitionMixin, VersionAdmin):
     fields = [
         'state',
         'name',
-        'email',
         'zone',
-        'phone',
         'is_public',
         'is_voter',
         'role',
@@ -124,14 +122,16 @@ class AssignmentAdmin(VersionAdmin):
     ]
 
 
-
 @admin.register(Comment)
-class CommentAdmin(PolymorphicParentModelAdmin, VersionAdmin):
+class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin):
     save_on_top = True
     fields = [
         # 'video',
         'is_featured',
         'is_moderated',
+    ]
+    fsm_fields = [
+        'state',
     ]
     list_filter = [
         'is_featured',
@@ -149,10 +149,15 @@ class CommentAdmin(PolymorphicParentModelAdmin, VersionAdmin):
     ]
 
 @admin.register(WrittenComment)
-class WrittenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
+class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, VersionAdmin):
     save_on_top = True
+    fsm_fields = [
+        'state',
+    ]
     fields = [
-        # 'video',
+        'state',
+        'is_featured',
+        'is_moderated',
         'account',
         'text',
     ]
