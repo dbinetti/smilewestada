@@ -3,7 +3,6 @@ import datetime
 
 from cloudinary_storage.storage import VideoMediaCloudinaryStorage
 from cloudinary_storage.validators import validate_video
-from django.conf import settings
 # First-Party
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
