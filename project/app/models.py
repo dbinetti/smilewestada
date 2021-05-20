@@ -29,12 +29,6 @@ class Account(models.Model):
         choices=STATE,
         default=STATE.new,
     )
-    is_featured = models.BooleanField(
-        default=False,
-    )
-    is_moderated = models.BooleanField(
-        default=False,
-    )
     name = models.CharField(
         max_length=100,
         blank=False,
@@ -62,14 +56,6 @@ class Account(models.Model):
         blank=True,
         null=True,
         choices=ROLE,
-    )
-    email = models.EmailField(
-        blank=True,
-        null=True,
-    )
-    phone = PhoneNumberField(
-        blank=True,
-        null=True,
     )
     is_public = models.BooleanField(
         default=False,
