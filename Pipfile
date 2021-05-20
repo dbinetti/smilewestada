@@ -43,6 +43,8 @@ fuzzywuzzy = "*"
 python-Levenshtein = "*"
 python-magic = "*"
 pillow = "*"
+django-fsm = "*"
+django-fsm-admin = "*"
 
 [requires]
 python_version = "3.9"
