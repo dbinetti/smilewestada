@@ -74,29 +74,12 @@ class Account(models.Model):
     is_public = models.BooleanField(
         default=False,
     )
-    is_volunteer = models.BooleanField(
-        default=False,
-    )
-    is_speaker = models.BooleanField(
-        default=False,
-    )
-    is_signage = models.BooleanField(
-        default=False,
-    )
     is_voter = models.BooleanField(
-        default=False,
-    )
-    is_attending = models.BooleanField(
         default=False,
     )
     sendgrid = models.JSONField(
         null=True,
         blank=True,
-    )
-    comments = models.TextField(
-        max_length=500,
-        blank=True,
-        default='',
     )
     notes = models.TextField(
         max_length=2000,
@@ -127,7 +110,6 @@ class Account(models.Model):
     @transition(field=state, source=[STATE.new, STATE.active], target=STATE.inactive)
     def deactivate(self):
         return
-
 
 
 class Assignment(models.Model):
@@ -195,6 +177,12 @@ class Attendee(models.Model):
 class Comment(models.Model):
     id = HashidAutoField(
         primary_key=True,
+    )
+    is_featured = models.BooleanField(
+        default=False,
+    )
+    is_moderated = models.BooleanField(
+        default=False,
     )
     video = models.FileField(
         upload_to='videos/',

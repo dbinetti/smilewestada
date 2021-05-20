@@ -51,36 +51,26 @@ class AccountAdmin(FSMTransitionMixin, VersionAdmin):
     save_on_top = True
     fields = [
         'state',
-        'is_featured',
         'name',
         'email',
         'zone',
         'phone',
-        'is_moderated',
         'is_public',
         'is_voter',
         'role',
-        'comments',
         'sendgrid',
         'notes',
     ]
     list_display = [
         'name',
-        'comments',
-        'is_featured',
-        'is_moderated',
         'is_public',
-        'is_comment',
         'is_voter',
         'zone',
         'role',
-
     ]
     list_editable = [
     ]
     list_filter = [
-        'is_moderated',
-        'is_featured',
         'is_public',
         'is_voter',
         'role',
@@ -98,18 +88,11 @@ class AccountAdmin(FSMTransitionMixin, VersionAdmin):
     ordering = [
         '-created',
     ]
-    readonly_fields = [
-        'is_comment',
-    ]
     actions = [
         privatize,
         moderate,
         reinstate,
     ]
-    def is_comment(self, obj):
-        return bool(obj.comments)
-    is_comment.boolean = True
-
 
 @admin.register(Assignment)
 class AssignmentAdmin(VersionAdmin):
