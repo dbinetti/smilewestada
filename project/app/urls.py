@@ -32,9 +32,9 @@ urlpatterns = [
 
     # Share
     # path('share', views.share, name='share'),
-    path('comments', views.comments, name='comments'),
-    path('comment-submission', views.comment_submission, name='comment_submission'),
-    path('submit', views.submit, name='submit'),
+    # path('comments', views.comments, name='comments'),
+    # path('comment-submission', views.comment_submission, name='comment_submission'),
+    # path('submit', views.submit, name='submit'),
 
     # Delete
     path('delete', views.delete, name='delete',),
