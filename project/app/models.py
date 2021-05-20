@@ -6,6 +6,8 @@ from cloudinary_storage.validators import validate_video
 # First-Party
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
+from django_fsm import FSMIntegerField
+from django_fsm import transition
 from hashid_field import HashidAutoField
 from model_utils import Choices
 from phonenumber_field.modelfields import PhoneNumberField
@@ -17,6 +19,15 @@ from .managers import UserManager
 class Account(models.Model):
     id = HashidAutoField(
         primary_key=True,
+    )
+    STATE = Choices(
+        (-10, 'inactive', 'Inactive'),
+        (0, 'new', 'New'),
+        (10, 'active', 'Active'),
+    )
+    state = FSMIntegerField(
+        choices=STATE,
+        default=STATE.new,
     )
     is_featured = models.BooleanField(
         default=False,
@@ -107,6 +118,16 @@ class Account(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    # Transitions
+    @transition(field=state, source=[STATE.new, STATE.inactive], target=STATE.active)
+    def activate(self):
+        return
+
+    @transition(field=state, source=[STATE.new, STATE.active], target=STATE.inactive)
+    def deactivate(self):
+        return
+
 
 
 class Assignment(models.Model):

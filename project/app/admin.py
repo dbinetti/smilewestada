@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
+from fsm_admin.mixins import FSMTransitionMixin
 from reversion.admin import VersionAdmin
 
 # Local
@@ -43,9 +44,13 @@ reinstate.short_description = 'Reinstate Account'
 
 
 @admin.register(Account)
-class AccountAdmin(VersionAdmin):
+class AccountAdmin(FSMTransitionMixin, VersionAdmin):
+    fsm_field = [
+        'state',
+    ]
     save_on_top = True
     fields = [
+        'state',
         'is_featured',
         'name',
         'email',

@@ -261,5 +261,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'bootstrap4',
     'phonenumber_field',
+    'fsm_admin',
     'app',
 ]
