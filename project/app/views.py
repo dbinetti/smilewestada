@@ -39,7 +39,6 @@ def index(request):
         is_public=True,
         user__is_active=True,
     ).order_by(
-        '-is_featured',
         '-created',
     )
     total = Account.objects.count()

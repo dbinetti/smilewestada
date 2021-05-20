@@ -10,7 +10,6 @@ from django_fsm import FSMIntegerField
 from django_fsm import transition
 from hashid_field import HashidAutoField
 from model_utils import Choices
-from phonenumber_field.modelfields import PhoneNumberField
 
 # Local
 from .managers import UserManager
