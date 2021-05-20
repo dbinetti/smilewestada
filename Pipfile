@@ -45,6 +45,7 @@ python-magic = "*"
 pillow = "*"
 django-fsm = "*"
 django-fsm-admin = "*"
+django-polymorphic = "*"
 
 [requires]
 python_version = "3.9"

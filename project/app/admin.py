@@ -5,6 +5,8 @@ from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from fsm_admin.mixins import FSMTransitionMixin
+from polymorphic.admin import PolymorphicChildModelAdmin
+from polymorphic.admin import PolymorphicParentModelAdmin
 from reversion.admin import VersionAdmin
 
 # Local
@@ -18,8 +20,10 @@ from .models import Attendee
 from .models import Comment
 from .models import Event
 from .models import School
+from .models import SpokenComment
 from .models import User
 from .models import Voter
+from .models import WrittenComment
 from .tasks import moderate_account
 from .tasks import privatize_account
 from .tasks import reinstate_account
@@ -120,38 +124,12 @@ class AssignmentAdmin(VersionAdmin):
     ]
 
 
-@admin.register(Attendee)
-class Attendee(VersionAdmin):
-    save_on_top = True
-    fields = [
-        'is_confirmed',
-        'account',
-        'event',
-    ]
-    list_display = [
-        'id',
-        'is_confirmed',
-        'account',
-        'event',
-    ]
-    list_editable = [
-    ]
-    autocomplete_fields = [
-        'account',
-        'event',
-    ]
-    ordering = [
-        'event',
-        'account',
-    ]
-
 
 @admin.register(Comment)
-class CommentAdmin(VersionAdmin):
+class CommentAdmin(PolymorphicParentModelAdmin, VersionAdmin):
     save_on_top = True
     fields = [
-        'video',
-        'written',
+        # 'video',
         'is_featured',
         'is_moderated',
     ]
@@ -165,6 +143,49 @@ class CommentAdmin(VersionAdmin):
     ordering = [
         '-created',
     ]
+    child_models = [
+        WrittenComment,
+        SpokenComment,
+    ]
+
+@admin.register(WrittenComment)
+class WrittenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
+    save_on_top = True
+    fields = [
+        # 'video',
+        'account',
+        'text',
+    ]
+    list_display = [
+        'text',
+    ]
+    ordering = [
+        '-created',
+    ]
+    autocomplete_fields = [
+        'account',
+    ]
+    base_model = Comment
+
+@admin.register(SpokenComment)
+class SpokenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
+    save_on_top = True
+    fields = [
+        # 'video',
+        'account',
+        'video',
+    ]
+    list_display = [
+        'id',
+    ]
+    ordering = [
+        '-created',
+    ]
+    autocomplete_fields = [
+        'account',
+    ]
+    base_model = Comment
+
 
 @admin.register(Event)
 class EventAdmin(VersionAdmin):

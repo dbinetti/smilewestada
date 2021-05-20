@@ -99,10 +99,8 @@ def create_or_update_mailchimp_from_account(account):
         'email_address': email,
         'merge_fields': {
             'NAME': account.name,
-            'COMMENTS': account.comments,
             'ZONE': zone,
             'PUBLIC': int(account.is_public),
-            'VOLUNTEER': int(account.is_volunteer),
         }
     }
     try:

@@ -23,8 +23,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = [
-            'video',
-            'written',
+            # 'video',
+            # 'written',
         ]
         widgets = {
             'written': forms.Textarea(

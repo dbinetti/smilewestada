@@ -10,6 +10,7 @@ from django_fsm import FSMIntegerField
 from django_fsm import transition
 from hashid_field import HashidAutoField
 from model_utils import Choices
+from polymorphic.models import PolymorphicModel
 
 # Local
 from .managers import UserManager
@@ -159,7 +160,7 @@ class Attendee(models.Model):
         return f"{self.id}"
 
 
-class Comment(models.Model):
+class Comment(PolymorphicModel):
     id = HashidAutoField(
         primary_key=True,
     )
@@ -169,17 +170,17 @@ class Comment(models.Model):
     is_moderated = models.BooleanField(
         default=False,
     )
-    video = models.FileField(
-        upload_to='videos/',
-        blank=True,
-        storage=VideoMediaCloudinaryStorage(),
-        validators=[validate_video],
-    )
-    written = models.TextField(
-        max_length=2000,
-        blank=True,
-        default='',
-    )
+    # video = models.FileField(
+    #     upload_to='videos/',
+    #     blank=True,
+    #     storage=VideoMediaCloudinaryStorage(),
+    #     validators=[validate_video],
+    # )
+    # written = models.TextField(
+    #     max_length=2000,
+    #     blank=True,
+    #     default='',
+    # )
     account = models.ForeignKey(
         'app.Account',
         on_delete=models.SET_NULL,
@@ -194,8 +195,27 @@ class Comment(models.Model):
         auto_now=True,
     )
 
-    def __str__(self):
-        return f"{self.id}"
+    # def __str__(self):
+    #     return f"{self.id}"
+
+
+class WrittenComment(Comment):
+    text = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+    )
+
+
+class SpokenComment(Comment):
+    video = models.FileField(
+        upload_to='videos/',
+        blank=True,
+        storage=VideoMediaCloudinaryStorage(),
+        validators=[validate_video],
+    )
+    # def __str__(self):
+    #     return f"{self.id}"
 
 
 class Event(models.Model):
