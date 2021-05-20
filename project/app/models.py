@@ -175,9 +175,6 @@ class Comment(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
-    date = models.DateField(
-        default=datetime.date.today,
-    )
     video = models.FileField(
         upload_to='videos/',
         blank=True,

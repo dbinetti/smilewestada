@@ -163,11 +163,13 @@ class CommentAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'video',
+        'written',
     ]
     list_display = [
         'id',
     ]
     ordering = [
+        '-created',
     ]
 
 @admin.register(Event)
