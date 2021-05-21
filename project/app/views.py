@@ -19,10 +19,11 @@ from django.utils.crypto import get_random_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+# from .forms import CommentForm
 from .forms import AccountForm
 from .forms import AttendeeForm
-from .forms import CommentForm
 from .forms import DeleteForm
+from .forms import WrittenCommentForm
 from .models import Account
 from .models import Assignment
 from .models import Attendee
@@ -168,18 +169,15 @@ def account(request):
             return redirect('account')
     else:
         form = AccountForm(instance=account)
-    accounts = Account.objects.filter(
-        is_public=True,
-        user__is_active=True,
-    ).order_by('-created')
-    total = Account.objects.count()
+    comments = account.comments.order_by(
+        'created',
+    )
     return render(
         request,
         'app/pages/account.html',
         context={
             'form': form,
-            'accounts': accounts,
-            'total': total,
+            'comments': comments,
         },
     )
 
@@ -211,21 +209,21 @@ def comments(request):
         }
     )
 
-@login_required
-def submit(request):
-    if request.POST:
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('comments')
-    form = CommentForm()
-    return render(
-        request,
-        'app/pages/submit.html',
-        context={
-            'form': form,
-        }
-    )
+# @login_required
+# def submit(request):
+#     if request.POST:
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('comments')
+#     form = CommentForm()
+#     return render(
+#         request,
+#         'app/pages/submit.html',
+#         context={
+#             'form': form,
+#         }
+#     )
 
 
 # @login_required
@@ -354,7 +352,8 @@ def sendgrid_event_webhook(request):
 
 @csrf_exempt
 @require_POST
-def comment_submission(request):
+@login_required
+def submit_spoken_comment(request):
     if request.method == 'POST':
         payload = json.loads(request.body)
         comment = Comment(
@@ -363,3 +362,47 @@ def comment_submission(request):
         comment.video.name = payload['public_id']
         comment.save()
     return HttpResponse()
+
+
+@login_required
+def submit_written_comment(request):
+    account = request.user.account
+    form = WrittenCommentForm(request.POST or None)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.account = account
+        comment.save()
+        messages.success(
+            request,
+            'Saved!',
+        )
+        return redirect('comments')
+    return render(
+        request,
+        'app/pages/submit_written_comment.html',
+        context = {
+            'form': form,
+        }
+    )
+
+@login_required
+def comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if request.POST:
+        form = WrittenCommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save()
+            messages.success(
+                request,
+                "Saved!",
+            )
+            return redirect('account')
+    else:
+        form = WrittenCommentForm(instance=comment)
+    return render(
+        request,
+        'app/pages/comment.html',
+        context={
+            'form': form,
+        },
+    )

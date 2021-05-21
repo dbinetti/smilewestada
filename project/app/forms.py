@@ -11,6 +11,7 @@ from .models import Attendee
 from .models import Comment
 from .models import User
 from .models import Voter
+from .models import WrittenComment
 
 
 class DeleteForm(forms.Form):
@@ -19,15 +20,14 @@ class DeleteForm(forms.Form):
     )
 
 
-class CommentForm(forms.ModelForm):
+class WrittenCommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = WrittenComment
         fields = [
-            # 'video',
-            # 'written',
+            'text',
         ]
         widgets = {
-            'written': forms.Textarea(
+            'text': forms.Textarea(
                 attrs={
                     'class': 'form-control h-25',
                     'placeholder': 'Any respectful, on-topic comments to share publicly? (Optional)',
@@ -35,6 +35,23 @@ class CommentForm(forms.ModelForm):
                 }
             ),
         }
+
+# class CommentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comment
+#         fields = [
+#             'text',
+#             'video',
+#         ]
+#         widgets = {
+#             'text': forms.Textarea(
+#                 attrs={
+#                     'class': 'form-control h-25',
+#                     'placeholder': 'Any respectful, on-topic comments to share publicly? (Optional)',
+#                     'rows': 5,
+#                 }
+#             ),
+#         }
 
 class AttendeeForm(forms.ModelForm):
     class Meta:

@@ -1,0 +1,36 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+
+
+{% block title %}Comment{% endblock title %}
+
+{% block content %}
+  <section class='mt-5 col-md-8'>
+    <div class='card'>
+      <h4 class='card-header'>Comment</h4>
+      <div class="card-body">
+        <div class='card-title'>
+        </div>
+        <div class='card-text'>
+          <form method='post'>
+            {% csrf_token %}
+            {% bootstrap_form_errors form %}
+
+            {% bootstrap_field form.text show_help=True show_label=False %}
+
+            {% bootstrap_button "Save" button_type='submit' size='large' %}
+            {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-light' extra_classes='ml-3'%}
+          </form>
+        </div>
+      </div>
+      {% comment %}
+      <div class='card-footer'>
+        <p>
+          We will post your comments as soon as possible.
+        </p>
+      </div>
+      {% endcomment %}
+    </div>
+  </section>
+{% endblock content %}
