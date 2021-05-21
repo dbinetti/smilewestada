@@ -182,9 +182,9 @@ class Comment(PolymorphicModel):
     )
     account = models.ForeignKey(
         'app.Account',
-        on_delete=models.SET_NULL,
-        related_name='comments_model',
-        null=True,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        null=False,
         blank=False,
     )
     created = models.DateTimeField(
@@ -194,8 +194,8 @@ class Comment(PolymorphicModel):
         auto_now=True,
     )
 
-    # def __str__(self):
-    #     return f"{self.id}"
+    def __str__(self):
+        return f"{self.account.name}"
 
     @transition(field=state, source=[STATE.new, STATE.moderated, STATE.featured], target=STATE.approved)
     def approve(self):

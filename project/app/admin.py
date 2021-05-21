@@ -128,19 +128,17 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     save_on_top = True
     fields = [
         # 'video',
-        'is_featured',
-        'is_moderated',
+        'state',
     ]
     fsm_fields = [
         'state',
     ]
     list_filter = [
+        'state',
         PolymorphicChildModelFilter,
-        'is_featured',
-        'is_moderated',
     ]
     list_display = [
-        'id',
+        '__str__',
     ]
     ordering = [
         '-created',
@@ -152,6 +150,10 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     autocomplete_fields = [
         'account',
     ]
+    list_select_related = [
+        'account',
+    ]
+
 
 @admin.register(WrittenComment)
 class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, VersionAdmin):
@@ -176,6 +178,7 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
         'account',
     ]
     base_model = Comment
+
 
 @admin.register(SpokenComment)
 class SpokenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):

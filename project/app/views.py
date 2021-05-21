@@ -195,6 +195,8 @@ def comments(request):
     comments = Comment.objects.filter(
         account__is_public=True,
         state__gt=Comment.STATE.new,
+    ).select_related(
+        'account',
     ).order_by(
         '-state',
         '-created',
