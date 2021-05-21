@@ -80,7 +80,7 @@ class AccountAdmin(FSMTransitionMixin, VersionAdmin):
     ]
     search_fields = [
         'name',
-        'email',
+        'user__email',
     ]
     autocomplete_fields = [
         'user',
@@ -146,6 +146,9 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     child_models = [
         WrittenComment,
         SpokenComment,
+    ]
+    autocomplete_fields = [
+        'account',
     ]
 
 @admin.register(WrittenComment)
