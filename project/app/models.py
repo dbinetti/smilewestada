@@ -196,6 +196,7 @@ class Comment(PolymorphicModel):
 
     # def __str__(self):
     #     return f"{self.id}"
+
     @transition(field=state, source=[STATE.new, STATE.moderated, STATE.featured], target=STATE.approved)
     def approve(self):
         return
