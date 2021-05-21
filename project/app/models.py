@@ -216,6 +216,10 @@ class WrittenComment(Comment):
         blank=True,
         default='',
     )
+    class Meta:
+        verbose_name = 'Written Comment'
+        verbose_name_plural = 'Written Comments'
+
 
 
 class SpokenComment(Comment):
@@ -227,6 +231,9 @@ class SpokenComment(Comment):
     )
     # def __str__(self):
     #     return f"{self.id}"
+    class Meta:
+        verbose_name = 'Spoken Comment'
+        verbose_name_plural = 'Spoken Comments'
 
 
 class Event(models.Model):
