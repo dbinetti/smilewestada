@@ -38,20 +38,31 @@
               <li class='nav-item'>
                 <a href="{% url 'account' %}" class='align-bottom far fa-cog mr-3'>&nbsp;Account</a>
               </li>
-              <span class="visible-xs-inline mb-3"></span>
+
               {% comment %}
+              <span class="visible-xs-inline mb-3"></span>
               <li class='nav-item'>
                 <a href="{% url 'share' %}" class='align-bottom far fa-share mr-3'>&nbsp;Share</a>
               </li>
+              {% endcomment %}
+
+
+              <span class="visible-xs-inline mb-3"></span>
+              <li class='nav-item'>
+                <a href="{% url 'comments' %}" class='align-bottom far fa-bullhorn mr-3'>&nbsp;Comments</a>
+              </li>
+
+
               <span class="visible-xs-inline mb-3"></span>
               <li class='nav-item'>
                 <a href="{% url 'updates' %}" class='align-bottom far fa-newspaper mr-3'>&nbsp;Updates</a>
               </li>
-              {% endcomment %}
+
               <span class="visible-xs-inline mb-3"></span>
               <li class='nav-item'>
                 <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-outline-dark ml-3'>Logout</a>
               </li>
+
             {% else %}
               <li class='nav-item'>
                 <a href="{% url 'login' %}" role='button' class='btn btn-sm btn-outline-primary ml-3'>Login</a>

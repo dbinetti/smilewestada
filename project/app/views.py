@@ -192,12 +192,18 @@ def share(request):
     )
 
 def comments(request):
-    comments = Comment.objects.all()
+    comments = Comment.objects.filter(
+        account__is_public=True,
+        state__gt=Comment.STATE.new,
+    ).order_by(
+        '-state',
+        '-created',
+    )
     return render(
         request,
         'app/pages/comments.html',
         context={
-            'comments': comments
+            'comments': comments,
         }
     )
 

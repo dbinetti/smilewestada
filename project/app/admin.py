@@ -6,6 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from fsm_admin.mixins import FSMTransitionMixin
 from polymorphic.admin import PolymorphicChildModelAdmin
+from polymorphic.admin import PolymorphicChildModelFilter
 from polymorphic.admin import PolymorphicParentModelAdmin
 from reversion.admin import VersionAdmin
 
@@ -134,6 +135,7 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
         'state',
     ]
     list_filter = [
+        PolymorphicChildModelFilter,
         'is_featured',
         'is_moderated',
     ]

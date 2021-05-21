@@ -23,57 +23,68 @@
         Following are public comments submitted by Smile West Ada members.
       </p>
       <p>
-        Note that this site is not a substitute for official Public Comment before the Board of Trustees; they are simply provided as a courtesy to our members to make their voice heard.  We will post all on-topic, respectful comments regardless of position.  If you'd like to add your voice to these, <a href='{% url "submit" %}'>click here</a>.
+        Note that this site is not a substitute for official Public Comment before the Board of Trustees; they are simply provided as a courtesy to our members to make their voice heard.  We will post all on-topic, respectful comments regardless of position.
       </p>
     </div>
   </section>
 
-  <section>
-    <table class='table'>
-      <thead>
-        <tr>
-          <th>Comment</th>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for comment in comments %}
-        <tr>
-          <td>
-            <div class='col-md-3'>
-              <video
-                id="{{comment.id}}"
-                controls
-                autoplay
-                data-cld-public-id="{{comment.video.name}}"
-                class="cld-video-player cld-video-player-skin-dark cld-fluid">
-              </video>
-            </div>
-          </td>
-          <td>{{comment.name}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
-{% endblock content %}
+  <section class='mt-3'>
+    <div class="card">
 
-{% block scripts %}
-  <script>
-    let cld = cloudinary.Cloudinary.new({
-      cloud_name: '{% get_env_var "CLOUDINARY_NAME" %}',
-      secure: true
-    });
-    // Global Config
-    // let player = cld.videoPlayer('example-player', {
-    //   bigPlayButton: false,
-    // });
-    // // Instance Config
-    // player.source('smilewestada-dev/videos/testvideo', {
-    //   posterOptions: {transformation: {effect: ['sepia']}}
-    // });
-    var players = cld.videoPlayers(
-      '.cld-video-player',
-    );
-  </script>
-{% endblock scripts %}
+      {# <h6 class="card-header"> #}
+        {# Public Comments #}
+      {# </h6> #}
+
+      <div class="card-body">
+        <table class='table'>
+          <thead>
+            <tr class='row'>
+              {# <th scope='col' class='col-1'>Zone</th> #}
+              <th scope='col' class='col-5'>Name</th>
+              <th scope='col' class='col-7'>Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for comment in comments %}
+              <tr class='row'>
+                <td class='col-5'>
+                  {{comment.account.name}}<br>
+                  <ul class='list-inline'>
+                    {% if comment.account.role == 1 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-warning">Parent</span>
+                      </li>
+                    {% elif comment.account.role == 2 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-success">Student</span>
+                      </li>
+                    {% elif comment.account.role == 3 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-danger">Teacher</span>
+                      </li>
+                    {% endif %}
+                    {% if comment.account.is_voter %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-primary">Registered Voter</span>
+                      </li>
+                    {% endif %}
+                    {% if comment.account.zone %}
+                      <li class='list-inline-item'>
+                        <span class="badge badge-light">{{account.get_zone_display}}</span>
+                      </li>
+                    {% endif %}
+                  </ul>
+                  {# {% if account.is_featured %} #}
+                  {# {% endif %} #}
+                  {# <span class="badge badge-info">Zone 3</span> #}
+                </td>
+                <td class='col-7'>{{comment.text}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
