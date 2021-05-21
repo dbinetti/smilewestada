@@ -5,7 +5,9 @@ from django.contrib import admin
 from django.shortcuts import render
 from django.urls import include
 from django.urls import path
+from django.views.defaults import bad_request
 from django.views.defaults import page_not_found
+from django.views.defaults import permission_denied
 from django.views.defaults import server_error
 from django.views.generic import TemplateView
 # First-Party
@@ -27,16 +29,28 @@ urlpatterns = [
 
 if settings.DEBUG:
     import debug_toolbar
-    def custom_page_not_found(request):
+
+    def render_bad_request(request):
+        return bad_request(request, None)
+
+
+    def render_permission_denied(request):
+        return permission_denied(request, None)
+
+
+    def render_page_not_found(request):
         return page_not_found(request, None)
-    def trigger_error(request):
-        return 1/0
+
+
+    def render_server_error(request):
+        return server_error(request)
 
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
-        path('404/', custom_page_not_found),
-        path('500/', server_error),
-        path('sentry-debug/', trigger_error),
+        path('400/', render_bad_request),
+        path('403/', render_permission_denied),
+        path('404/', render_page_not_found),
+        path('500/', render_server_error),
     ]
 else:
     def handler500(request, *args, **argv):
