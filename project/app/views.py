@@ -24,12 +24,14 @@ from django.views.decorators.http import require_POST
 from .forms import AccountForm
 from .forms import AttendeeForm
 from .forms import DeleteForm
+from .forms import SpokenCommentForm
 from .forms import WrittenCommentForm
 from .models import Account
 from .models import Assignment
 from .models import Attendee
 from .models import Comment
 from .models import Event
+from .models import SpokenComment
 from .tasks import get_mailchimp_client
 
 log = logging.getLogger('SWA View')
@@ -336,22 +338,39 @@ def comments(request):
 @login_required
 def comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
-    if request.POST:
-        form = WrittenCommentForm(request.POST, instance=comment)
-        if form.is_valid():
-            comment = form.save()
-            messages.success(
-                request,
-                "Saved!",
-            )
-            return redirect('comment', comment.id)
+    if comment.polymorphic_ctype.name == 'Written Comment':
+        if request.POST:
+            form = WrittenCommentForm(request.POST, instance=comment)
+            if form.is_valid():
+                comment = form.save()
+                messages.success(
+                    request,
+                    "Saved!",
+                )
+                return redirect('comment', comment.id)
+        else:
+            form = WrittenCommentForm(instance=comment)
+        spokenform = None
     else:
-        form = WrittenCommentForm(instance=comment)
+        if request.POST:
+            spokenform = SpokenCommentForm(request.POST, instance=comment)
+            if spokenform.is_valid():
+                comment = spokenform.save()
+                messages.success(
+                    request,
+                    "Saved!",
+                )
+                return redirect('comment', comment.id)
+        else:
+            spokenform = SpokenCommentForm(instance=comment)
+        form = None
+
     return render(
         request,
         'app/pages/comment.html',
         context={
             'form': form,
+            'spokenform': spokenform,
             'comment': comment,
         },
     )
@@ -387,13 +406,20 @@ def comment_delete(request, comment_id):
     )
 
 
+@login_required
+def submit_spoken_comment(request):
+    return render(
+        request,
+        'app/pages/submit_spoken_comment.html',
+    )
+
 @csrf_exempt
 @require_POST
 @login_required
-def submit_spoken_comment(request):
+def video_submission(request):
     if request.method == 'POST':
         payload = json.loads(request.body)
-        comment = Comment(
+        comment = SpokenComment(
             account=request.user.account,
         )
         comment.video.name = payload['public_id']

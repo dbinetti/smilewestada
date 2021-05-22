@@ -12,30 +12,42 @@
       <div class="card-body">
         <div class='card-title'>
         </div>
-        <div class='card-text'>
-          <form method='post'>
-            {% csrf_token %}
-            {% bootstrap_form_errors form %}
+        {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+          <div class='card-text'>
+            <form method='post'>
+              {% csrf_token %}
+              {% bootstrap_form_errors form %}
 
-            {% bootstrap_field form.text show_help=True show_label=False %}
+              {% bootstrap_field form.text show_help=True show_label=False %}
 
-            {% bootstrap_button "Save" button_type='submit' size='large' %}
-            {% url 'account' as url_comment %}
-            {% bootstrap_button "Cancel" button_type='link' href=url_comment size='large' button_class='btn-light' extra_classes='ml-3'%}
-            {% url 'comment-delete' comment.id as url_comment_delete %}
-            <div class='float-right'>
-              <a href='{% url "comment-delete" comment.id%}'><span class='text-danger'>Delete Comment</span></a>
-            </div>
-          </form>
-        </div>
+              {% bootstrap_button "Save" button_type='submit' size='large' %}
+              {% url 'account' as url_comment %}
+              {% bootstrap_button "Cancel" button_type='link' href=url_comment size='large' button_class='btn-light' extra_classes='ml-3'%}
+              {% url 'comment-delete' comment.id as url_comment_delete %}
+              <div class='float-right'>
+                <a href='{% url "comment-delete" comment.id%}'><span class='text-danger'>Delete Comment</span></a>
+              </div>
+            </form>
+          </div>
+        {% else %}
+          <div class='card-text'>
+            <form method='post'>
+              {% csrf_token %}
+              {% bootstrap_form_errors spokenform %}
+
+              {% bootstrap_field spokenform.video show_help=True show_label=False %}
+
+              {% bootstrap_button "Save" button_type='submit' size='large' %}
+              {% url 'account' as url_comment %}
+              {% bootstrap_button "Cancel" button_type='link' href=url_comment size='large' button_class='btn-light' extra_classes='ml-3'%}
+              {% url 'comment-delete' comment.id as url_comment_delete %}
+              <div class='float-right'>
+                <a href='{% url "comment-delete" comment.id%}'><span class='text-danger'>Delete Comment</span></a>
+              </div>
+            </form>
+          </div>
+        {% endif %}
       </div>
-      {% comment %}
-      <div class='card-footer'>
-        <p>
-          We will post your comments as soon as possible.
-        </p>
-      </div>
-      {% endcomment %}
     </div>
   </section>
 {% endblock content %}

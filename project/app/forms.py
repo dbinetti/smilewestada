@@ -9,6 +9,7 @@ from django.utils.safestring import mark_safe
 from .models import Account
 from .models import Attendee
 from .models import Comment
+from .models import SpokenComment
 from .models import User
 from .models import Voter
 from .models import WrittenComment
@@ -35,6 +36,13 @@ class WrittenCommentForm(forms.ModelForm):
                 }
             ),
         }
+
+class SpokenCommentForm(forms.ModelForm):
+    class Meta:
+        model = SpokenComment
+        fields = [
+            'video',
+        ]
 
 # class CommentForm(forms.ModelForm):
 #     class Meta:
