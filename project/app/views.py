@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 # from django.shortcuts import get_object_or_404
 from django.shortcuts import get_object_or_404
@@ -189,43 +190,6 @@ def share(request):
         'app/pages/share.html',
     )
 
-def comments(request):
-    comments = Comment.objects.filter(
-        account__is_public=True,
-        state__gt=Comment.STATE.new,
-        account__user__is_active=True,
-    ).select_related(
-        'account',
-        'account__user',
-    ).order_by(
-        '-state',
-        '-created',
-    )
-    return render(
-        request,
-        'app/pages/comments.html',
-        context={
-            'comments': comments,
-        }
-    )
-
-# @login_required
-# def submit(request):
-#     if request.POST:
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('comments')
-#     form = CommentForm()
-#     return render(
-#         request,
-#         'app/pages/submit.html',
-#         context={
-#             'form': form,
-#         }
-#     )
-
-
 # @login_required
 def sign(request):
     assignments = Assignment.objects.filter(
@@ -349,39 +313,23 @@ def sendgrid_event_webhook(request):
                 account.save()
     return HttpResponse()
 
-
-@csrf_exempt
-@require_POST
-@login_required
-def submit_spoken_comment(request):
-    if request.method == 'POST':
-        payload = json.loads(request.body)
-        comment = Comment(
-            account=request.user.account,
-        )
-        comment.video.name = payload['public_id']
-        comment.save()
-    return HttpResponse()
-
-
-@login_required
-def submit_written_comment(request):
-    account = request.user.account
-    form = WrittenCommentForm(request.POST or None)
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.account = account
-        comment.save()
-        messages.success(
-            request,
-            'Saved!',
-        )
-        return redirect('comments')
+def comments(request):
+    comments = Comment.objects.filter(
+        account__is_public=True,
+        state__gt=Comment.STATE.new,
+        account__user__is_active=True,
+    ).select_related(
+        'account',
+        'account__user',
+    ).order_by(
+        '-state',
+        '-created',
+    )
     return render(
         request,
-        'app/pages/submit_written_comment.html',
-        context = {
-            'form': form,
+        'app/pages/comments.html',
+        context={
+            'comments': comments,
         }
     )
 
@@ -404,5 +352,95 @@ def comment(request, comment_id):
         'app/pages/comment.html',
         context={
             'form': form,
+            'comment': comment,
         },
+    )
+
+
+@login_required
+def comment_edit(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if request.POST:
+        form = WrittenCommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save()
+            messages.success(
+                request,
+                "Saved!",
+            )
+            return redirect('account')
+    else:
+        form = WrittenCommentForm(instance=comment)
+    return render(
+        request,
+        'app/pages/comment.html',
+        context={
+            'form': form,
+        },
+    )
+
+
+@login_required
+def comment_delete(request, comment_id):
+    try:
+        comment = Comment.objects.get(
+            id=comment_id,
+            account=request.user.account,
+        )
+    except Comment.DoesNotExist:
+        raise PermissionDenied("You can not delete others' comments")
+    if request.method == "POST":
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            comment.delete()
+            messages.error(
+                request,
+                "Comment Deleted!",
+            )
+            return redirect('comments')
+    else:
+        form = DeleteForm()
+    return render(
+        request,
+        'app/pages/comment_delete.html',
+        context = {
+            'form': form,
+            'comment': comment,
+        },
+    )
+
+
+
+@csrf_exempt
+@require_POST
+@login_required
+def submit_spoken_comment(request):
+    if request.method == 'POST':
+        payload = json.loads(request.body)
+        comment = Comment(
+            account=request.user.account,
+        )
+        comment.video.name = payload['public_id']
+        comment.save()
+    return HttpResponse()
+
+@login_required
+def submit_written_comment(request):
+    account = request.user.account
+    form = WrittenCommentForm(request.POST or None)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.account = account
+        comment.save()
+        messages.success(
+            request,
+            'Saved!',
+        )
+        return redirect('comments')
+    return render(
+        request,
+        'app/pages/submit_written_comment.html',
+        context = {
+            'form': form,
+        }
     )

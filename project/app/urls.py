@@ -37,10 +37,10 @@ urlpatterns = [
     # Comments
     path('comments', views.comments, name='comments'),
     path('comment/<str:comment_id>', views.comment, name='comment',),
-
-    # path('comments/submit-written', views.submit_written_comment, name='submit-written-comment'),
-    # path('comments/submit-spoken', views.submit_spoken_comment, name='submit-spoken-comment'),
-    # path('comment-submission', views.comment_submission, name='comment_submission'),
+    path('comment/<str:comment_id>/edit', views.comment_edit, name='comment-edit',),
+    path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
+    path('comments/submit-written', views.submit_written_comment, name='submit-written-comment'),
+    path('comments/submit-spoken', views.submit_spoken_comment, name='submit-spoken-comment'),
 
     # Delete
     path('delete', views.delete, name='delete',),
