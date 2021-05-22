@@ -78,7 +78,7 @@
           </p>
         </div>
         <div class='card-text'>
-          <table class='table'>
+          <table class='table table-sm'>
             <thead>
               <tr>
                 <th>Date</th>
@@ -91,9 +91,15 @@
                   <td>
                     {{comment.created|date:"SHORT_DATE_FORMAT"}}
                   </td>
-                  <td>
-                    <a href='{% url "comment" comment.id %}'>{{comment.text|truncatewords:10}}</a>
-                  </td>
+                  {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+                    <td>
+                      <a href='{% url "comment" comment.id %}'>{{comment.text|truncatewords:10}}</a>
+                    </td>
+                  {% else %}
+                    <td>
+                      <a href='{% url "comment" comment.id %}'><img src={{comment.video.url}}.jpg class='img-fluid'></a>
+                    </td>
+                  {% endif %}
                 </tr>
               {% empty %}
                 <tr>
