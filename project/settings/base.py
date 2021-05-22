@@ -259,6 +259,7 @@ INSTALLED_APPS = [
     'django_rq',
     'reversion',
     'cloudinary',
+    'polymorphic',
     'bootstrap4',
     'phonenumber_field',
     'fsm_admin',
