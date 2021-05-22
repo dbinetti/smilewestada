@@ -344,7 +344,7 @@ def comment(request, comment_id):
                 request,
                 "Saved!",
             )
-            return redirect('account')
+            return redirect('comment', comment.id)
     else:
         form = WrittenCommentForm(instance=comment)
     return render(
@@ -353,29 +353,6 @@ def comment(request, comment_id):
         context={
             'form': form,
             'comment': comment,
-        },
-    )
-
-
-@login_required
-def comment_edit(request, comment_id):
-    comment = Comment.objects.get(id=comment_id)
-    if request.POST:
-        form = WrittenCommentForm(request.POST, instance=comment)
-        if form.is_valid():
-            comment = form.save()
-            messages.success(
-                request,
-                "Saved!",
-            )
-            return redirect('account')
-    else:
-        form = WrittenCommentForm(instance=comment)
-    return render(
-        request,
-        'app/pages/comment.html',
-        context={
-            'form': form,
         },
     )
 
@@ -397,7 +374,7 @@ def comment_delete(request, comment_id):
                 request,
                 "Comment Deleted!",
             )
-            return redirect('comments')
+            return redirect('account')
     else:
         form = DeleteForm()
     return render(
@@ -408,7 +385,6 @@ def comment_delete(request, comment_id):
             'comment': comment,
         },
     )
-
 
 
 @csrf_exempt
@@ -436,7 +412,7 @@ def submit_written_comment(request):
             request,
             'Saved!',
         )
-        return redirect('comments')
+        return redirect('account')
     return render(
         request,
         'app/pages/submit_written_comment.html',

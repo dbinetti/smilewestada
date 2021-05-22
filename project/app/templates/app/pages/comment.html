@@ -20,10 +20,12 @@
             {% bootstrap_field form.text show_help=True show_label=False %}
 
             {% bootstrap_button "Save" button_type='submit' size='large' %}
-            {% url 'comment' comment.id as url_comment %}
+            {% url 'account' as url_comment %}
             {% bootstrap_button "Cancel" button_type='link' href=url_comment size='large' button_class='btn-light' extra_classes='ml-3'%}
             {% url 'comment-delete' comment.id as url_comment_delete %}
-            {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' extra_classes='ml-auto'%}
+            <div class='float-right'>
+              <a href='{% url "comment-delete" comment.id%}'><span class='text-danger'>Delete Comment</span></a>
+            </div>
           </form>
         </div>
       </div>
