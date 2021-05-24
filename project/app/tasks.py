@@ -73,7 +73,6 @@ def create_account_from_user(user):
     account = Account.objects.create(
         user=user,
         name=user.name,
-        email=user.email,
     )
     return account
 
