@@ -97,7 +97,6 @@ def callback(request):
     # Reject if state doesn't match
     browser_state = request.session.get('state')
     server_state = request.GET.get('state')
-    print(browser_state, server_state)
     if browser_state != server_state:
         return HttpResponse(status=400)
     next_url = server_state.partition('|')[2]
