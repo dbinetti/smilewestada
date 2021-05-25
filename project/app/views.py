@@ -18,6 +18,7 @@ from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from reversion.views import create_revision
 
 from .forms import AccountForm
 from .forms import AttendeeForm
@@ -155,6 +156,7 @@ def logout(request):
 
 # Account
 @login_required
+@create_revision
 def account(request):
     account = request.user.account
     if request.POST:
