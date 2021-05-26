@@ -2,6 +2,12 @@
 {% load bootstrap4 %}
 {% load app_tags %}
 
+{% block metatags %}
+  <link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
+{% endblock metatags %}
+
 
 {% block title %}Comment{% endblock title %}
 
@@ -14,40 +20,36 @@
         </div>
         {% if comment.polymorphic_ctype.name == 'Written Comment' %}
           <div class='card-text'>
-            <form method='post'>
-              {% csrf_token %}
-              {% bootstrap_form_errors form %}
-
-              {% bootstrap_field form.text show_help=True show_label=False %}
-
-              {% bootstrap_button "Save" button_type='submit' size='large' %}
-              {% url 'account' as url_comment %}
-              {% bootstrap_button "Cancel" button_type='link' href=url_comment size='large' button_class='btn-light' extra_classes='ml-3'%}
-              {% url 'comment-delete' comment.id as url_comment_delete %}
-              <div class='float-right'>
-                <a href='{% url "comment-delete" comment.id%}'><span class='text-danger'>Delete Comment</span></a>
-              </div>
-            </form>
+            <p>
+              {{comment.text}}
+            </p>
+            {% url 'comment-delete' comment.id as url_comment_delete %}
+            {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' %}
           </div>
         {% else %}
           <div class='card-text'>
-            <form method='post'>
-              {% csrf_token %}
-              {% bootstrap_form_errors spokenform %}
-
-              {% bootstrap_field spokenform.video show_help=True show_label=False %}
-
-              {% bootstrap_button "Save" button_type='submit' size='large' %}
-              {% url 'account' as url_comment %}
-              {% bootstrap_button "Cancel" button_type='link' href=url_comment size='large' button_class='btn-light' extra_classes='ml-3'%}
-              {% url 'comment-delete' comment.id as url_comment_delete %}
-              <div class='float-right'>
-                <a href='{% url "comment-delete" comment.id%}'><span class='text-danger'>Delete Comment</span></a>
-              </div>
-            </form>
+            <video
+              id="comment-player"
+              controls
+              muted
+              class="cld-video-player cld-fluid">
+            </video>
+            {% url 'comment-delete' comment.id as url_comment_delete %}
+            {% bootstrap_button "Delete" button_type='link' href=url_comment size='large' button_class='btn-danger' extra_classes='ml-3'%}
           </div>
         {% endif %}
       </div>
     </div>
   </section>
 {% endblock content %}
+
+{% block scripts %}
+  <script>
+    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
+    let cld = cloudinary.Cloudinary.new({
+      cloud_name: cloudName
+    });
+    let demoplayer = cld.videoPlayer('comment-player').width(600);
+    demoplayer.source('{{comment.video.name}}');
+  </script>
+{% endblock scripts %}

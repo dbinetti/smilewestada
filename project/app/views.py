@@ -336,40 +336,14 @@ def comments(request):
 
 @login_required
 def comment(request, comment_id):
-    comment = Comment.objects.get(id=comment_id)
-    if comment.polymorphic_ctype.name == 'Written Comment':
-        if request.POST:
-            form = WrittenCommentForm(request.POST, instance=comment)
-            if form.is_valid():
-                comment = form.save()
-                messages.success(
-                    request,
-                    "Saved!",
-                )
-                return redirect('comment', comment.id)
-        else:
-            form = WrittenCommentForm(instance=comment)
-        spokenform = None
-    else:
-        if request.POST:
-            spokenform = SpokenCommentForm(request.POST, instance=comment)
-            if spokenform.is_valid():
-                comment = spokenform.save()
-                messages.success(
-                    request,
-                    "Saved!",
-                )
-                return redirect('comment', comment.id)
-        else:
-            spokenform = SpokenCommentForm(instance=comment)
-        form = None
-
+    comment = get_object_or_404(
+        Comment,
+        pk=comment_id,
+    )
     return render(
         request,
         'app/pages/comment.html',
         context={
-            'form': form,
-            'spokenform': spokenform,
             'comment': comment,
         },
     )
