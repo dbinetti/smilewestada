@@ -399,6 +399,10 @@ def video_submission(request):
         )
         comment.video.name = payload['public_id']
         comment.save()
+        messages.success(
+            request,
+            "Spoken Comment Submitted!",
+        )
     return HttpResponse()
 
 @login_required

@@ -113,8 +113,10 @@
         </div>
       </div>
       <div class='card-footer'>
-        {% url 'submit-written-comment' as url_comment %}
-        {% bootstrap_button "Make Comment" button_type='link' href=url_comment size='large' button_class='btn-success' extra_classes='ml-3'%}
+        {% url 'submit-spoken-comment' as spoken_url_comment %}
+        {% bootstrap_button "Make Spoken Comment" button_type='link' href=spoken_url_comment size='large' button_class='btn-primary' extra_classes=''%}
+        {% url 'submit-written-comment' as written_url_comment %}
+        {% bootstrap_button "Make Written Comment" button_type='link' href=written_url_comment size='large' button_class='btn-success' extra_classes='ml-3'%}
       </div>
     </div>
   </section>

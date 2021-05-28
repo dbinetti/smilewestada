@@ -1,5 +1,6 @@
 {% extends 'app/pages/base.html' %}
 {% load app_tags %}
+{% load bootstrap4 %}
 
 {% block metatags %}
   <link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
@@ -25,6 +26,15 @@
       <p>
         Note that this site is not a substitute for official Public Comment before the Board of Trustees; they are simply provided as a courtesy to our members to make their voice heard.  We will post all on-topic, respectful comments regardless of position.
       </p>
+    </div>
+    <div>
+      <ul class='list-inline'>
+        {% url 'submit-spoken-comment' as spoken_url_comment %}
+        <li class='list-inline-item'>{% bootstrap_button "Make Spoken Comment" button_type='link' href=spoken_url_comment size='large' button_class='btn-primary' extra_classes='m-3'%}</li>
+        {% url 'submit-written-comment' as written_url_comment %}
+        <li class='list-inline-item'>{% bootstrap_button "Make Written Comment" button_type='link' href=written_url_comment size='large' button_class='btn-success' extra_classes='m-3'%}
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -71,7 +81,13 @@
               {# {% endif %} #}
               {# <span class="badge badge-info">Zone 3</span> #}
             </td>
-            <td class='col-7'>{{comment.text}}</td>
+            <td class='col-7'>
+              {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+                {{comment.text}}
+              {% else %}
+                <a href='{% url "comment" comment.id %}'><img class='img-fluid' src='{{comment.video.url}}.jpg'></a>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>

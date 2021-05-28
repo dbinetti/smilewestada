@@ -221,7 +221,6 @@ class WrittenComment(Comment):
         verbose_name_plural = 'Written Comments'
 
 
-
 class SpokenComment(Comment):
     video = models.FileField(
         upload_to='videos/',

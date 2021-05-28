@@ -5,19 +5,47 @@
 
 {% block title %}Submit Spoken Comment{% endblock title %}
 
-
-
 {% block content %}
   <section class='my-5'>
     <h2>
       Submit Spoken Comment
     </h2>
   </section>
+  <section class='col-md-8'>
+    <p class='lead'>
+      Here are the guidelines for leaving a video comment:
+    </p>
+    <ul class='list-styled'>
+      <li>It must be less than two minutes long.</li>
+      <li>It should start with who you are and your affiliation with the WASD.</li>
+      <li>It should remain respectful and on-topic.</li>
+      <li>It will be reviewed before posting to avoid inappropriate content on our site.</li>
+      <li>It will <em>not</em> be cross-posted to YouTube, Facebook, etc.; we have complete control over the content.  However, it is nonetheless  public and should be treated as such.</li>
+      <li>Any students posting <strong>must receive express permission from parents</strong> and state so clearly at the beginning of their comment.</li>
+    </ul>
+    <p>
+      Also note that there is no guarantee the Board of Trustees will hear your comments; this is not an official channel.
+    </p>
+  </section>
   <section class='my-5'>
-    <div class='col-lg-8'>
-      <p>
-        {% bootstrap_button "Upload" button_type='button' size='large' button_class='btn-success' id='upload-widget'%}
-      </p>
+    <div class='card'>
+      <div class='card-header'>
+        <h4>Instructions</h4>
+      </div>
+      <div class='card-body'>
+        <div>
+          <ul class='list-styled'>
+            <li>Create your video with your phone or computer.</li>
+            <li>Save the file locally OR copy a URL from a previously uploaded video on YouTube, TikTok, etc.</li>
+            <li>Click Upload and follow the prompts to either upload the file or submit the URL.</li>
+          </ul>
+        </div>
+        <div class='col-lg-8'>
+          <p>
+            {% bootstrap_button "Upload" button_type='button' size='large' button_class='btn-success' id='upload-widget'%}
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 {% endblock content %}
@@ -48,7 +76,7 @@
             method: 'POST',
             body: JSON.stringify(result.info)
           }).then(res => {
-            console.log('don', res);
+            window.location.replace('{% url "account" %}');
           });
         }
       }

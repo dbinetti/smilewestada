@@ -34,8 +34,10 @@
               muted
               class="cld-video-player cld-fluid">
             </video>
-            {% url 'comment-delete' comment.id as url_comment_delete %}
-            {% bootstrap_button "Delete" button_type='link' href=url_comment size='large' button_class='btn-danger' extra_classes='ml-3'%}
+            {% if comment.account.user == request.user %}
+              {% url 'comment-delete' comment.id as url_comment_delete %}
+              {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' extra_classes='ml-3'%}
+            {% endif %}
           </div>
         {% endif %}
       </div>
