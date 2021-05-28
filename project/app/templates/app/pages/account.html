@@ -40,8 +40,8 @@
             {% bootstrap_field form.name show_help=True show_label=False placeholder="Name" %}
             {% bootstrap_field form.role show_help=True show_label=False %}
             {% bootstrap_field form.is_public show_help=True show_label=False %}
-            {% bootstrap_field form.is_voter show_help=True show_label=False %}
             {% bootstrap_field form.zone show_help=True show_label=False %}
+            {% bootstrap_field form.is_voter show_help=True show_label=False %}
             {% comment %}
             {% bootstrap_field form.is_attending show_help=True show_label=False %}
             {% bootstrap_field form.is_signage show_help=True show_label=False %}
@@ -56,13 +56,67 @@
       </div>
       <div class='card-footer'>
           <div class='row'>
-            <div class='col-6'>
-              <small class='text-muted'>Please contact <a href='mailto://support@smilewestada.com'>support@smilewestada.com</a> if you have any questions or need support.</small>
+            <div class='col-8'>
+              <small class='text-muted'>Help available at <a href='mailto://support@smilewestada.com'>support@smilewestada.com</a>.</small>
             </div>
-            <div class='col-4 offset-2 text-right'>
+            <div class='col-4 text-right'>
               <a href='{% url "delete" %}'><span class='text-danger text-small'>Delete Account</span></a>
             </div>
           </div>
+      </div>
+    </div>
+  </section>
+  <section class='mt-5 col-md-8'>
+    <div class='card'>
+      <h4 class='card-header'>
+        Public Comments
+      </h4>
+      <div class="card-body">
+        <div class='card-title'>
+          <p>
+            These are the public comments you have made.  Click on the comment to review/edit/delete.
+          </p>
+        </div>
+        <div class='card-text'>
+          <table class='table table-sm'>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for comment in comments %}
+                <tr>
+                  <td>
+                    {{comment.created|date:"SHORT_DATE_FORMAT"}}
+                  </td>
+                  {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+                    <td>
+                      <a href='{% url "comment" comment.id %}'>{{comment.text|truncatewords:10}}</a>
+                    </td>
+                  {% else %}
+                    <td>
+                      <a href='{% url "comment" comment.id %}'><img src={{comment.video.url}}.jpg class='img-fluid'></a>
+                    </td>
+                  {% endif %}
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan=2>
+                    (No Public Comments)
+                  <td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class='card-footer'>
+        {% url 'submit-spoken-comment' as spoken_url_comment %}
+        {% bootstrap_button "Make Spoken Comment" button_type='link' href=spoken_url_comment size='large' button_class='btn-primary' extra_classes=''%}
+        {% url 'submit-written-comment' as written_url_comment %}
+        {% bootstrap_button "Make Written Comment" button_type='link' href=written_url_comment size='large' button_class='btn-success' extra_classes='ml-3'%}
       </div>
     </div>
   </section>

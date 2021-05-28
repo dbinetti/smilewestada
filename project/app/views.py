@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 # from django.shortcuts import get_object_or_404
 from django.shortcuts import get_object_or_404
@@ -20,15 +21,18 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from reversion.views import create_revision
 
+# from .forms import CommentForm
 from .forms import AccountForm
 from .forms import AttendeeForm
-from .forms import CommentForm
 from .forms import DeleteForm
+from .forms import SpokenCommentForm
+from .forms import WrittenCommentForm
 from .models import Account
 from .models import Assignment
 from .models import Attendee
 from .models import Comment
 from .models import Event
+from .models import SpokenComment
 from .tasks import get_mailchimp_client
 
 log = logging.getLogger('SWA View')
@@ -94,7 +98,6 @@ def callback(request):
     # Reject if state doesn't match
     browser_state = request.session.get('state')
     server_state = request.GET.get('state')
-    print(browser_state, server_state)
     if browser_state != server_state:
         return HttpResponse(status=400)
     next_url = server_state.partition('|')[2]
@@ -170,18 +173,15 @@ def account(request):
             return redirect('account')
     else:
         form = AccountForm(instance=account)
-    accounts = Account.objects.filter(
-        is_public=True,
-        user__is_active=True,
-    ).order_by('-created')
-    total = Account.objects.count()
+    comments = account.comments.order_by(
+        'created',
+    )
     return render(
         request,
         'app/pages/account.html',
         context={
             'form': form,
-            'accounts': accounts,
-            'total': total,
+            'comments': comments,
         },
     )
 
@@ -192,43 +192,6 @@ def share(request):
         request,
         'app/pages/share.html',
     )
-
-def comments(request):
-    comments = Comment.objects.filter(
-        account__is_public=True,
-        state__gt=Comment.STATE.new,
-        account__user__is_active=True,
-    ).select_related(
-        'account',
-        'account__user',
-    ).order_by(
-        '-state',
-        '-created',
-    )
-    return render(
-        request,
-        'app/pages/comments.html',
-        context={
-            'comments': comments,
-        }
-    )
-
-@login_required
-def submit(request):
-    if request.POST:
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('comments')
-    form = CommentForm()
-    return render(
-        request,
-        'app/pages/submit.html',
-        context={
-            'form': form,
-        }
-    )
-
 
 # @login_required
 def sign(request):
@@ -353,15 +316,112 @@ def sendgrid_event_webhook(request):
                 account.save()
     return HttpResponse()
 
+def comments(request):
+    comments = Comment.objects.filter(
+        account__is_public=True,
+        state__gt=Comment.STATE.new,
+        account__user__is_active=True,
+    ).select_related(
+        'account',
+        'account__user',
+    ).order_by(
+        '-state',
+        '-created',
+    )
+    return render(
+        request,
+        'app/pages/comments.html',
+        context={
+            'comments': comments,
+        }
+    )
+
+@login_required
+def comment(request, comment_id):
+    comment = get_object_or_404(
+        Comment,
+        pk=comment_id,
+    )
+    return render(
+        request,
+        'app/pages/comment.html',
+        context={
+            'comment': comment,
+        },
+    )
+
+
+@login_required
+def comment_delete(request, comment_id):
+    try:
+        comment = Comment.objects.get(
+            id=comment_id,
+            account=request.user.account,
+        )
+    except Comment.DoesNotExist:
+        raise PermissionDenied("You can not delete others' comments")
+    if request.method == "POST":
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            comment.delete()
+            messages.error(
+                request,
+                "Comment Deleted!",
+            )
+            return redirect('account')
+    else:
+        form = DeleteForm()
+    return render(
+        request,
+        'app/pages/comment_delete.html',
+        context = {
+            'form': form,
+            'comment': comment,
+        },
+    )
+
+
+@login_required
+def submit_spoken_comment(request):
+    return render(
+        request,
+        'app/pages/submit_spoken_comment.html',
+    )
 
 @csrf_exempt
 @require_POST
-def comment_submission(request):
+@login_required
+def video_submission(request):
     if request.method == 'POST':
         payload = json.loads(request.body)
-        comment = Comment(
+        comment = SpokenComment(
             account=request.user.account,
         )
         comment.video.name = payload['public_id']
         comment.save()
+        messages.success(
+            request,
+            "Spoken Comment Submitted!",
+        )
     return HttpResponse()
+
+@login_required
+def submit_written_comment(request):
+    account = request.user.account
+    form = WrittenCommentForm(request.POST or None)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.account = account
+        comment.save()
+        messages.success(
+            request,
+            'Saved!',
+        )
+        return redirect('account')
+    return render(
+        request,
+        'app/pages/submit_written_comment.html',
+        context = {
+            'form': form,
+        }
+    )

@@ -1,0 +1,57 @@
+{% extends 'app/pages/base.html' %}
+{% load bootstrap4 %}
+{% load app_tags %}
+
+{% block metatags %}
+  <link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
+{% endblock metatags %}
+
+
+{% block title %}Comment{% endblock title %}
+
+{% block content %}
+  <section class='mt-5 col-md-8'>
+    <div class='card'>
+      <h4 class='card-header'>Comment</h4>
+      <div class="card-body">
+        <div class='card-title'>
+        </div>
+        {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+          <div class='card-text'>
+            <p>
+              {{comment.text}}
+            </p>
+            {% url 'comment-delete' comment.id as url_comment_delete %}
+            {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' %}
+          </div>
+        {% else %}
+          <div class='card-text'>
+            <video
+              id="comment-player"
+              controls
+              muted
+              class="cld-video-player cld-fluid">
+            </video>
+            {% if comment.account.user == request.user %}
+              {% url 'comment-delete' comment.id as url_comment_delete %}
+              {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' extra_classes='ml-3'%}
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+
+{% block scripts %}
+  <script>
+    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
+    let cld = cloudinary.Cloudinary.new({
+      cloud_name: cloudName
+    });
+    let demoplayer = cld.videoPlayer('comment-player').width(600);
+    demoplayer.source('{{comment.video.name}}');
+  </script>
+{% endblock scripts %}

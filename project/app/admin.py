@@ -184,7 +184,7 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
 class SpokenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
     save_on_top = True
     fields = [
-        # 'video',
+        'state',
         'account',
         'video',
     ]
