@@ -4,13 +4,13 @@
 {% load humanize %}
 
 {% block metatags %}
-  <meta property="og:title" content="Three Reasons Why Masks are Now Optional" />
-  <meta property="og:image" content='{% static "app/threereasons.png" %}' />
-  <meta property="og:image:secure_url" content='{% static "app/threereasons.png" %}' />
+  <meta property="og:title" content="Make Masks Optional Next School Year" />
+  <meta property="og:image" content='{% static "app/wide_logo.jpg" %}' />
+  <meta property="og:image:secure_url" content='{% static "app/wide_logo.jpg" %}' />
   <meta property="og:url" content="https://www.smilewestada.com" />
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="286973936371350" />
-  <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional the last two weeks of this school year.  Join today so we can speak with one, clear, powerful voice at the May 11th School Board meeting.  The site is free, we protect your privacy, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms before the end of this year." />
+  <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional next year.  Join today so we can speak with one, clear, powerful voice.  The site is free, we protect your privacy, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms next year." />
 
 
   {% comment %}
@@ -27,16 +27,51 @@
 
 {% block content %}
   <section class 'mt-5'>
-
+    {% comment %}
     <div id='id_wistia'>
-<script src="https://fast.wistia.com/embed/medias/477txvdoqr.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_477txvdoqr popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
+<script src="https://fast.wistia.com/embed/medias/24zuln9lmk.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_24zuln9lmk popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
     </div>
+    {% endcomment %}
 
     <div class='jumbotron'>
-      <div class='mb-2'>
-        <p>
-          Smile West Ada has a Code of Conduct that includes: "We follow the rules, even as we seek to change them."  And now that the rules have changed, we're going to follow them.  Let's see those Smiles, West Ada!
-        </p>
+      <div class='mb-3'>
+        <div class='row'>
+          <div class='col-md-6 mt-2'>
+            <p>
+              <strong>Smile West Ada</strong> wants to see the smiles of West Ada students next year by making masks-optional.  The Board will vote on the 2021-2022 masking policy at the June 15th meeting.  To support our mission and stay informed progress, please <a href='{% url "join"%}'>Join Us</a>!
+            </p>
+          </div>
+          <div class='col-md-6'>
+            <div class='ml-5'>
+              <table class='table table-borderless table-sm'>
+                <thead>
+                  <tr>
+                    <th style="width: 10px;"></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class='text-danger' style='font-size:30px;'>&#10008;</span></td>
+                    <td class='align-middle'><h6>Smiles Inside This Year</h6></td>
+                  </tr>
+                  <tr>
+                    <td><span class='text-success' style='font-size:30px;'>&#10004;</td>
+                    <td class='align-middle'><h6>Smiles Outside This Year</h6></td>
+                  </tr>
+                  <tr>
+                    <td><span class='text-success' style='font-size:30px;'>&#10004;</span></td>
+                    <td class='align-middle'><h6>Smiles This Summer</h6></td>
+                  </tr>
+                  <tr>
+                    <td><span class='emoji' style='font-size:30px;'>&#x1f937;</span></td>
+                    <td class='align-middle'><h6>Smiles Next Year</h6></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
       <div class='mb-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3">
@@ -90,8 +125,7 @@
     </ul>
   </nav>
 
-{% comment %}
-
+  {% comment %}
   <section class='mt-3'>
     <div class="card">
       <h6 class="card-header">
@@ -111,23 +145,34 @@
               <tr class='row'>
                 <td class='col-5'>
                   {{account.name}}<br>
-                  {% if account.zone == 1 %}
-                    <span class="badge badge-warning">Zone 1</span>
-                  {% elif account.zone == 2 %}
-                    <span class="badge badge-secondary">Zone 2</span>
-                  {% elif account.zone == 3 %}
-                    <span class="badge badge-info">Zone 3</span>
-                  {% elif account.zone == 4 %}
-                    <span class="badge badge-success">Zone 4</span>
-                  {% elif account.zone == 5 %}
-                    <span class="badge badge-danger">Zone 5</span>
-                  {% endif %}
-                  {% if account.is_featured %}
-                    <span class="badge badge-light">Featured</span>
-                  {% endif %}
-                  {% if account.is_voter %}
-                    <span class="badge badge-primary">Registered Voter</span>
-                  {% endif %}
+                  <ul class='list-inline'>
+                    {% if account.role == 1 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-warning">Parent</span>
+                      </li>
+                    {% elif account.role == 2 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-success">Student</span>
+                      </li>
+                    {% elif account.role == 3 %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-danger">Teacher</span>
+                      </li>
+                    {% endif %}
+                    {% if account.is_voter %}
+                      <li class='list-inline-item'>
+                          <span class="badge badge-primary">Registered Voter</span>
+                      </li>
+                    {% endif %}
+                    {% if account.zone %}
+                      <li class='list-inline-item'>
+                        <span class="badge badge-light">{{account.get_zone_display}}</span>
+                      </li>
+                    {% endif %}
+                  </ul>
+                  {# {% if account.is_featured %} #}
+                  {# {% endif %} #}
+                  {# <span class="badge badge-info">Zone 3</span> #}
                 </td>
                 <td class='col-7'>{% if not account.is_moderated %}{{account.comments}}{% endif %}</td>
               </tr>
@@ -137,8 +182,7 @@
       </div>
     </div>
   </section>
-{% endcomment %}
-
+  {% endcomment %}
 {% endblock content %}
 {% block bottomnav %}
 {% endblock bottomnav %}
