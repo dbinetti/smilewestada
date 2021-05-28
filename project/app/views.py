@@ -156,7 +156,7 @@ def logout(request):
 
 # Account
 @login_required
-@create_revision
+# @create_revision
 def account(request):
     account = request.user.account
     if request.POST:
