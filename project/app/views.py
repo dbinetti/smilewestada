@@ -42,13 +42,13 @@ log = logging.getLogger('SWA View')
 def index(request):
     comments = Comment.objects.filter(
         account__is_public=True,
-        state__gt=Comment.STATE.new,
+        state=Comment.STATE.approved,
         account__user__is_active=True,
     ).select_related(
         'account',
         'account__user',
     ).order_by(
-        '-state',
+        # '-is_featured',
         '-created',
     )
     return render(

@@ -129,12 +129,14 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     fields = [
         # 'video',
         'state',
+        'is_featured',
     ]
     fsm_fields = [
         'state',
     ]
     list_filter = [
         'state',
+        'is_featured',
         PolymorphicChildModelFilter,
     ]
     list_display = [

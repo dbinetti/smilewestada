@@ -168,7 +168,6 @@ class Comment(PolymorphicModel):
         (-10, 'moderated', 'Moderated'),
         (0, 'new', 'New'),
         (10, 'approved', 'Approved'),
-        (20, 'featured', 'Featured'),
     )
     state = FSMIntegerField(
         choices=STATE,
@@ -204,16 +203,12 @@ class Comment(PolymorphicModel):
     def __str__(self):
         return f"{self.account.name}"
 
-    @transition(field=state, source=[STATE.new, STATE.moderated, STATE.featured], target=STATE.approved)
+    @transition(field=state, source=[STATE.new, STATE.moderated], target=STATE.approved)
     def approve(self):
         return
 
     @transition(field=state, source=[STATE.new, STATE.approved], target=STATE.moderated)
     def moderate(self):
-        return
-
-    @transition(field=state, source=[STATE.new, STATE.approved], target=STATE.featured)
-    def feature(self):
         return
 
 
