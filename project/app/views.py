@@ -40,17 +40,23 @@ log = logging.getLogger('SWA View')
 
 # Root
 def index(request):
-    accounts = Account.objects.filter(
-        is_public=True,
-        user__is_active=True,
+    comments = Comment.objects.filter(
+        account__is_public=True,
+        state__gt=Comment.STATE.new,
+        account__user__is_active=True,
+    ).select_related(
+        'account',
+        'account__user',
     ).order_by(
+        '-state',
         '-created',
     )
-    total = Account.objects.count()
     return render(
         request,
         'app/pages/index.html',
-        {'accounts': accounts, 'total': total,},
+        context = {
+            'comments': comments,
+        },
     )
 
 # Authentication
