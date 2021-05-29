@@ -40,17 +40,23 @@ log = logging.getLogger('SWA View')
 
 # Root
 def index(request):
-    accounts = Account.objects.filter(
-        is_public=True,
-        user__is_active=True,
+    comments = Comment.objects.filter(
+        account__is_public=True,
+        state=Comment.STATE.approved,
+        account__user__is_active=True,
+    ).select_related(
+        'account',
+        'account__user',
     ).order_by(
+        # '-is_featured',
         '-created',
     )
-    total = Account.objects.count()
     return render(
         request,
         'app/pages/index.html',
-        {'accounts': accounts, 'total': total,},
+        context = {
+            'comments': comments,
+        },
     )
 
 # Authentication
@@ -260,7 +266,6 @@ def event(request, event_id):
         }
     )
 
-@login_required
 def updates(request):
     client = get_mailchimp_client()
     updates = client.campaigns.all(
@@ -315,41 +320,6 @@ def sendgrid_event_webhook(request):
                 account.sendgrid = payload
                 account.save()
     return HttpResponse()
-
-def comments(request):
-    comments = Comment.objects.filter(
-        account__is_public=True,
-        state__gt=Comment.STATE.new,
-        account__user__is_active=True,
-    ).select_related(
-        'account',
-        'account__user',
-    ).order_by(
-        '-state',
-        '-created',
-    )
-    return render(
-        request,
-        'app/pages/comments.html',
-        context={
-            'comments': comments,
-        }
-    )
-
-@login_required
-def comment(request, comment_id):
-    comment = get_object_or_404(
-        Comment,
-        pk=comment_id,
-    )
-    return render(
-        request,
-        'app/pages/comment.html',
-        context={
-            'comment': comment,
-        },
-    )
-
 
 @login_required
 def comment_delete(request, comment_id):

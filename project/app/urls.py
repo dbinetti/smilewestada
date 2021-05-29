@@ -11,10 +11,10 @@ urlpatterns = [
 
     # Footer
     path('about/', TemplateView.as_view(template_name='app/pages/about.html'), name='about',),
+    path('updates/', views.updates, name='updates',),
     path('faq/', TemplateView.as_view(template_name='app/pages/faq.html'), name='faq',),
     path('privacy/', TemplateView.as_view(template_name='app/pages/privacy.html'), name='privacy',),
     path('terms/', TemplateView.as_view(template_name='app/pages/terms.html'), name='terms',),
-    path('conduct/', TemplateView.as_view(template_name='app/pages/conduct.html'), name='support',),
     path('support/', TemplateView.as_view(template_name='app/pages/support.html'), name='support',),
 
     # Authentication
@@ -28,15 +28,12 @@ urlpatterns = [
     path('events', views.events, name='events',),
     path('event/<str:event_id>', views.event, name='event',),
     # path('sign/', views.sign, name='sign',),
-    path('updates/', views.updates, name='updates',),
 
     # Share
     # path('share', views.share, name='share'),
 
 
     # Comments
-    path('comments', views.comments, name='comments'),
-    path('comment/<str:comment_id>', views.comment, name='comment',),
     path('comment/<str:comment_id>/delete', views.comment_delete, name='comment-delete',),
     path('comments/submit-written', views.submit_written_comment, name='submit-written-comment'),
     path('comments/submit-spoken', views.submit_spoken_comment, name='submit-spoken-comment'),

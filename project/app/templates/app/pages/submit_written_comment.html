@@ -6,31 +6,49 @@
 {% block title %}Submit Written Comment{% endblock title %}
 
 {% block content %}
-  <section class='mt-5 col-md-8'>
-    <div class='card'>
-      <h4 class='card-header'>Written Comment</h4>
-      <div class="card-body">
-        <div class='card-title'>
+  <section class='col-md-8'>
+    <form method='post'>
+      {% csrf_token %}
+      <div class='card'>
+        <div class='card-header'>
+          <h4>
+            Submit Written Comment
+          </h4>
         </div>
-        <div class='card-text'>
-          <form method='post'>
-            {% csrf_token %}
-            {% bootstrap_form_errors form %}
+        <div class="card-body">
+          <div class='card-title'>
+            <p class='lead'>
+              Here are the guidelines for leaving a written comment:
+            </p>
+            <ul class='list-styled'>
+              <li>It should remain respectful and on-topic.</li>
+              <li>It will be reviewed before posting to avoid inappropriate content on our site.</li>
+              <li>Any students posting <strong>must receive express permission from parents</strong> first.</li>
+            </ul>
+            <p>
+              Also note that there is no guarantee the Board of Trustees will read your comments; this is not an official channel.
+            </p>
+          </div>
+          <div class='card-text'>
+              {% bootstrap_form_errors form %}
 
-            {% bootstrap_field form.text show_help=True show_label=False %}
+              {% bootstrap_field form.text show_help=True show_label=False %}
 
-            {% bootstrap_button "Save" button_type='submit' size='large' %}
-            {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-light' extra_classes='ml-3'%}
-          </form>
+          </div>
         </div>
+
+        <div class='card-footer'>
+          <div class='list-inline'>
+            <li class='list-inline-item'>
+              {% bootstrap_button "Save" button_type='submit' size='large' %}</li>
+            <li class='list-inline-item'>
+          {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+            </li>
+          </div>
+        </div>
+
       </div>
-      {% comment %}
-      <div class='card-footer'>
-        <p>
-          We will post your comments as soon as possible.
-        </p>
-      </div>
-      {% endcomment %}
-    </div>
+    </form>
+
   </section>
 {% endblock content %}

@@ -14,32 +14,30 @@
 {% block content %}
   <section class='mt-5 col-md-8'>
     <div class='card'>
-      <h4 class='card-header'>Comment</h4>
+      <div class='card-header'>
+        <h4>
+          Comment
+        </h4>
+      </div>
       <div class="card-body">
-        <div class='card-title'>
-        </div>
-        {% if comment.polymorphic_ctype.name == 'Written Comment' %}
-          <div class='card-text'>
+        <div class='card-text'>
+          {% if comment.polymorphic_ctype.name == 'Written Comment' %}
             <p>
               {{comment.text}}
             </p>
-            {% url 'comment-delete' comment.id as url_comment_delete %}
-            {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' %}
-          </div>
-        {% else %}
-          <div class='card-text'>
+          {% else %}
             <video
               id="comment-player"
               controls
               muted
               class="cld-video-player cld-fluid">
             </video>
-            {% if comment.account.user == request.user %}
-              {% url 'comment-delete' comment.id as url_comment_delete %}
-              {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' extra_classes='ml-3'%}
-            {% endif %}
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      <div class='card-footer'>
+        {% url 'comment-delete' comment.id as url_comment_delete %}
+        {% bootstrap_button "Delete" button_type='link' href=url_comment_delete size='large' button_class='btn-danger' %}
       </div>
     </div>
   </section>

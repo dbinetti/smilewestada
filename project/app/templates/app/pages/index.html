@@ -2,6 +2,7 @@
 {% load cloudinary %}
 {% load static %}
 {% load humanize %}
+{% load app_tags %}
 
 {% block metatags %}
   <meta property="og:title" content="Make Masks Optional Next School Year" />
@@ -11,179 +12,107 @@
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="286973936371350" />
   <meta property="og:description" content="Smile West Ada is a group of parents who want masks optional next year.  Join today so we can speak with one, clear, powerful voice.  The site is free, we protect your privacy, and we don't have an agenda beyond seeing all those smiles in West Ada classrooms next year." />
-
-
-  {% comment %}
-  <meta property="og:video" content="https://youtu.be/EX9Ztv3vTyU" />
-  <meta property="og:video:secure_url" content="https://youtu.be/EX9Ztv3vTyU" />
-  <meta property="og:video:type" content="video/mp4" />
-  <meta property="og:video:width" content="1280" />
-  <meta property="og:video:height" content="720" />
-  {% endcomment %}
-
 {% endblock metatags %}
+
+{% block customstyles %}
+  <link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
+{% endblock customstyles %}
+
 
 {% block title %}{% endblock title%}
 
 {% block content %}
   <section class 'mt-5'>
-    {% comment %}
+
     <div id='id_wistia'>
-<script src="https://fast.wistia.com/embed/medias/24zuln9lmk.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_24zuln9lmk popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
+      <script src="https://fast.wistia.com/embed/medias/ldzymrx1za.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_ldzymrx1za popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
     </div>
-    {% endcomment %}
 
     <div class='jumbotron'>
       <div class='mb-3'>
-        <div class='row'>
-          <div class='col-md-6 mt-2'>
+          <div class='mb-2 mx-3'>
             <p>
-              <strong>Smile West Ada</strong> wants to see the smiles of West Ada students next year by making masks-optional.  The Board will vote on the 2021-2022 masking policy at the June 15th meeting.  To support our mission and stay informed progress, please <a href='{% url "join"%}'>Join Us</a>!
+              <strong>Smile West Ada</strong> wants to see the smiles of West Ada students next year by making masks-optional.  The Board will vote on the 2021-2022 masking policy at the June 15th meeting.  To support our mission, post a comment, and stay informed, please <a href='{% url "join"%}'>Join Us</a>!
             </p>
           </div>
-          <div class='col-md-6'>
-            <div class='ml-5'>
-              <table class='table table-borderless table-sm'>
-                <thead>
-                  <tr>
-                    <th style="width: 10px;"></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class='text-danger' style='font-size:30px;'>&#10008;</span></td>
-                    <td class='align-middle'><h6>Smiles Inside This Year</h6></td>
-                  </tr>
-                  <tr>
-                    <td><span class='text-success' style='font-size:30px;'>&#10004;</td>
-                    <td class='align-middle'><h6>Smiles Outside This Year</h6></td>
-                  </tr>
-                  <tr>
-                    <td><span class='text-success' style='font-size:30px;'>&#10004;</span></td>
-                    <td class='align-middle'><h6>Smiles This Summer</h6></td>
-                  </tr>
-                  <tr>
-                    <td><span class='emoji' style='font-size:30px;'>&#x1f937;</span></td>
-                    <td class='align-middle'><h6>Smiles Next Year</h6></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
       </div>
-      <div class='mb-3'>
+      <div class='mt-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg p-3">
-          <strong>Click Here to Join</strong>
+          <strong>Click Here to Join, Post Comments, and Stay Informed</strong>
         </a>
-      </div>
-      {% comment %}
-      <div>
-        <a class="btn btn-light btn-block btn-lg" data-toggle='collapse' data-target='#learnMoreCollapse' role='button'>
-          Learn More
-        </a>
-      </div>
-      <div class="collapse" id="learnMoreCollapse">
-        <div class="card card-body mt-3 p-5">
-          <p>
-            On Tuesday February 9th, the West Ada School Board voted 4-1 to bring the kids all in school, Full-Time, In-Person, K-12 by March 29 (moved up from the original date of April 13.)
-          </p>
-          <p>
-            While this fell short of our original goal of March 1, I believe we helped shift the conversation to, as Trustee Chair Amy Johnson put it, "not whether we are coming back to school, but how much sooner we can move it forward."  I firmly believe that we played an important part in making that happen, and while the result might not be perfect, it certainly was very, very good.
-          </p>
-          <p>
-            In the coming days, as promised, I will delete any and all personal information and close down the site entirely.  Look for one final email from me immediately before that happens.  But for now, let me simply say thank you.  Thank you for helping get our <strong>Smile West Ada</strong>.
-          </p>
-          <br>
-          <p class='mb-5'>
-            P.S. Note that you can still <a href='{% url "join" %}'>Join Us</a> if you wish to add your name to ours before we close down!
-          </p>
-        </div>
-      </div>
-      {% endcomment %}
-    </div>
-  </section>
-
-  <nav class="navbar navbar-expand-sm navbar-light">
-    <ul class="nav nav-pills mr-auto">
-      <li class="nav-item ml-3">
-        <a href="{% url 'about' %}"><small>About</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'faq' %}"><small>FAQ</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'privacy' %}"><small>Privacy</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'terms' %}"><small>Terms</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'support' %}"><small>Support</small></a>
-      </li>
-    </ul>
-  </nav>
-
-  {% comment %}
-  <section class='mt-3'>
-    <div class="card">
-      <h6 class="card-header">
-        Of our {{total|intcomma}} members, here are those who have elected to share their names publicly:
-      </h6>
-      <div class="card-body">
-        <table class='table'>
-          <thead>
-            <tr class='row'>
-              {# <th scope='col' class='col-1'>Zone</th> #}
-              <th scope='col' class='col-5'>Name</th>
-              <th scope='col' class='col-7'>Comments</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for account in accounts %}
-              <tr class='row'>
-                <td class='col-5'>
-                  {{account.name}}<br>
-                  <ul class='list-inline'>
-                    {% if account.role == 1 %}
-                      <li class='list-inline-item'>
-                          <span class="badge badge-warning">Parent</span>
-                      </li>
-                    {% elif account.role == 2 %}
-                      <li class='list-inline-item'>
-                          <span class="badge badge-success">Student</span>
-                      </li>
-                    {% elif account.role == 3 %}
-                      <li class='list-inline-item'>
-                          <span class="badge badge-danger">Teacher</span>
-                      </li>
-                    {% endif %}
-                    {% if account.is_voter %}
-                      <li class='list-inline-item'>
-                          <span class="badge badge-primary">Registered Voter</span>
-                      </li>
-                    {% endif %}
-                    {% if account.zone %}
-                      <li class='list-inline-item'>
-                        <span class="badge badge-light">{{account.get_zone_display}}</span>
-                      </li>
-                    {% endif %}
-                  </ul>
-                  {# {% if account.is_featured %} #}
-                  {# {% endif %} #}
-                  {# <span class="badge badge-info">Zone 3</span> #}
-                </td>
-                <td class='col-7'>{% if not account.is_moderated %}{{account.comments}}{% endif %}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
       </div>
     </div>
   </section>
-  {% endcomment %}
+  <section class='m-3'>
+    <table class='table'>
+      <thead>
+        <tr class='row'>
+          <th scope='col' class='col-5'>Name</th>
+          <th scope='col' class='col-7'>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for comment in comments %}
+          <tr class='row'>
+            <td class='col-5'>
+              {{comment.account.name}}<br>
+              <ul class='list-inline'>
+                {% if comment.account.role == 1 %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-warning">Parent</span>
+                  </li>
+                {% elif comment.account.role == 2 %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-success">Student</span>
+                  </li>
+                {% elif comment.account.role == 3 %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-danger">Teacher</span>
+                  </li>
+                {% endif %}
+                {% if comment.account.is_voter %}
+                  <li class='list-inline-item'>
+                      <span class="badge badge-primary">Registered Voter</span>
+                  </li>
+                {% endif %}
+                {% if comment.account.zone %}
+                  <li class='list-inline-item'>
+                    <span class="badge badge-light">{{account.get_zone_display}}</span>
+                  </li>
+                {% endif %}
+              </ul>
+            </td>
+            <td class='col-7'>
+              {% if comment.polymorphic_ctype.name == 'Written Comment' %}
+                {{comment.text}}
+              {% else %}
+                <video
+                  id="comment-player"
+                  controls
+                  class="cld-video-player cld-fluid"
+                  data-cld-public-id="{{comment.video.name}}"
+                >
+                </video>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
 {% endblock content %}
-{% block bottomnav %}
-{% endblock bottomnav %}
 
+{% block scripts %}
+  <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
+  <script>
+    let cloudName = '{% get_env_var "CLOUDINARY_NAME"%}';
+    let cld = cloudinary.Cloudinary.new({
+      cloud_name: cloudName
+    });
+    let  players = cld.videoPlayers('.cld-video-player', {
+      showLogo: false,
+    });
+  </script>
+{% endblock scripts %}
