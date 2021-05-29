@@ -31,7 +31,7 @@ class WrittenCommentForm(forms.ModelForm):
             'text': forms.Textarea(
                 attrs={
                     'class': 'form-control h-25',
-                    'placeholder': 'Any respectful, on-topic comments to share publicly? (Optional)',
+                    'placeholder': 'Comments',
                     'rows': 5,
                 }
             ),
