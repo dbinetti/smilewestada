@@ -189,7 +189,9 @@ class SpokenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
         'video',
     ]
     list_display = [
-        'id',
+        'account',
+        'state',
+        'video',
     ]
     ordering = [
         '-created',
