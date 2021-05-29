@@ -266,7 +266,6 @@ def event(request, event_id):
         }
     )
 
-@login_required
 def updates(request):
     client = get_mailchimp_client()
     updates = client.campaigns.all(

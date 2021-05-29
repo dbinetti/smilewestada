@@ -43,28 +43,6 @@
       </div>
     </div>
   </section>
-
-  <nav class="navbar navbar-expand-sm navbar-light">
-    <ul class="nav nav-pills mr-auto">
-      <li class="nav-item ml-3">
-        <a href="{% url 'about' %}"><small>About</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'faq' %}"><small>FAQ</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'privacy' %}"><small>Privacy</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'terms' %}"><small>Terms</small></a>
-      </li>
-      <li class="nav-item ml-3">
-        <a href="{% url 'support' %}"><small>Support</small></a>
-      </li>
-    </ul>
-  </nav>
-
-
   <section class='m-3'>
     <table class='table'>
       <thead>
@@ -124,8 +102,6 @@
   </section>
 
 {% endblock content %}
-
-{% block bottomnav %}{% endblock bottomnav %}
 
 {% block scripts %}
   <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" type="text/javascript"></script>
