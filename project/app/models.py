@@ -187,6 +187,13 @@ class Comment(PolymorphicModel):
         null=False,
         blank=False,
     )
+    event = models.ForeignKey(
+        'app.Event',
+        on_delete=models.SET_NULL,
+        related_name='comments',
+        null=True,
+        blank=True,
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
