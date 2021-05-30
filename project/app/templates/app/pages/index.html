@@ -113,10 +113,11 @@
     });
     let  players = cld.videoPlayers('.cld-video-player', {
       showLogo: false,
-      sourceTypes: ["hls"],
-      transformation: {
-         streaming_profile: 'hd_h265',
-      },
+      sourceTypes: ['hls', 'dash'],
+      sourceTransformation: {
+        'hls': [{ streaming_profile: 'hd_h265' }],
+        'dash': [{ streaming_profile: 'hd_dash' }],
+      }
     });
   </script>
 {% endblock scripts %}
