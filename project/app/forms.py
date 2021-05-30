@@ -35,6 +35,18 @@ class WrittenCommentForm(forms.ModelForm):
             ),
         }
 
+    def clean_text(self):
+        text= self.cleaned_data['text']
+        words = text.split(" ")
+        for word in words:
+            if any([
+                word.startswith("http"),
+                word.startswith("www"),
+            ]):
+                raise ValidationError(
+                    "Links are not allowed in comments."
+                )
+        return text
 
 class AttendeeForm(forms.ModelForm):
     class Meta:
@@ -95,8 +107,8 @@ class AccountForm(forms.ModelForm):
             )
         }
         help_texts = {
-            'name': "Please provide your real full name.  Your name remains private \
-            unless you explicity ask to be Public.",
+            'name': "Please provide your real full name, which remains private \
+            unless you explicity ask to be Public.  (Students are exempt from this requirement.)",
             'is_public': "Showing your support publicly encourages others to join \
             and enables you to make a comment below.",
             'is_voter': "We'll verify with Ada County Elections and add a Badge to your Account.",
@@ -104,33 +116,20 @@ class AccountForm(forms.ModelForm):
             'role': "Select the role that best describes you.  If both a parent and teacher, choose teacher.",
         }
 
-    # def clean_comments(self):
-    #     comments= self.cleaned_data['comments']
-    #     words = comments.split(" ")
-    #     for word in words:
-    #         if any([
-    #             word.startswith("http"),
-    #             word.startswith("www"),
-    #         ]):
-    #             raise ValidationError(
-    #                 "Links are not allowed in comments."
-    #             )
-    #     return comments
-
 
     def clean(self):
         cleaned_data = super().clean()
         is_public = cleaned_data.get("is_public")
-        # comments = cleaned_data.get("comments")
+        is_student = cleaned_data.get("role") == Account.ROLE.student
         name = cleaned_data.get("name")
         last_name = name.partition(" ")[2]
         full_name = False
         if last_name:
             if len(last_name) > 1:
                 full_name = True
-        if is_public and not full_name:
+        if is_public and not full_name and not is_student:
             raise ValidationError(
-                "You must provide your full, real name to be public."
+                "You must provide your full, real name to be public (students exempted)."
             )
         # if comments and not is_public:
         #     raise ValidationError(
