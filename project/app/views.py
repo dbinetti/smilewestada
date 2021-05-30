@@ -356,6 +356,13 @@ def comment_delete(request, comment_id):
 
 @login_required
 def submit_spoken_comment(request):
+    account = request.user.account
+    if not account.is_public:
+        messages.warning(
+            request,
+            "You must make your name Public to make a comment",
+        )
+        return redirect('account')
     return render(
         request,
         'app/pages/submit_spoken_comment.html',
@@ -383,6 +390,12 @@ def video_submission(request):
 @login_required
 def submit_written_comment(request):
     account = request.user.account
+    if not account.is_public:
+        messages.warning(
+            request,
+            "You must make your name Public to make a comment",
+        )
+        return redirect('account')
     form = WrittenCommentForm(request.POST or None)
     if form.is_valid():
         event = Event.objects.latest('date')
