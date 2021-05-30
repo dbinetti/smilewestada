@@ -20,6 +20,7 @@ from mailchimp3.mailchimpclient import MailChimpError
 
 from .forms import VoterForm
 from .models import Account
+from .models import Comment
 from .models import User
 from .models import Voter
 
@@ -202,13 +203,13 @@ def send_goodbye_email(email_address):
     return email.send()
 
 @job
-def send_admin_notification(account):
-    count = Account.objects.all().count()
+def send_admin_notification():
+    count = Comment.objects.filter(state=Comment.STATE.pending).count()
     email = build_email(
         template='app/emails/update.txt',
-        subject=f'SWA {count}',
+        subject=f'New Comment',
         from_email='David Binetti <dbinetti@smilewestada.com>',
-        context={'account': account, 'count': count},
+        context={'count': count},
         to=['dbinetti@gmail.com'],
     )
     return email.send()
@@ -319,6 +320,7 @@ def send_approval_email(account):
         to=[account.user.email],
     )
     return email.send()
+
 @job
 def deactivate_user(email):
     user = User.objects.get(email=email)

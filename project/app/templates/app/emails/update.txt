@@ -1,6 +1,5 @@
 {% autoescape off %}
 
 Count: {{count}}
-{{account.name}}
 
 {% endautoescape %}

@@ -3,6 +3,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 
 from .models import Account
+from .models import Comment
 from .models import User
 from .tasks import create_account_from_user
 from .tasks import create_or_update_mailchimp_from_account
@@ -13,6 +14,12 @@ from .tasks import send_goodbye_email
 from .tasks import send_welcome_email
 from .tasks import update_auth0_from_user
 
+
+@receiver(post_save, sender=Comment)
+def comment_post_save(sender, instance, created, **kwargs):
+    if created:
+        send_admin_notification()
+    return
 
 @receiver(post_save, sender=User)
 def user_post_save(sender, instance, created, **kwargs):
@@ -35,5 +42,4 @@ def account_post_save(sender, instance, created, **kwargs):
     if created:
         send_welcome_email.delay(instance)
     create_or_update_mailchimp_from_account.delay(instance)
-    send_admin_notification.delay(instance)
     return

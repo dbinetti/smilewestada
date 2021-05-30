@@ -12,6 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% block metatags %}
     {% endblock metatags %}
+      <script
+        src="https://browser.sentry-cdn.com/6.4.1/bundle.tracing.min.js"
+        integrity="sha384-hddl7X3flGhIMJgLUpwZDzLOWf8GDApKvKos/jS4z7Uz/sejXA0thkp9JCZgoDG4"
+        crossorigin="anonymous"
+      ></script>
     <link rel="shortcut icon" href="{%  static 'app/favicon.png' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
@@ -74,9 +79,13 @@
     <br>
     {% include 'app/includes/footer.html' %}
     <br><br><br>
-
+    <script>
+      Sentry.init({
+        dsn: "{% get_env_var 'SENTRY_DSN' %}",
+        environment: 'production',
+      });
+    </script>
     {% block scripts %}
     {% endblock scripts %}
-
   </body>
 </html>
