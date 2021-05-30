@@ -18,7 +18,7 @@ from .tasks import update_auth0_from_user
 @receiver(post_save, sender=Comment)
 def comment_post_save(sender, instance, created, **kwargs):
     if created:
-        send_admin_notification()
+        send_admin_notification.delay()
     return
 
 @receiver(post_save, sender=User)
