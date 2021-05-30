@@ -297,6 +297,29 @@ def send_featured_email(account):
     return email.send()
 
 @job
+def send_denial_email(account):
+    # comments = account.comments
+    email = build_email(
+        template='app/emails/denied.txt',
+        subject='Smile West Ada Comment Denied',
+        # context={'comments': comments},
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+
+@job
+def send_approval_email(account):
+    # comments = account.comments
+    email = build_email(
+        template='app/emails/approved.txt',
+        subject='Smile West Ada Comment Approved!',
+        # context={'comments': comments},
+        from_email='David Binetti <dbinetti@smilewestada.com>',
+        to=[account.user.email],
+    )
+    return email.send()
+@job
 def deactivate_user(email):
     user = User.objects.get(email=email)
     user.is_active = False

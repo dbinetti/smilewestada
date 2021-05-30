@@ -190,7 +190,7 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
 
 
 @admin.register(SpokenComment)
-class SpokenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
+class SpokenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, VersionAdmin):
     save_on_top = True
     fields = [
         'state',
