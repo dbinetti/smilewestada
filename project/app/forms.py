@@ -8,8 +8,6 @@ from django.utils.safestring import mark_safe
 # Local
 from .models import Account
 from .models import Attendee
-from .models import Comment
-from .models import SpokenComment
 from .models import User
 from .models import Voter
 from .models import WrittenComment
@@ -37,29 +35,6 @@ class WrittenCommentForm(forms.ModelForm):
             ),
         }
 
-class SpokenCommentForm(forms.ModelForm):
-    class Meta:
-        model = SpokenComment
-        fields = [
-            'video',
-        ]
-
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = [
-#             'text',
-#             'video',
-#         ]
-#         widgets = {
-#             'text': forms.Textarea(
-#                 attrs={
-#                     'class': 'form-control h-25',
-#                     'placeholder': 'Any respectful, on-topic comments to share publicly? (Optional)',
-#                     'rows': 5,
-#                 }
-#             ),
-#         }
 
 class AttendeeForm(forms.ModelForm):
     class Meta:
@@ -72,6 +47,7 @@ class AttendeeForm(forms.ModelForm):
         labels = {
             "is_confirmed": "Yes I'll Attend",
         }
+
 
 class VoterForm(forms.ModelForm):
     class Meta:
@@ -89,6 +65,7 @@ class VoterForm(forms.ModelForm):
             'zipcode',
             'zone',
         ]
+
 
 class AccountForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

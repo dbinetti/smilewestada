@@ -19,13 +19,11 @@ from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from reversion.views import create_revision
 
 # from .forms import CommentForm
 from .forms import AccountForm
 from .forms import AttendeeForm
 from .forms import DeleteForm
-from .forms import SpokenCommentForm
 from .forms import WrittenCommentForm
 from .models import Account
 from .models import Assignment
@@ -35,15 +33,20 @@ from .models import Event
 from .models import SpokenComment
 from .tasks import get_mailchimp_client
 
+# from reversion.views import create_revision
+
+
 log = logging.getLogger('SWA View')
 
 
 # Root
 def index(request):
+    event = Event.objects.latest('date')
     comments = Comment.objects.filter(
         account__is_public=True,
         state=Comment.STATE.approved,
         account__user__is_active=True,
+        event=event,
     ).select_related(
         'account',
         'account__user',
@@ -363,11 +366,13 @@ def submit_spoken_comment(request):
 @login_required
 def video_submission(request):
     if request.method == 'POST':
+        event = Event.objects.latest('date')
         payload = json.loads(request.body)
         comment = SpokenComment(
             account=request.user.account,
         )
         comment.video.name = payload['public_id']
+        comment.event = event
         comment.save()
         messages.success(
             request,
@@ -380,8 +385,10 @@ def submit_written_comment(request):
     account = request.user.account
     form = WrittenCommentForm(request.POST or None)
     if form.is_valid():
+        event = Event.objects.latest('date')
         comment = form.save(commit=False)
         comment.account = account
+        comment.event = event
         comment.save()
         messages.success(
             request,

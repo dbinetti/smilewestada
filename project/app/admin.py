@@ -130,6 +130,7 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
         # 'video',
         'state',
         'is_featured',
+        'event',
     ]
     fsm_fields = [
         'state',
@@ -138,9 +139,12 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
         'state',
         'is_featured',
         PolymorphicChildModelFilter,
+        'event',
     ]
     list_display = [
         '__str__',
+        'state',
+        'event',
     ]
     ordering = [
         '-created',
@@ -151,9 +155,11 @@ class CommentAdmin(FSMTransitionMixin, PolymorphicParentModelAdmin, VersionAdmin
     ]
     autocomplete_fields = [
         'account',
+        'event',
     ]
     list_select_related = [
         'account',
+        'event',
     ]
 
 
@@ -166,8 +172,8 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
     fields = [
         'state',
         'is_featured',
-        'is_moderated',
         'account',
+        'event',
         'text',
     ]
     list_display = [
@@ -178,6 +184,7 @@ class WrittenCommentAdmin(FSMTransitionMixin, PolymorphicChildModelAdmin, Versio
     ]
     autocomplete_fields = [
         'account',
+        'event',
     ]
     base_model = Comment
 
@@ -187,7 +194,9 @@ class SpokenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
     save_on_top = True
     fields = [
         'state',
+        'is_featured',
         'account',
+        'event',
         'video',
     ]
     list_display = [
@@ -203,6 +212,7 @@ class SpokenCommentAdmin(PolymorphicChildModelAdmin, VersionAdmin):
     ]
     autocomplete_fields = [
         'account',
+        'event',
     ]
     base_model = Comment
 
@@ -228,6 +238,7 @@ class EventAdmin(VersionAdmin):
     ]
     search_fields = [
         'name',
+        'date',
     ]
     inlines = [
         AttendeeInline,
