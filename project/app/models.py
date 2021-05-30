@@ -165,18 +165,15 @@ class Comment(PolymorphicModel):
         primary_key=True,
     )
     STATE = Choices(
-        (-10, 'moderated', 'Moderated'),
-        (0, 'new', 'New'),
+        (-10, 'denied', 'Denied'),
+        (0, 'pending', 'Pending'),
         (10, 'approved', 'Approved'),
     )
     state = FSMIntegerField(
         choices=STATE,
-        default=STATE.new,
+        default=STATE.pending,
     )
     is_featured = models.BooleanField(
-        default=False,
-    )
-    is_moderated = models.BooleanField(
         default=False,
     )
     account = models.ForeignKey(
@@ -203,12 +200,12 @@ class Comment(PolymorphicModel):
     def __str__(self):
         return f"{self.account.name}"
 
-    @transition(field=state, source=[STATE.new, STATE.moderated], target=STATE.approved)
+    @transition(field=state, source=[STATE.pending, STATE.denied], target=STATE.approved)
     def approve(self):
         return
 
-    @transition(field=state, source=[STATE.new, STATE.approved], target=STATE.moderated)
-    def moderate(self):
+    @transition(field=state, source=[STATE.pending, STATE.approved], target=STATE.denied)
+    def deny(self):
         return
 
 

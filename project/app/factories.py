@@ -4,6 +4,7 @@ from factory import PostGenerationMethodCall
 from factory.django import DjangoModelFactory
 
 # Local
+from .models import Event
 from .models import User
 
 
@@ -14,3 +15,9 @@ class UserFactory(DjangoModelFactory):
     is_active = True
     class Meta:
         model = User
+
+class EventFactory(DjangoModelFactory):
+    name = "Test Event"
+    date = Faker('date')
+    class Meta:
+        model = Event

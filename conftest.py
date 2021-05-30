@@ -1,6 +1,7 @@
 # Django
 # First-Party
 import pytest
+from app.factories import EventFactory
 from app.factories import UserFactory
 from django.test.client import Client
 
@@ -48,3 +49,9 @@ def admin_client():
     client = Client()
     client.force_login(admin)
     return client
+
+@pytest.fixture
+def event():
+    event = EventFactory(
+    )
+    return event
