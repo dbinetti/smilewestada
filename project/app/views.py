@@ -55,7 +55,6 @@ def index(request):
         '-created',
     )
     count = Account.objects.all().count()
-    count = 1800
     return render(
         request,
         'app/pages/index.html',
