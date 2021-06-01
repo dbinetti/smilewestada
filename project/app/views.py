@@ -54,11 +54,14 @@ def index(request):
         # '-is_featured',
         '-created',
     )
+    count = Account.objects.all().count()
+    count = 1800
     return render(
         request,
         'app/pages/index.html',
         context = {
             'comments': comments,
+            'count': count,
         },
     )
 
