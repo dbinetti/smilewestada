@@ -166,6 +166,7 @@ class Comment(PolymorphicModel):
     )
     STATE = Choices(
         (-10, 'denied', 'Denied'),
+        (-5, 'archived', 'Archived'),
         (0, 'pending', 'Pending'),
         (10, 'approved', 'Approved'),
     )
