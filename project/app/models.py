@@ -220,6 +220,12 @@ class WrittenComment(Comment):
         blank=True,
         default='',
     )
+
+    @property
+    def wordcount(self):
+        words = self.text.split(" ")
+        return len(words)
+
     class Meta:
         verbose_name = 'Written Comment'
         verbose_name_plural = 'Written Comments'

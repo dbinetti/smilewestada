@@ -84,7 +84,15 @@
             </td>
             <td class='col-7'>
               {% if comment.polymorphic_ctype.name == 'Written Comment' %}
-                {{comment.text}}
+                {% if comment.wordcount < 31 %}
+                  {{comment.text}}
+                {% else %}
+                  {{comment.text|truncatewords:30}}
+                  <a data-toggle="collapse" href="#collapseExample"><small>more</small></a>
+                  <div class="collapse" id="collapseExample">
+                    {{comment.text}}
+                  </div>
+                {% endif %}
               {% else %}
                 <video
                   id="comment-player"
