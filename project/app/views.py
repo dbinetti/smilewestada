@@ -276,6 +276,7 @@ def updates(request):
     updates = client.campaigns.all(
         folder_id='ca56599381',
         sort_field='send_time',
+        count=100,
     )['campaigns']
     return render(
         request,
