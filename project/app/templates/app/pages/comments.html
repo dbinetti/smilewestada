@@ -128,11 +128,13 @@
                       {% if public.wordcount < 31 %}
                         {{public.text}}
                       {% else %}
-                        {{public.text|truncatewords:30}}
-                        <a data-toggle="collapse" href="#collapseExample"><small>more</small></a>
-                        <div class="collapse" id="collapseExample">
+                        <div class="collapse show" id="public-{{public.id}}">
+                          {{public.text|truncatewords:30}}
+                        </div>
+                        <div class="collapse" id="public-{{public.id}}">
                           {{public.text}}
                         </div>
+                        <a data-toggle="collapse" href="#public-{{public.id}}"><small>more</small></a>
                       {% endif %}
                     {% else %}
                       <video

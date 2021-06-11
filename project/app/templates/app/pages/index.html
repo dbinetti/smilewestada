@@ -87,11 +87,13 @@
                 {% if comment.wordcount < 31 %}
                   {{comment.text}}
                 {% else %}
-                  {{comment.text|truncatewords:30}}
-                  <a data-toggle="collapse" href="#collapseExample"><small>more</small></a>
-                  <div class="collapse" id="collapseExample">
+                  <div class="collapse show" id="comment-{{comment.id}}">
+                    {{comment.text|truncatewords:30}}
+                  </div>
+                  <div class="collapse" id="comment-{{comment.id}}">
                     {{comment.text}}
                   </div>
+                  <a data-toggle="collapse" href="#comment-{{comment.id}}"><small>more</small></a>
                 {% endif %}
               {% else %}
                 <video
