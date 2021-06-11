@@ -68,7 +68,7 @@ def index(request):
 # Authentication
 def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', '/account')
+    next_url = request.GET.get('next', None)
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -148,9 +148,16 @@ def callback(request):
         log_in(request, user)
         if user.is_admin:
             return redirect('admin:index')
-        # if (user.last_login - user.created) < datetime.timedelta(minutes=1):
-        #     return redirect('welcome')
-        return redirect(next_url)
+        if (user.last_login - user.created) < datetime.timedelta(minutes=1):
+            messages.warning(
+                request,
+                "Thanks for joining Smile West Ada!  We've registered your support for masks-optional; next, please update your account information."
+            )
+        if next_url:
+            return redirect(next_url)
+        if user.account.is_public:
+            return redirect('comments')
+        return redirect('account')
     return HttpResponse(status=403)
 
 def logout(request):
@@ -206,27 +213,34 @@ def welcome(request):
         },
     )
 
+# Delete
+@login_required
+def delete(request):
+    if request.method == "POST":
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            user.delete()
+            messages.error(
+                request,
+                "Account Deleted!",
+            )
+            return redirect('index')
+    else:
+        form = DeleteForm()
+    return render(
+        request,
+        'app/pages/delete.html',
+        {'form': form,},
+    )
+
+
 # Account
 @login_required
 def share(request):
     return render(
         request,
         'app/pages/share.html',
-    )
-
-# @login_required
-def sign(request):
-    assignments = Assignment.objects.filter(
-        date='2021-05-11',
-    ).order_by(
-        'school__name',
-    )
-    return render(
-        request,
-        'app/pages/sign.html',
-        context = {
-            'assignments': assignments,
-        }
     )
 
 @login_required
@@ -297,28 +311,6 @@ def updates(request):
     )
 
 
-# Delete
-@login_required
-def delete(request):
-    if request.method == "POST":
-        form = DeleteForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            user.delete()
-            messages.error(
-                request,
-                "Account Deleted!",
-            )
-            return redirect('index')
-    else:
-        form = DeleteForm()
-    return render(
-        request,
-        'app/pages/delete.html',
-        {'form': form,},
-    )
-
-
 @csrf_exempt
 @require_POST
 def sendgrid_event_webhook(request):
@@ -339,6 +331,34 @@ def sendgrid_event_webhook(request):
     return HttpResponse()
 
 @login_required
+def comments(request):
+    account = request.user.account
+    event = Event.objects.latest('date')
+    personals = account.comments.order_by(
+        'created',
+    )
+    publics = Comment.objects.filter(
+        account__is_public=True,
+        state=Comment.STATE.approved,
+        account__user__is_active=True,
+        event=event,
+    ).select_related(
+        'account',
+        'account__user',
+    ).order_by(
+        # '-is_featured',
+        '-created',
+    )
+    return render(
+        request,
+        'app/pages/comments.html',
+        context={
+            'personals': personals,
+            'publics': publics,
+        },
+    )
+
+@login_required
 def comment_delete(request, comment_id):
     try:
         comment = Comment.objects.get(
@@ -355,7 +375,7 @@ def comment_delete(request, comment_id):
                 request,
                 "Comment Deleted!",
             )
-            return redirect('account')
+            return redirect('comments')
     else:
         form = DeleteForm()
     return render(
@@ -397,7 +417,7 @@ def video_submission(request):
         comment.save()
         messages.success(
             request,
-            "Spoken Comment Submitted!",
+            "Comment Submitted!  You'll receive an email once approved."
         )
     return HttpResponse()
 
@@ -419,9 +439,9 @@ def submit_written_comment(request):
         comment.save()
         messages.success(
             request,
-            'Saved!',
+            "Comment Submitted!  You'll receive an email once approved."
         )
-        return redirect('account')
+        return redirect('comments')
     return render(
         request,
         'app/pages/submit_written_comment.html',

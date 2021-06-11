@@ -37,7 +37,7 @@
             {% bootstrap_button "Upload" button_type='button' size='large' button_class='btn-primary' id='upload-widget'%}
           </li>
           <li class='list-inline-item'>
-            {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
+            {% bootstrap_button "Cancel" button_type='link' href="/comments" size='large' button_class='btn-outline-dark' extra_classes='ml-3'%}
           </li>
         </div>
       </div>
@@ -71,7 +71,7 @@
             method: 'POST',
             body: JSON.stringify(result.info)
           }).then(res => {
-            window.location.replace('{% url "account" %}');
+            window.location.replace('{% url "comments" %}');
           });
         }
       }
