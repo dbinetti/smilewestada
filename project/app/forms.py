@@ -112,7 +112,8 @@ class AccountForm(forms.ModelForm):
             'is_public': "Showing your support publicly encourages others to join \
             and enables you to make a comment below.",
             'is_voter': "We'll verify with Ada County Elections and add a Badge to your Account.",
-            'zone': mark_safe("Select your <a href='https://res.cloudinary.com/dyvz0sbfw/raw/upload/v1620230044/smilewestada/app/wasd_trustee_zones.20328492709b.pdf' target='_blank'>District Zone</a>."),
+            # 'zone': mark_safe("Select your <a href='https://res.cloudinary.com/dyvz0sbfw/raw/upload/v1620230044/smilewestada/app/wasd_trustee_zones.20328492709b.pdf' target='_blank'>District Zone</a>."),
+            'zone': mark_safe("Select your <a href='#' data-toggle='modal' data-target='#zoneModal'>District Zone</a>."),
             'role': "Select the role that best describes you.  If both a parent and teacher, choose teacher.",
         }
 
