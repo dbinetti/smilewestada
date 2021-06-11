@@ -149,15 +149,29 @@ def callback(request):
         if user.is_admin:
             return redirect('admin:index')
         if (user.last_login - user.created) < datetime.timedelta(minutes=1):
-            messages.warning(
+            messages.success(
                 request,
-                "Thanks for joining Smile West Ada!  We've registered your support for masks-optional; next, please update your account information."
+                "Thanks for supporting masks-optional for our kids!  Please update your account information below."
             )
-        print(next_url)
+            return redirect('account')
         if next_url != '/account':
             return redirect(next_url)
         if user.account.is_public:
+            if user.account.comments.count == 0:
+                messages.success(
+                    request,
+                    "Consider adding a public comment to give your voice more weight."
+                )
+            else:
+                messages.success(
+                    request,
+                    "You can add or delete your public comments below."
+                )
             return redirect('comments')
+        messages.success(
+            request,
+            "Consider making your name public to encourage others to join."
+        )
         return redirect('account')
     return HttpResponse(status=403)
 
