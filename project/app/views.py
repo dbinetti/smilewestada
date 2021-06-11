@@ -68,7 +68,7 @@ def index(request):
 # Authentication
 def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
-    next_url = request.GET.get('next', None)
+    next_url = request.GET.get('next', 'account')
     state = f"{get_random_string()}|{next_url}"
     request.session['state'] = state
     params = {
@@ -153,7 +153,8 @@ def callback(request):
                 request,
                 "Thanks for joining Smile West Ada!  We've registered your support for masks-optional; next, please update your account information."
             )
-        if next_url:
+        print(next_url)
+        if next_url != '/account':
             return redirect(next_url)
         if user.account.is_public:
             return redirect('comments')
