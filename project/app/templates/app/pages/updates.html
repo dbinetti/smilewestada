@@ -19,7 +19,7 @@
     <table class='table'>
       <thead>
         <tr>
-          {# <th>Date</th> #}
+          <th>Date</th>
           <th>
             Subject
           </th>
@@ -31,7 +31,7 @@
       <tbody>
         {% for update in updates %}
         <tr>
-          {# <td><a href='{{update.long_archive_url}}'>{{update.send_time}}</a></td> #}
+          <td><a href='{{update.long_archive_url}}'>{{update.date|date:"m/d"}}</a></td>
           <td><a href='{{update.long_archive_url}}'>{{update.settings.subject_line}}</a></td>
           {# <td>{{update.settings.subject_line}}</td> #}
           <td>{{update.settings.preview_text}}</td>

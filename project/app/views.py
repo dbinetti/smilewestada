@@ -27,7 +27,6 @@ from .forms import AttendeeForm
 from .forms import DeleteForm
 from .forms import WrittenCommentForm
 from .models import Account
-from .models import Assignment
 from .models import Attendee
 from .models import Comment
 from .models import Event
@@ -317,6 +316,8 @@ def updates(request):
         sort_field='send_time',
         count=100,
     )['campaigns']
+    for u in updates:
+        u['date'] = datetime.datetime.strptime(u['send_time'], '%Y-%m-%dT%H:%M:%S%z')
     return render(
         request,
         'app/pages/updates.html',
