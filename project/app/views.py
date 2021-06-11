@@ -1,3 +1,4 @@
+import datetime
 import json
 import logging
 
@@ -136,7 +137,6 @@ def callback(request):
         }
     )
     payload['username'] = payload.pop('sub')
-    log.info(payload)
     if not 'email' in payload:
         messages.error(
             request,
@@ -148,6 +148,8 @@ def callback(request):
         log_in(request, user)
         if user.is_admin:
             return redirect('admin:index')
+        # if (user.last_login - user.created) < datetime.timedelta(minutes=1):
+        #     return redirect('welcome')
         return redirect(next_url)
     return HttpResponse(status=403)
 
@@ -193,6 +195,14 @@ def account(request):
         context={
             'form': form,
             'comments': comments,
+        },
+    )
+
+def welcome(request):
+    return render(
+        request,
+        'app/pages/welcome.html',
+        context = {
         },
     )
 
@@ -285,6 +295,7 @@ def updates(request):
             'updates': updates,
         },
     )
+
 
 # Delete
 @login_required

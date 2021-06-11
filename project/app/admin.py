@@ -70,10 +70,12 @@ class AccountAdmin(FSMTransitionMixin, VersionAdmin):
         'is_voter',
         'zone',
         'role',
+        'state',
     ]
     list_editable = [
     ]
     list_filter = [
+        'state',
         'is_public',
         'is_voter',
         'role',

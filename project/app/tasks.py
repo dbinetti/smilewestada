@@ -124,21 +124,6 @@ def create_or_update_mailchimp_from_account(account):
     return
 
 @job
-def create_mailchimp_from_account(account):
-    client = get_mailchimp_client()
-    list_id = settings.MAILCHIMP_AUDIENCE_ID
-    data = {
-        'status': 'subscribed',
-        'email_address': account.user.email,
-    }
-    client.lists.members.create(
-        list_id=list_id,
-        data=data,
-    )
-    return
-
-
-@job
 def delete_mailchimp_from_account(account):
     client = get_mailchimp_client()
     subscriber_hash = get_subscriber_hash(account.user.email)
