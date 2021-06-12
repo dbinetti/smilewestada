@@ -13,10 +13,11 @@ from django.core.mail import EmailMultiAlternatives
 from django.db.models.signals import post_save
 from django.template.loader import render_to_string
 from django_rq import job
-from fuzzywuzzy import fuzz
 from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
+
+from fuzzywuzzy import fuzz
 
 from .forms import VoterForm
 from .models import Account
@@ -81,7 +82,6 @@ def create_account_from_user(user):
 # Mailchimp
 def get_mailchimp_client():
     enabled = not settings.DEBUG
-    enabled = True
     return MailChimp(
         mc_api=settings.MAILCHIMP_API_KEY,
         enabled=enabled,
