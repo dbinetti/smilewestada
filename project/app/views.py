@@ -18,6 +18,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
+from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -202,7 +203,7 @@ def account(request):
             account = form.save()
             messages.success(
                 request,
-                "Saved!",
+                mark_safe("Saved!  You can also <a href='/comments'>review and make public comments</a>."),
             )
             return redirect('account')
     else:
