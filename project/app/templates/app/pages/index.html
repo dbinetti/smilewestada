@@ -139,6 +139,7 @@
       }
     });
   </script>
+  {% comment %}
   <script>
     function animateValue(obj, start, end, duration) {
       let startTimestamp = null;
@@ -156,4 +157,5 @@
     const obj = document.getElementById("value");
     animateValue(obj, 0, {{count}}, 5000);
   </script>
+  {% endcomment %}
 {% endblock scripts %}
