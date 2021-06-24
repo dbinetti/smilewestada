@@ -1,12 +1,12 @@
 {% autoescape off %}
 
-Per your request, we have deleted your Smile West Ada account.
+Your Smile West Ada account, and all related data, have been deleted.
+This is the last message you'll receive.
 
 If you have any questions or concerns please don't hesitate to reach out
 to me at dbinetti@smilewestada.com.
 
 Best,
 Dave
-
 
 {% endautoescape %}

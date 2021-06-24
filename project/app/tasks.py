@@ -13,11 +13,10 @@ from django.core.mail import EmailMultiAlternatives
 from django.db.models.signals import post_save
 from django.template.loader import render_to_string
 from django_rq import job
+from fuzzywuzzy import fuzz
 from mailchimp3 import MailChimp
 from mailchimp3.helpers import get_subscriber_hash
 from mailchimp3.mailchimpclient import MailChimpError
-
-from fuzzywuzzy import fuzz
 
 from .forms import VoterForm
 from .models import Account
@@ -210,12 +209,12 @@ def send_planning_email(account):
     return email.send()
 
 @job
-def send_shutdown_email(account):
+def send_shutdown_email(user):
     email = build_email(
-        template='app/emails/final.txt',
+        template='app/emails/shutdown.txt',
         subject='Smile West Ada - Shutdown Notice',
         from_email='David Binetti <dbinetti@smilewestada.com>',
-        to=[account.user.email],
+        to=[f'{user.name} <{user.email}>'],
     )
     return email.send()
 

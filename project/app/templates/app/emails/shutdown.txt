@@ -1,38 +1,35 @@
 {% autoescape off %}
 
-Shutdown Notice
+Smile West Ada Shutdown Notice
 
 *Summary*
-The Smile West Ada site is shutting down and deleting all collected data.  No action
-is required.  This will be the last message you receive.  Thank you!
+Smile West Ada has shutdown.  All collected data has been deleted.  Consider
+joining the West Ada Parents Association at:
+https://www.westadaparents.com.
 
 
 *Detail*
-On Tuesday February 9th, the West Ada School Board voted 4-1 to bring
-the kids all in school, Full-Time, In-Person, K-12 by March 29 (moved up from
-the original date of April 13.)
+On Tuesday June 15, the West Ada School Board voted 5-0 to
+make masks optional for the 2021-2022 school year.
 
-While this fell short of our original goal of March 1, I believe we helped shift
-the conversation to, as Trustee Chair Amy Johnson put it, "not whether we are
-coming back to school, but how much sooner we can move it forward."  I firmly
-believe that we played an important part in making that happen, and while the
-result might not be perfect, it certainly was very, very good.
+Now that we've accomplished our mission, as promised the site has been shut
+down and all personal information collected has been deleted, effective
+immediately.  This is the last email you'll receive.
 
-Since our purpose is now moot, as promised I'll be shutting down the site and
-deleting any and all personal information collected, effective immediately.  If
-you'd like to reach me in the future for any reason, you can do so at
-dbinetti@gmail.com or 415.713.2126.
+If you wish to stay active in District affairs, I wanted to let you
+know about a new organization I've created: the West Ada Parents
+Association.  Our goal is to support the District in avoiding any
+controversial policies that might distract from providing our students
+with a quality education.  If you'd like to sign up or learn more
+please do so at:
 
-Before this is complete, I wanted to let you know about a new site I've created
-called "Help West Ada", the goal of which is to help connect parent volunteers
-with needed roles at the District (such as substitute teachers.)  The details of
-this are still in flux, but if you'd like to sign up to learn more please do so
-at https://www.helpwestada.com .  Same rules as before: it's free, private, and
-you can delete your info at any time.
+    https://www.westadaparents.com
 
-Finally, **Thank You** for taking a stand for our kids.  We're getting the Kids
-All In full time at the end of the month, and you made that happen.  Thank you
-so much.
+Same rules as before: it's free, private, and you can delete your
+info at any time.
+
+Finally, **Thank You** for getting involved.  We're going to see the
+smiles next year, and you made that happen.  Thank you so much.
 
 Best, Dave
 
