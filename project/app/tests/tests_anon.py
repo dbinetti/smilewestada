@@ -14,15 +14,15 @@ def test_index(anon_client, event):
     response = anon_client.get(path)
     assert response.status_code == 200
 
-def test_about(anon_client):
-    path = reverse('about')
-    response = anon_client.get(path)
-    assert response.status_code == 200
+# def test_about(anon_client):
+#     path = reverse('about')
+#     response = anon_client.get(path)
+#     assert response.status_code == 200
 
-def test_privacy(anon_client):
-    path = reverse('privacy')
-    response = anon_client.get(path)
-    assert response.status_code == 200
+# def test_privacy(anon_client):
+#     path = reverse('privacy')
+#     response = anon_client.get(path)
+#     assert response.status_code == 200
 
 # @pytest.mark.django_db
 # def test_sign(anon_client):
@@ -30,7 +30,7 @@ def test_privacy(anon_client):
 #     response = anon_client.get(path)
 #     assert response.status_code == 200
 
-def test_support(anon_client):
-    path = reverse('support')
-    response = anon_client.get(path)
-    assert response.status_code == 200
+# def test_support(anon_client):
+#     path = reverse('support')
+#     response = anon_client.get(path)
+#     assert response.status_code == 200
