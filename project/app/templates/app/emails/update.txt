@@ -1,5 +1,0 @@
-{% autoescape off %}
-
-Count: {{count}}
-
-{% endautoescape %}
